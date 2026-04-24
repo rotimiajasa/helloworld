@@ -1,0 +1,30 @@
+{
+  "model": "claude-opus-4-7",
+  "routines": [
+    {
+      "name": "pre-market-research",
+      "schedule": "0 6 * * 1-5",
+      "prompt": "routines/pre_market.txt"
+    },
+    {
+      "name": "market-open-execution",
+      "schedule": "30 8 * * 1-5",
+      "prompt": "routines/market_open.txt"
+    },
+    {
+      "name": "midday-monitor",
+      "schedule": "0 12 * * 1-5",
+      "prompt": "routines/midday.txt"
+    },
+    {
+      "name": "market-close-report",
+      "schedule": "0 15 * * 1-5",
+      "prompt": "routines/market_close.txt"
+    },
+    {
+      "name": "weekly-review",
+      "schedule": "0 16 * * 5",
+      "prompt": "routines/weekly_review.txt"
+    }
+  ]
+}
