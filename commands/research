@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# /research — Run a focused research query via Perplexity and log findings
+# Usage: /research <ticker or topic>
+#
+# Example: /research NVDA earnings outlook
+#          /research "Fed interest rate impact on growth stocks"
+
+QUERY="$*"
+
+if [ -z "$QUERY" ]; then
+  echo "Usage: /research <ticker or topic>"
+  exit 1
+fi
+
+echo "🔍 Researching: $QUERY"
+echo ""
+
+node -e "
+import('./scripts/fetch_market_data.js').then(async ({ researchWithPerplexity }) => {
+  const result = await researchWithPerplexity('$QUERY — focus on fundamentals, valuation, recent earnings, macro factors relevant to a long-term equity investor.');
+  console.log(result);
+
+  // Append to research log
+  import('fs').then(fs => {
+    const date = new Date().toISOString().split('T')[0];
+    const entry = \`\n### \${date} — Ad-hoc Research: $QUERY\n\${result}\n\`;
+    const log = fs.readFileSync('memory/research_log.md', 'utf8');
+    const insertAt = log.indexOf('<!-- Research entries will be appended below this line -->');
+    if (insertAt !== -1) {
+      const updated = log.slice(0, insertAt + '<!-- Research entries will be appended below this line -->'.length) + entry + log.slice(insertAt + '<!-- Research entries will be appended below this line -->'.length);
+      fs.writeFileSync('memory/research_log.md', updated);
+    } else {
+      fs.appendFileSync('memory/research_log.md', entry);
+    }
+    console.log('\n📝 Logged to memory/research_log.md');
+  });
+}).catch(err => { console.error(err.message); process.exit(1); });
+"

@@ -1,0 +1,86 @@
+## Weekly Review Routine (Friday 4:00 PM)
+
+GOAL: Deep performance review, compare vs S&P 500, grade the week, improve strategy.
+
+---
+
+STEP 1 — Load ALL Memory
+Read every file:
+- memory/strategy.md
+- memory/portfolio.md
+- memory/trade_log.md      → all trades this week
+- memory/research_log.md   → all research this week
+- memory/weekly_review.md  → last week's review (for comparison)
+
+STEP 2 — Fetch Weekly Data
+Run: node scripts/fetch_market_data.js SPY,QQQ
+Get week-over-week returns for SPY and QQQ as benchmarks.
+
+STEP 3 — Calculate Weekly Performance
+- Portfolio return for the week (%)
+- SPY return for the week (%)
+- Alpha generated (portfolio - SPY)
+- Number of trades executed
+- Win rate (winning trades / total trades)
+- Average gain on winners
+- Average loss on losers
+
+STEP 4 — Identify Best and Worst Trades
+Best Trade:
+- Which position generated the most return?
+- WHY did it work? (thesis confirmed, timing, catalyst)
+- What can we replicate?
+
+Worst Trade:
+- Which position lost the most?
+- What went wrong? (thesis broken, macro, timing error, size too large?)
+- What rule should have prevented this? Did we break any guardrails?
+
+STEP 5 — Identify Process Mistakes
+Separate outcome from process:
+- Did we follow the strategy rules? (If yes: good process, even if bad outcome)
+- Did we deviate from rules? (If yes: bad process, even if good outcome)
+- Were there emotional decisions (holding losers too long, chasing entries)?
+- Did we trade when we had no conviction?
+
+STEP 6 — Grade the Week
+A: Beat SPY by > 1%, followed all rules, good process
+B: Near SPY performance, minor rule deviations, learned something
+C: Underperformed SPY, some rule violations, needs improvement
+D: Significant underperformance, multiple rule violations
+F: Major loss, broke guardrails, must review before next week
+
+STEP 7 — Lessons & Strategy Updates
+Write specific, actionable lessons:
+❌ Bad: "Be more careful with tech stocks"
+✅ Good: "Avoid buying high-P/E tech names in rising rate environments — add to strategy.md"
+
+If lessons warrant a strategy rule change:
+- Update memory/strategy.md with the new rule
+- Note the date and week it was learned
+
+STEP 8 — Write Weekly Review Entry
+Append to memory/weekly_review.md:
+
+```
+### Week of [DATE]
+**Portfolio Return:** X%
+**SPY Return:** X%
+**Alpha:** +/-X%
+**Win Rate:** X/X trades (X%)
+
+**Best Trade:** [TICKER] (+X%) — [why it worked]
+**Worst Trade:** [TICKER] (-X%) — [what went wrong]
+**Mistakes:** [specific process errors]
+**Grade:** [A/B/C/D/F]
+**Lessons:** [specific actionable rules]
+**Strategy Updates:** [changes made to strategy.md, or "None"]
+```
+
+STEP 9 — Send Weekly Report to ClickUp
+POST a weekly summary task to ClickUp:
+Title: "Weekly Review [DATE]"
+Include: performance, grade, top lesson, strategy changes.
+
+STEP 10 — Commit Everything
+Run: git add memory/ && git commit -m "weekly review [DATE]: grade [X], alpha [+/-X%]" && git push origin claude/build-agent-tutorial-5NDRQ

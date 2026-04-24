@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# /log — View or append to memory logs
+# Usage:
+#   /log trades          → show last 10 trade entries
+#   /log research        → show last 5 research entries
+#   /log portfolio       → show current portfolio state
+#   /log review          → show latest weekly review
+#   /log note "<text>"   → append a manual note to research_log.md
+
+SUBCMD="$1"
+shift
+
+case "$SUBCMD" in
+  trades)
+    echo "=== Recent Trades ==="
+    tail -n 60 memory/trade_log.md
+    ;;
+  research)
+    echo "=== Recent Research ==="
+    tail -n 80 memory/research_log.md
+    ;;
+  portfolio)
+    echo "=== Current Portfolio ==="
+    cat memory/portfolio.md
+    ;;
+  review)
+    echo "=== Latest Weekly Review ==="
+    tail -n 40 memory/weekly_review.md
+    ;;
+  note)
+    NOTE="$*"
+    if [ -z "$NOTE" ]; then
+      echo "Usage: /log note \"<your note>\""
+      exit 1
+    fi
+    DATE=$(date +%Y-%m-%d)
+    TIME=$(date +%H:%M)
+    ENTRY="\n### $DATE $TIME — Manual Note\n$NOTE\n"
+    echo -e "$ENTRY" >> memory/research_log.md
+    echo "📝 Note appended to memory/research_log.md"
+    git add memory/research_log.md && git commit -m "manual note [$DATE]" && git push origin claude/build-agent-tutorial-5NDRQ
+    ;;
+  *)
+    echo "Usage: /log <trades|research|portfolio|review|note>"
+    echo ""
+    echo "  trades     Show last 10 trade entries"
+    echo "  research   Show last 5 research entries"
+    echo "  portfolio  Show current portfolio state"
+    echo "  review     Show latest weekly review"
+    echo "  note       Append manual note to research log"
+    ;;
+esac

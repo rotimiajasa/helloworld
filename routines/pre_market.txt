@@ -1,0 +1,51 @@
+## Pre-Market Routine (6:00 AM Weekdays)
+
+GOAL: Research, identify trade candidates, and draft a trade plan. NO execution.
+
+---
+
+STEP 1 — Load Memory
+Read ALL files in /memory:
+- strategy.md       → understand current rules and constraints
+- portfolio.md      → know current positions and open orders
+- trade_log.md      → review recent trades (last 5 entries)
+- research_log.md   → check yesterday's research context
+- weekly_review.md  → check latest weekly grade and lessons
+
+STEP 2 — Fetch Market Data
+Run: node scripts/fetch_market_data.js SPY,QQQ,VTI --news
+This gives you: account state, open positions, SPY performance, and news for benchmarks.
+
+STEP 3 — Research (via Perplexity)
+Query for:
+a) Macro conditions: Fed signals, economic data releases today, geopolitical risks
+b) Earnings today/tomorrow: any companies in our portfolio or watchlist reporting?
+c) Sector rotation signals: which sectors are showing strength or weakness?
+d) Watchlist news: any notable developments in companies we track?
+
+STEP 4 — Identify Trade Candidates
+For each candidate:
+- State the ticker
+- Summarize the investment thesis (fundamentals, not just price action)
+- Note the entry price range and what catalyst supports entry
+- Calculate position size (max 5% of total equity, start at 2-3%)
+- Define stop loss (~7% below entry) and initial target
+- Rate conviction: High / Medium / Low
+
+STEP 5 — Draft Trade Plan
+List planned trades for Market Open routine:
+Format: BUY [TICKER] [QTY] @ [PRICE RANGE] | Stop: [PRICE] | Thesis: [1 sentence]
+
+If no high-conviction opportunities: state "NO TRADE today — waiting for better setup"
+
+STEP 6 — Update Research Log
+Append entry to memory/research_log.md with today's findings and trade plan.
+
+STEP 7 — Commit Memory
+Run: git add memory/research_log.md && git commit -m "pre-market research [DATE]" && git push origin claude/build-agent-tutorial-5NDRQ
+
+⚠️ GUARDRAILS REMINDER:
+- Max 5% per position
+- No options, no leverage, no penny stocks
+- Fundamentals must support every trade
+- Prefer no trade over a bad trade

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# /trade — Execute a trade with guardrails
+# Usage: /trade <buy|sell> <TICKER> <qty> [--dollars] [--stop <price>] [--limit <price>]
+#
+# Examples:
+#   /trade buy AAPL 10 --stop 175.00
+#   /trade buy MSFT 500 --dollars --stop 380.00
+#   /trade sell TSLA all
+#   /trade sell AMZN 5 --limit 185.00
+
+node scripts/execute_trade.js "$@"

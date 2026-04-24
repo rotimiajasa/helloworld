@@ -1,0 +1,22 @@
+{
+  "name": "ai-trading-agent",
+  "version": "1.0.0",
+  "description": "24/7 autonomous AI trading agent powered by Claude Opus 4.7",
+  "type": "module",
+  "scripts": {
+    "pre-market": "node -e \"console.log('Run: claude -p routines/pre_market.txt')\"",
+    "market-open": "node -e \"console.log('Run: claude -p routines/market_open.txt')\"",
+    "midday": "node -e \"console.log('Run: claude -p routines/midday.txt')\"",
+    "market-close": "node -e \"console.log('Run: claude -p routines/market_close.txt')\"",
+    "weekly-review": "node -e \"console.log('Run: claude -p routines/weekly_review.txt')\"",
+    "fetch-data": "node scripts/fetch_market_data.js",
+    "test-keys": "node scripts/fetch_market_data.js SPY --news"
+  },
+  "dependencies": {
+    "@alpacahq/alpaca-trade-api": "^3.1.1",
+    "node-fetch": "^3.3.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

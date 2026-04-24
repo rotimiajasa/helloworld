@@ -1,0 +1,57 @@
+## Market Open Routine (8:30 AM Weekdays)
+
+GOAL: Execute the pre-market trade plan. Set stops. Log everything.
+
+---
+
+STEP 1 — Load Memory
+Read:
+- memory/portfolio.md      → current positions and account state
+- memory/research_log.md   → today's pre-market trade plan (last entry)
+- memory/strategy.md       → confirm guardrails before any execution
+
+STEP 2 — Fetch Live State
+Run: node scripts/fetch_market_data.js
+Confirm: account equity, existing positions, any open orders from yesterday
+
+STEP 3 — Review Trade Plan
+Read today's trade plan from research_log.md.
+Ask yourself:
+- Has anything materially changed since 6 AM (e.g., surprise earnings, macro shock)?
+- Are the entry prices still valid given opening prices?
+- Is conviction still high?
+If thesis is broken → cancel that trade and log reason.
+
+STEP 4 — Execute Trades (if plan is valid)
+For each planned trade:
+  node scripts/execute_trade.js buy [TICKER] [QTY] --stop [STOP_PRICE]
+
+Only execute if:
+✅ Conviction is HIGH
+✅ Position size ≤ 5% of equity
+✅ Fundamentals thesis is intact
+✅ No conflicting open orders
+
+STEP 5 — Set Trailing Stops on ALL Open Positions
+For every open position:
+- Calculate 10% trailing stop from current price
+- If stop is already placed and price has moved up, update stop higher
+- Log stop levels in memory/portfolio.md
+
+STEP 6 — Update Portfolio Memory
+Rewrite the "Open Positions" and "Pending Orders" tables in memory/portfolio.md
+with current data from Alpaca.
+
+STEP 7 — Send Notification (ONLY if trades were executed)
+Post to ClickUp:
+  "🟢 Trade Executed: [SIDE] [QTY] [TICKER] @ ~$[PRICE] | Thesis: [1 sentence] | Stop: $[PRICE]"
+
+If NO trades executed: skip notification.
+
+STEP 8 — Commit Memory
+Run: git add memory/ && git commit -m "market-open [DATE]: [TICKER trades or 'no trades']" && git push origin claude/build-agent-tutorial-5NDRQ
+
+⚠️ GUARDRAILS:
+- Never override stop losses
+- Never chase a stock up more than 2% above planned entry
+- If unsure → do NOT trade

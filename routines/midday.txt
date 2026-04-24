@@ -1,0 +1,43 @@
+## Midday Routine (12:00 PM Weekdays)
+
+GOAL: Monitor positions, cut losers, tighten stops. No new entries.
+
+---
+
+STEP 1 — Load Memory
+Read:
+- memory/portfolio.md    → open positions and stop levels
+- memory/strategy.md     → exit rules (especially the -7% cut rule)
+
+STEP 2 — Fetch Live Positions
+Run: node scripts/fetch_market_data.js
+Review each open position's current P&L%.
+
+STEP 3 — Cut Losers (STRICT RULE)
+For any position down > 7% from entry cost:
+  → Execute: node scripts/execute_trade.js sell [TICKER] all
+  → Log reason: "Stop triggered — down [X]% from entry"
+  → Note: this rule is NON-NEGOTIABLE. Do not hold a loser hoping for recovery.
+
+STEP 4 — Adjust Stop Losses on Winners
+For any position up significantly (> 5% from entry):
+- Calculate new trailing stop at 10% below CURRENT price (not entry)
+- Update stop in Alpaca if the new level is higher than current stop
+- Record updated stop level in memory/portfolio.md
+
+STEP 5 — Macro Check
+Quick scan: Is there breaking news that changes any open position's thesis?
+Run Perplexity query if needed: "Breaking news for [TICKER1, TICKER2] in the past 4 hours"
+If fundamental thesis has broken → consider selling even if stop not hit.
+
+STEP 6 — Update Portfolio Memory
+Update memory/portfolio.md with current prices, P&L, and stop levels.
+
+STEP 7 — Log Updates
+Append to memory/trade_log.md if any sells were executed.
+
+STEP 8 — Commit Memory
+Run: git add memory/ && git commit -m "midday check [DATE]" && git push origin claude/build-agent-tutorial-5NDRQ
+
+⚠️ NO new buy orders during midday routine.
+⚠️ The -7% loss cut is automatic and mandatory.

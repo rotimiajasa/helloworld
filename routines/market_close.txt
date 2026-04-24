@@ -1,0 +1,58 @@
+## Market Close Routine (3:00 PM Weekdays)
+
+GOAL: Evaluate the day, update all memory, send daily report to ClickUp.
+
+---
+
+STEP 1 — Load Memory
+Read:
+- memory/portfolio.md
+- memory/trade_log.md    → today's trades
+- memory/research_log.md → today's thesis
+
+STEP 2 — Fetch Final State
+Run: node scripts/fetch_market_data.js SPY
+Get: final account equity, positions, day P&L, SPY day return.
+
+STEP 3 — Cancel Open Day Orders
+Any unfilled "day" orders from market open should now be expired.
+Confirm via Alpaca that no stale orders remain. Cancel any GTC orders no longer needed.
+
+STEP 4 — Evaluate Day Performance
+Calculate:
+- Portfolio day return %
+- SPY day return %
+- Alpha (portfolio - SPY)
+- Any positions that hit stops today
+- Any positions that moved > 5% (good or bad)
+
+STEP 5 — Update Portfolio Memory
+Rewrite memory/portfolio.md with:
+- Updated account summary (equity, cash, day P&L)
+- Updated open positions table (prices, P&L%, stops)
+- Updated benchmark row (MTD/YTD if calculable)
+
+STEP 6 — Log Lessons (if any)
+If a trade closed today → update its entry in trade_log.md with:
+- Outcome: +/-X%
+- Lesson: what we learned (even for winners — why did it work?)
+
+STEP 7 — Generate Daily Summary
+Compose a concise daily report:
+
+```
+📊 Daily Summary — [DATE]
+Portfolio: [+/-X%] | SPY: [+/-X%] | Alpha: [+/-X%]
+Trades Today: [list or "None"]
+Open Positions: [count] | Largest: [TICKER] [X%]
+Cash: $[amount] ([X%] of equity)
+Notable: [1-2 sentences on anything significant]
+Tomorrow Watch: [any events/earnings to monitor]
+```
+
+STEP 8 — Send to ClickUp
+POST the daily summary to ClickUp via API.
+Use task title: "Daily Report [DATE]" in the trading journal list.
+
+STEP 9 — Commit Memory
+Run: git add memory/ && git commit -m "close [DATE]: portfolio update + daily report" && git push origin claude/build-agent-tutorial-5NDRQ
