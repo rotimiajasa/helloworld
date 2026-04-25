@@ -1,0 +1,202 @@
+[
+  {
+    "id": "T1003",
+    "name": "OS Credential Dumping",
+    "tactic": "credential-access",
+    "description": "Adversaries may attempt to dump credentials to obtain account login and credential material. Credentials can then be used to perform lateral movement and access restricted information.",
+    "platforms": ["Windows", "Linux", "macOS"],
+    "detection": "Monitor for unexpected processes accessing LSASS memory. Use Credential Guard to protect credentials.",
+    "mitigation": "Enable Credential Guard. Restrict access to LSASS. Monitor for tools like Mimikatz.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1003.001",
+    "name": "LSASS Memory",
+    "tactic": "credential-access",
+    "description": "Adversaries may attempt to access credential material stored in the process memory of the Local Security Authority Subsystem Service (LSASS). Credentials stored in LSASS may include domain user passwords, local passwords, and hashed passwords.",
+    "platforms": ["Windows"],
+    "detection": "Monitor for unexpected access to LSASS process memory. Tools like Sysmon can detect suspicious process access.",
+    "mitigation": "Enable Windows Credential Guard. Enable LSA protection. Use Protected Users security group.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1003.002",
+    "name": "Security Account Manager",
+    "tactic": "credential-access",
+    "description": "Adversaries may attempt to extract credential material from the Security Account Manager (SAM) database, which stores hashed Windows account credentials.",
+    "platforms": ["Windows"],
+    "detection": "Monitor for registry access to SAM hive. Monitor for volume shadow copy creation.",
+    "mitigation": "Restrict registry access. Enable Windows Defender Credential Guard.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1003.003",
+    "name": "NTDS",
+    "tactic": "credential-access",
+    "description": "Adversaries may attempt to access or create a copy of the Active Directory domain database (NTDS.dit) to steal credential information.",
+    "platforms": ["Windows"],
+    "detection": "Monitor for ntdsutil.exe usage. Monitor for VSS shadow copy creation on domain controllers.",
+    "mitigation": "Restrict privileged access. Monitor domain controller activity. Use Just Enough Administration.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1059.001",
+    "name": "PowerShell",
+    "tactic": "execution",
+    "description": "Adversaries may abuse PowerShell commands and scripts for execution. PowerShell is a powerful interactive command-line interface and scripting environment included in the Windows operating system.",
+    "platforms": ["Windows"],
+    "detection": "Monitor PowerShell execution, script block logging, and module logging. Look for encoded commands (-EncodedCommand).",
+    "mitigation": "Enable PowerShell script block logging. Use Constrained Language Mode. Restrict PowerShell with AppLocker.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1059.003",
+    "name": "Windows Command Shell",
+    "tactic": "execution",
+    "description": "Adversaries may abuse the Windows command shell (cmd.exe) for execution. The Windows command shell is the primary command prompt on Windows systems.",
+    "platforms": ["Windows"],
+    "detection": "Monitor for cmd.exe spawning from unusual parent processes. Look for obfuscated commands.",
+    "mitigation": "Restrict cmd.exe usage via AppLocker or Software Restriction Policies.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1055",
+    "name": "Process Injection",
+    "tactic": "defense-evasion",
+    "description": "Adversaries may inject code into processes to evade process-based defenses and elevate privileges. Running code in the context of another process may allow access to the process's memory, system/network resources, and elevated privileges.",
+    "platforms": ["Windows", "Linux", "macOS"],
+    "detection": "Monitor for APIs associated with process injection: VirtualAllocEx, WriteProcessMemory, CreateRemoteThread.",
+    "mitigation": "Use Endpoint Detection and Response tools. Enable Windows Defender Attack Surface Reduction rules.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1078",
+    "name": "Valid Accounts",
+    "tactic": "defense-evasion",
+    "description": "Adversaries may obtain and abuse credentials of existing accounts as a means of gaining Initial Access, Persistence, Privilege Escalation, or Defense Evasion.",
+    "platforms": ["Windows", "Linux", "macOS", "Azure AD", "Office 365", "SaaS", "IaaS", "Network"],
+    "detection": "Monitor for anomalous authentication attempts. Correlate login events across systems.",
+    "mitigation": "Implement MFA. Monitor and alert on impossible travel. Use privileged access workstations.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1110",
+    "name": "Brute Force",
+    "tactic": "credential-access",
+    "description": "Adversaries may use brute force techniques to gain access to accounts when passwords are unknown or when password hashes are obtained.",
+    "platforms": ["Windows", "Linux", "macOS", "Azure AD", "Office 365", "SaaS"],
+    "detection": "Monitor authentication logs for repeated failures. Alert on account lockouts.",
+    "mitigation": "Enforce account lockout policies. Use MFA. Monitor authentication logs.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1110.001",
+    "name": "Password Guessing",
+    "tactic": "credential-access",
+    "description": "Adversaries with no prior knowledge of legitimate credentials may guess passwords to attempt access to accounts.",
+    "platforms": ["Windows", "Linux", "macOS", "Azure AD", "SaaS"],
+    "detection": "Monitor for multiple authentication failures followed by success.",
+    "mitigation": "Use strong password policies. Enable account lockout. Implement MFA.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1110.003",
+    "name": "Password Spraying",
+    "tactic": "credential-access",
+    "description": "Adversaries may use a single or small list of commonly used passwords against many different accounts to attempt to acquire valid account credentials.",
+    "platforms": ["Windows", "Azure AD", "Office 365", "SaaS"],
+    "detection": "Monitor for multiple authentication failures from single source across multiple accounts.",
+    "mitigation": "Use smart lockout policies. Monitor authentication logs for spray patterns.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1558.003",
+    "name": "Kerberoasting",
+    "tactic": "credential-access",
+    "description": "Adversaries may abuse a valid Kerberos ticket-granting ticket (TGT) or sniff network traffic to obtain a ticket-granting service (TGS) ticket that may be vulnerable to offline password cracking.",
+    "platforms": ["Windows"],
+    "detection": "Monitor for RC4 Kerberos TGS requests. Alert on encryption downgrade events (Event ID 4769).",
+    "mitigation": "Use AES encryption for Kerberos. Set long random passwords for service accounts. Use Managed Service Accounts.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1021.002",
+    "name": "SMB/Windows Admin Shares",
+    "tactic": "lateral-movement",
+    "description": "Adversaries may use valid accounts to interact with a remote network share using SMB. The adversary may then perform actions on remote systems, such as remotely executing commands.",
+    "platforms": ["Windows"],
+    "detection": "Monitor for unusual SMB connections. Log access to admin shares (C$, ADMIN$, IPC$).",
+    "mitigation": "Restrict admin shares. Use host firewalls to limit SMB access. Monitor lateral movement.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1046",
+    "name": "Network Service Discovery",
+    "tactic": "discovery",
+    "description": "Adversaries may attempt to get a listing of services running on remote hosts and local network infrastructure devices, including those that may be vulnerable to remote exploitation through services.",
+    "platforms": ["Windows", "Linux", "macOS", "Network"],
+    "detection": "Monitor for port scan activity. Alert on abnormal network scanning patterns.",
+    "mitigation": "Use network segmentation. Restrict access via firewalls.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1190",
+    "name": "Exploit Public-Facing Application",
+    "tactic": "initial-access",
+    "description": "Adversaries may attempt to exploit a weakness in an Internet-facing computer or program using software, data, or commands to cause unintended or unanticipated behavior.",
+    "platforms": ["Windows", "Linux", "macOS", "Network", "IaaS"],
+    "detection": "Monitor web application logs for unusual requests. Deploy WAF and IDS/IPS.",
+    "mitigation": "Keep software patched. Deploy WAF. Perform regular vulnerability assessments.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1566.001",
+    "name": "Spearphishing Attachment",
+    "tactic": "initial-access",
+    "description": "Adversaries may send spearphishing emails with a malicious attachment in an attempt to gain access to victim systems.",
+    "platforms": ["Windows", "macOS", "Linux"],
+    "detection": "Monitor email gateway logs. Analyze attachments with sandboxing. Train users on phishing awareness.",
+    "mitigation": "Deploy email filtering. Disable macros by default. Use sandboxing for attachments.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1136.001",
+    "name": "Local Account",
+    "tactic": "persistence",
+    "description": "Adversaries may create a local account to maintain access to victim systems.",
+    "platforms": ["Linux", "macOS", "Windows"],
+    "detection": "Monitor for new account creation events (Event ID 4720 on Windows). Alert on unexpected local accounts.",
+    "mitigation": "Monitor account creation. Use configuration management to detect unauthorized accounts.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1547.001",
+    "name": "Registry Run Keys / Startup Folder",
+    "tactic": "persistence",
+    "description": "Adversaries may achieve persistence by adding a program to a startup folder or referencing it with a Registry run key.",
+    "platforms": ["Windows"],
+    "detection": "Monitor changes to run keys and startup folder. Audit registry modifications.",
+    "mitigation": "Use application whitelisting. Monitor startup locations with EDR.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1053.005",
+    "name": "Scheduled Task",
+    "tactic": "persistence",
+    "description": "Adversaries may abuse the Windows Task Scheduler to perform task scheduling for initial or recurring execution of malicious code.",
+    "platforms": ["Windows"],
+    "detection": "Monitor scheduled task creation (Event ID 4698). Review task actions and triggers.",
+    "mitigation": "Restrict task scheduler access. Monitor for new scheduled tasks.",
+    "source": "mitre-attack"
+  },
+  {
+    "id": "T1071.001",
+    "name": "Web Protocols",
+    "tactic": "command-and-control",
+    "description": "Adversaries may communicate using application layer protocols associated with web traffic to avoid detection/network filtering.",
+    "platforms": ["Windows", "Linux", "macOS"],
+    "detection": "Monitor network traffic for unusual HTTP/HTTPS patterns. Analyze user-agent strings.",
+    "mitigation": "Use proxies to inspect HTTPS traffic. Deploy network monitoring tools.",
+    "source": "mitre-attack"
+  }
+]

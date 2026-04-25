@@ -1,0 +1,172 @@
+[
+  {
+    "benchmark": "Ubuntu 22.04",
+    "section": "1.1",
+    "title": "Ensure mounting of cramfs filesystems is disabled",
+    "description": "The cramfs filesystem type is a compressed read-only Linux filesystem embedded in small footprint systems. A null value for cramfs may point to an exploitable kernel module.",
+    "rationale": "Removing support for unneeded filesystem types reduces the local attack surface of the server.",
+    "audit_command": "modprobe -n -v cramfs 2>&1 | grep -E '(cramfs|install)'",
+    "remediation_command": "echo 'install cramfs /bin/true' >> /etc/modprobe.d/cramfs.conf && rmmod cramfs 2>/dev/null",
+    "level": 1
+  },
+  {
+    "benchmark": "Ubuntu 22.04",
+    "section": "1.3",
+    "title": "Ensure filesystem integrity is regularly checked",
+    "description": "Periodic checking of the filesystem integrity is needed to detect changes to the filesystem.",
+    "rationale": "Periodic file checking allows the system administrator to determine on a regular basis if critical files have been changed in an unauthorized fashion.",
+    "audit_command": "grep -r 'aide' /etc/cron.* /etc/crontab 2>/dev/null | grep -v '^Binary'",
+    "remediation_command": "apt install aide aide-common -y && aideinit && cp /var/lib/aide/aide.db.new /var/lib/aide/aide.db && echo '0 5 * * * root /usr/bin/aide.wrapper --config /etc/aide/aide.conf --check' >> /etc/crontab",
+    "level": 1
+  },
+  {
+    "benchmark": "Ubuntu 22.04",
+    "section": "2.2.2",
+    "title": "Ensure X Window System is not installed",
+    "description": "The X Window System provides a Graphical User Interface (GUI) where users can have multiple windows for applications running on the server.",
+    "rationale": "Unless your organization specifically requires graphical login access via the X Window System, remove it to reduce the potential attack surface.",
+    "audit_command": "dpkg -l xserver-xorg* 2>/dev/null | grep '^ii'",
+    "remediation_command": "apt purge xserver-xorg* -y",
+    "level": 1
+  },
+  {
+    "benchmark": "Ubuntu 22.04",
+    "section": "3.1.1",
+    "title": "Ensure IP forwarding is disabled",
+    "description": "The net.ipv4.ip_forward flag is used to tell the system whether it can forward packets or not.",
+    "rationale": "Setting the flag to 0 ensures that a system with multiple interfaces cannot forward packets.",
+    "audit_command": "sysctl net.ipv4.ip_forward && sysctl net.ipv6.conf.all.forwarding",
+    "remediation_command": "echo 'net.ipv4.ip_forward = 0' >> /etc/sysctl.d/60-netipv4_sysctl.conf && sysctl -w net.ipv4.ip_forward=0",
+    "level": 1
+  },
+  {
+    "benchmark": "Ubuntu 22.04",
+    "section": "4.1.1",
+    "title": "Ensure auditd is installed",
+    "description": "auditd is the userspace component to the Linux Auditing System. It's responsible for writing audit records to the disk.",
+    "rationale": "The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring.",
+    "audit_command": "dpkg -s auditd audispd-plugins 2>/dev/null | grep -E '^(Status|Package):'",
+    "remediation_command": "apt install auditd audispd-plugins -y",
+    "level": 2
+  },
+  {
+    "benchmark": "Ubuntu 22.04",
+    "section": "5.2.1",
+    "title": "Ensure permissions on /etc/ssh/sshd_config are configured",
+    "description": "The /etc/ssh/sshd_config file contains configuration specifications for sshd. The command below sets the owner and group of the file to root.",
+    "rationale": "The /etc/ssh/sshd_config file needs to be protected from unauthorized changes by non-privileged users.",
+    "audit_command": "stat /etc/ssh/sshd_config | grep -E '(Uid|Gid|Access)'",
+    "remediation_command": "chown root:root /etc/ssh/sshd_config && chmod og-rwx /etc/ssh/sshd_config",
+    "level": 1
+  },
+  {
+    "benchmark": "Ubuntu 22.04",
+    "section": "5.2.4",
+    "title": "Ensure SSH Protocol is set to 2",
+    "description": "SSH v1 has significant known vulnerabilities and should not be used.",
+    "rationale": "SSH v2 provides more secure encryption, authentication, and integrity checking compared to SSH v1.",
+    "audit_command": "grep -i '^Protocol' /etc/ssh/sshd_config",
+    "remediation_command": "echo 'Protocol 2' >> /etc/ssh/sshd_config && systemctl restart sshd",
+    "level": 1
+  },
+  {
+    "benchmark": "Ubuntu 22.04",
+    "section": "5.3.1",
+    "title": "Ensure password creation requirements are configured",
+    "description": "The pam_pwquality module provides strength checking for new passwords.",
+    "rationale": "Strong passwords protect systems from being hacked through brute force methods.",
+    "audit_command": "grep -E '^minlen|^minclass|^dcredit|^ucredit|^ocredit|^lcredit' /etc/security/pwquality.conf",
+    "remediation_command": "apt install libpam-pwquality -y && sed -i '/pam_pwquality.so/c\\password requisite pam_pwquality.so retry=3 minlen=14 dcredit=-1 ucredit=-1 ocredit=-1 lcredit=-1' /etc/pam.d/common-password",
+    "level": 1
+  },
+  {
+    "benchmark": "Docker",
+    "section": "1.1",
+    "title": "Ensure a separate partition for containers has been created",
+    "description": "All Docker containers and their data should be stored in a dedicated partition.",
+    "rationale": "Docker depends on /var/lib/docker as the default directory to store all Docker related files. This can grow rapidly and exhaust disk space causing system issues.",
+    "audit_command": "mountpoint -- \"$(docker info -f '{{ .DockerRootDir }}')\" 2>/dev/null && echo 'OK' || echo 'Not a mountpoint'",
+    "remediation_command": "Create a separate partition and mount it at /var/lib/docker before starting Docker service.",
+    "level": 1
+  },
+  {
+    "benchmark": "Docker",
+    "section": "2.1",
+    "title": "Run containers as non-root users",
+    "description": "Containers should not run as the root user to limit the blast radius of a container breakout.",
+    "rationale": "Running as root inside a container increases the risk that a container escape will lead to full host compromise.",
+    "audit_command": "docker ps --quiet | xargs -I{} docker inspect {} --format '{{ .Id }}: User={{ .Config.User }}'",
+    "remediation_command": "Add USER directive to Dockerfile: USER nobody:nobody\nOr run with: docker run --user 1000:1000 image",
+    "level": 1
+  },
+  {
+    "benchmark": "Docker",
+    "section": "2.5",
+    "title": "Ensure Content Trust for Docker is Enabled",
+    "description": "Content trust is disabled by default in Docker. Content trust provides the ability to use digital signatures for data sent to and received from remote Docker registries.",
+    "rationale": "Content trust provides the ability to verify the integrity and publisher of all data received from a registry over any channel.",
+    "audit_command": "echo $DOCKER_CONTENT_TRUST",
+    "remediation_command": "export DOCKER_CONTENT_TRUST=1\nAdd to /etc/environment: DOCKER_CONTENT_TRUST=1",
+    "level": 2
+  },
+  {
+    "benchmark": "Docker",
+    "section": "4.1",
+    "title": "Ensure a user for the container has been created",
+    "description": "Create a non-root user for the container in the Dockerfile for the container image.",
+    "rationale": "It is a good practice to run the container as a non-root user, if possible. Though user namespace mapping is now available, if a user is already defined in the container image, the container is run as that user by default.",
+    "audit_command": "docker inspect --format='{{.Config.User}}' $(docker ps -q) | grep -v '^$'",
+    "remediation_command": "Add to Dockerfile:\nRUN groupadd -r appgroup && useradd -r -g appgroup appuser\nUSER appuser",
+    "level": 1
+  },
+  {
+    "benchmark": "Kubernetes",
+    "section": "1.1.1",
+    "title": "Ensure that the API server pod specification file permissions are set to 600 or more restrictive",
+    "description": "Ensure that the API server pod specification file has permissions of 600 or more restrictive.",
+    "rationale": "The API server pod specification file controls various parameters that set the behavior of the API server. If an attacker can modify the file, they can compromise the cluster.",
+    "audit_command": "stat -c %a /etc/kubernetes/manifests/kube-apiserver.yaml",
+    "remediation_command": "chmod 600 /etc/kubernetes/manifests/kube-apiserver.yaml",
+    "level": 1
+  },
+  {
+    "benchmark": "Kubernetes",
+    "section": "1.2.1",
+    "title": "Ensure that the --anonymous-auth argument is set to false",
+    "description": "Disable anonymous requests to the API server.",
+    "rationale": "When anonymous requests are enabled, requests that are not rejected by other configured authentication methods are treated as anonymous requests.",
+    "audit_command": "ps -ef | grep kube-apiserver | grep 'anonymous-auth'",
+    "remediation_command": "Edit the API server pod specification at /etc/kubernetes/manifests/kube-apiserver.yaml and set:\n--anonymous-auth=false",
+    "level": 1
+  },
+  {
+    "benchmark": "Kubernetes",
+    "section": "4.2.1",
+    "title": "Ensure that the --anonymous-auth argument is set to false for kubelet",
+    "description": "Disable anonymous requests to the Kubelet server.",
+    "rationale": "When enabled, requests that are not rejected by other configured authentication methods are treated as anonymous requests.",
+    "audit_command": "ps -ef | grep kubelet | grep 'anonymous-auth'",
+    "remediation_command": "Edit /etc/kubernetes/kubelet.conf and add:\nauthentication:\n  anonymous:\n    enabled: false",
+    "level": 1
+  },
+  {
+    "benchmark": "Apache",
+    "section": "2.1",
+    "title": "Ensure the latest Apache HTTP Server software is installed",
+    "description": "The most recent Apache HTTP Server software should be installed to benefit from security patches and bug fixes.",
+    "rationale": "Running the latest version ensures protection against known vulnerabilities.",
+    "audit_command": "apache2 -v 2>/dev/null || httpd -v 2>/dev/null",
+    "remediation_command": "apt update && apt upgrade apache2 -y",
+    "level": 1
+  },
+  {
+    "benchmark": "Apache",
+    "section": "3.1",
+    "title": "Ensure Server Tokens are set to Prod",
+    "description": "The ServerTokens directive controls the information Apache returns in the HTTP response header.",
+    "rationale": "Reducing the information returned by Apache makes it harder for attackers to identify the server version and determine applicable exploits.",
+    "audit_command": "grep -r 'ServerTokens' /etc/apache2/ /etc/httpd/ 2>/dev/null | grep -v '#'",
+    "remediation_command": "echo 'ServerTokens Prod' >> /etc/apache2/conf-enabled/security.conf && systemctl restart apache2",
+    "level": 1
+  }
+]

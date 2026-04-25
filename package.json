@@ -1,0 +1,27 @@
+{
+  "name": "cyberstrike",
+  "version": "0.1.0",
+  "description": "AI-powered penetration testing skill agent with lazy-loaded security knowledge",
+  "main": "dist/cli.js",
+  "bin": {
+    "cyberstrike": "./bin/cyberstrike.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "seed": "node dist/scripts/seed.js",
+    "fetch-data": "node dist/scripts/fetch-data.js",
+    "dev": "ts-node src/cli.ts"
+  },
+  "keywords": ["pentesting", "security", "mitre-attack", "owasp", "atomic-red-team"],
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "better-sqlite3": "^9.4.3",
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.8",
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  }
+}

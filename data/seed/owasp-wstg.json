@@ -1,0 +1,242 @@
+[
+  {
+    "id": "WSTG-INFO-01",
+    "category": "Information Gathering",
+    "name": "Conduct Search Engine Discovery Reconnaissance",
+    "description": "Search engine discovery helps identify information that may have been inadvertently exposed, including sensitive data, internal network information, or development artifacts.",
+    "objectives": [
+      "Identify sensitive information exposed through search engines",
+      "Discover internal infrastructure details",
+      "Find exposed configuration files or backup files"
+    ],
+    "test_cases": [
+      "Use Google dorks: site:target.com filetype:pdf",
+      "Search for: site:target.com ext:xml OR ext:conf OR ext:cnf OR ext:reg OR ext:inf OR ext:rdp OR ext:cfg OR ext:txt OR ext:ora OR ext:ini",
+      "Use Shodan: hostname:target.com",
+      "Search for exposed .git directories: site:target.com '.git'",
+      "Use theHarvester: theHarvester -d target.com -b google,bing,linkedin"
+    ],
+    "tools": ["Google", "Bing", "Shodan", "theHarvester", "Maltego", "Recon-ng"],
+    "remediation": "Implement robots.txt properly, use meta noindex tags for sensitive pages, and regularly audit public information exposure."
+  },
+  {
+    "id": "WSTG-INFO-02",
+    "category": "Information Gathering",
+    "name": "Fingerprint Web Server",
+    "description": "Determine the web server type, version, and configuration to identify known vulnerabilities.",
+    "objectives": [
+      "Determine web server type and version",
+      "Identify server-side technologies",
+      "Discover misconfigurations"
+    ],
+    "test_cases": [
+      "Review HTTP response headers: curl -I https://target.com",
+      "Use Netcraft for server identification",
+      "Run whatweb: whatweb -a 3 https://target.com",
+      "Use Nmap service detection: nmap -sV -p 80,443 target.com",
+      "Check error pages for server information disclosure"
+    ],
+    "tools": ["curl", "Netcraft", "whatweb", "nmap", "Wappalyzer"],
+    "remediation": "Remove server version headers (Server, X-Powered-By). Customize error pages to not disclose server information."
+  },
+  {
+    "id": "WSTG-CONF-01",
+    "category": "Configuration and Deployment Management Testing",
+    "name": "Test Network Infrastructure Configuration",
+    "description": "Assess the configuration of network infrastructure for security weaknesses.",
+    "objectives": [
+      "Identify unnecessary services and ports",
+      "Verify firewall rules",
+      "Check SSL/TLS configuration"
+    ],
+    "test_cases": [
+      "Port scan: nmap -sV -p- --open target.com",
+      "Test SSL/TLS: testssl.sh https://target.com",
+      "Check for default credentials on network devices",
+      "Test for DNS zone transfer: dig axfr target.com @ns1.target.com",
+      "Verify HTTPS enforcement and HSTS header"
+    ],
+    "tools": ["nmap", "testssl.sh", "SSLyze", "dig", "Metasploit"],
+    "remediation": "Disable unnecessary services. Enforce HTTPS with HSTS. Use strong TLS configurations (TLS 1.2+)."
+  },
+  {
+    "id": "WSTG-AUTH-01",
+    "category": "Authentication Testing",
+    "name": "Testing for Credentials Transported over an Encrypted Channel",
+    "description": "Verify that credentials are transmitted securely over encrypted channels.",
+    "objectives": [
+      "Verify credentials are not sent over HTTP",
+      "Check for mixed content issues",
+      "Verify cookie security attributes"
+    ],
+    "test_cases": [
+      "Intercept login form submission with Burp Suite and verify HTTPS",
+      "Check if login page loads over HTTP: curl -v http://target.com/login",
+      "Verify Set-Cookie headers include Secure and HttpOnly flags",
+      "Test for forced HTTP to HTTPS redirect",
+      "Check for HSTS header: curl -I https://target.com | grep -i strict"
+    ],
+    "tools": ["Burp Suite", "curl", "OWASP ZAP", "Wireshark"],
+    "remediation": "Enforce HTTPS for all pages. Set Secure flag on session cookies. Implement HSTS."
+  },
+  {
+    "id": "WSTG-AUTH-02",
+    "category": "Authentication Testing",
+    "name": "Testing for Default Credentials",
+    "description": "Test whether the application uses default credentials for authentication.",
+    "objectives": [
+      "Identify use of default usernames and passwords",
+      "Check for known default credentials in admin interfaces",
+      "Verify vendor documentation for defaults"
+    ],
+    "test_cases": [
+      "Try common default credentials: admin/admin, admin/password, admin/123456",
+      "Check for admin panels: /admin, /manager, /administrator, /wp-admin",
+      "Use Metasploit auxiliary modules for default credential scanning",
+      "Review vendor documentation for default credentials",
+      "Run: hydra -L /usr/share/wordlists/default_users.txt -P /usr/share/wordlists/default_passwords.txt target.com http-get /admin"
+    ],
+    "tools": ["Burp Suite", "Hydra", "Metasploit", "Nikto"],
+    "remediation": "Change all default credentials during deployment. Implement account lockout policies."
+  },
+  {
+    "id": "WSTG-ATHZ-01",
+    "category": "Authorization Testing",
+    "name": "Testing Directory Traversal File Include",
+    "description": "Test for path traversal vulnerabilities that allow access to files outside the intended directory.",
+    "objectives": [
+      "Identify path traversal vulnerabilities",
+      "Attempt to read sensitive system files",
+      "Test file inclusion vectors"
+    ],
+    "test_cases": [
+      "Test URL parameters: ?file=../../../../etc/passwd",
+      "Try URL encoding: ?file=..%2F..%2F..%2Fetc%2Fpasswd",
+      "Test double encoding: ?file=..%252F..%252F..%252Fetc%252Fpasswd",
+      "Use DotDotPwn: dotdotpwn -m http -h target.com -u 'http://target.com/page?file=TRAVERSAL'",
+      "Test Windows paths: ?file=..\\..\\..\\Windows\\System32\\drivers\\etc\\hosts"
+    ],
+    "tools": ["Burp Suite", "DotDotPwn", "OWASP ZAP", "curl"],
+    "remediation": "Validate and sanitize all file path inputs. Use a whitelist of allowed files. Avoid passing user-supplied data to file system APIs."
+  },
+  {
+    "id": "WSTG-INPV-01",
+    "category": "Input Validation Testing",
+    "name": "Testing for Reflected Cross Site Scripting",
+    "description": "Identify and test for reflected XSS vulnerabilities where user input is immediately returned by the web application.",
+    "objectives": [
+      "Identify input vectors that are reflected in the response",
+      "Determine if input is properly sanitized",
+      "Verify Content Security Policy implementation"
+    ],
+    "test_cases": [
+      "Test all input fields with: <script>alert(1)</script>",
+      "Try HTML encoding bypass: &lt;script&gt;alert(1)&lt;/script&gt;",
+      "Test event handlers: \" onmouseover=\"alert(1)",
+      "Use XSS Cheat Sheet for advanced payloads",
+      "Automated scan: xssstrike --url 'http://target.com/search?q=test' --crawl"
+    ],
+    "tools": ["Burp Suite", "XSSStrike", "OWASP ZAP", "Dalfox"],
+    "remediation": "Implement output encoding. Use Content Security Policy. Validate and sanitize all input."
+  },
+  {
+    "id": "WSTG-INPV-05",
+    "category": "Input Validation Testing",
+    "name": "Testing for SQL Injection",
+    "description": "Test for SQL injection vulnerabilities that allow manipulation of database queries.",
+    "objectives": [
+      "Identify SQL injection entry points",
+      "Determine database type and version",
+      "Attempt data extraction or authentication bypass"
+    ],
+    "test_cases": [
+      "Test with single quote: ' OR '1'='1",
+      "Try time-based blind: ' OR SLEEP(5)--",
+      "Use sqlmap: sqlmap -u 'http://target.com/page?id=1' --dbs",
+      "Test login bypass: admin'-- in username field",
+      "Test with UNION: ' UNION SELECT NULL,NULL,NULL--"
+    ],
+    "tools": ["sqlmap", "Burp Suite", "Havij", "OWASP ZAP"],
+    "remediation": "Use parameterized queries/prepared statements. Implement input validation. Apply least privilege to database accounts."
+  },
+  {
+    "id": "WSTG-INPV-11",
+    "category": "Input Validation Testing",
+    "name": "Testing for Code Injection",
+    "description": "Test for code injection vulnerabilities that allow execution of attacker-controlled code on the server.",
+    "objectives": [
+      "Identify code injection vectors",
+      "Determine if user input is evaluated as code",
+      "Test for remote code execution"
+    ],
+    "test_cases": [
+      "Test PHP injection: ;phpinfo();",
+      "Test Python: import os;os.system('id')",
+      "Test template injection: {{7*7}} (Jinja2), ${7*7} (Freemarker)",
+      "Use tplmap for template injection: tplmap -u 'http://target.com/page?name=test'",
+      "Test for command injection: ; id, | id, && id"
+    ],
+    "tools": ["Burp Suite", "tplmap", "commix", "OWASP ZAP"],
+    "remediation": "Never pass user input to eval() or similar functions. Use sandboxed template engines. Validate all input."
+  },
+  {
+    "id": "WSTG-SESS-01",
+    "category": "Session Management Testing",
+    "name": "Testing for Session Management Schema",
+    "description": "Analyze the session management mechanism to identify weaknesses in session token generation and handling.",
+    "objectives": [
+      "Analyze session token entropy and randomness",
+      "Test for predictable session tokens",
+      "Verify proper session invalidation"
+    ],
+    "test_cases": [
+      "Collect multiple session tokens and analyze for patterns",
+      "Test session token entropy with Burp Sequencer",
+      "Verify session is invalidated after logout",
+      "Test concurrent session handling",
+      "Check cookie attributes: Secure, HttpOnly, SameSite"
+    ],
+    "tools": ["Burp Suite (Sequencer)", "OWASP ZAP", "curl"],
+    "remediation": "Use cryptographically secure random session tokens. Implement proper session expiration. Set secure cookie attributes."
+  },
+  {
+    "id": "WSTG-SESS-06",
+    "category": "Session Management Testing",
+    "name": "Testing for Cross Site Request Forgery",
+    "description": "Test for CSRF vulnerabilities that allow attackers to perform actions on behalf of authenticated users.",
+    "objectives": [
+      "Identify state-changing requests without CSRF protection",
+      "Verify CSRF token implementation",
+      "Test for CSRF token bypass techniques"
+    ],
+    "test_cases": [
+      "Identify all state-changing requests (POST, PUT, DELETE)",
+      "Check for CSRF tokens in forms and AJAX requests",
+      "Test if CSRF token is validated server-side",
+      "Try removing or modifying the CSRF token",
+      "Test SameSite cookie attribute bypass for cross-origin requests"
+    ],
+    "tools": ["Burp Suite", "OWASP ZAP", "CSRFTester"],
+    "remediation": "Implement synchronizer token pattern. Use SameSite cookie attribute. Verify Origin and Referer headers."
+  },
+  {
+    "id": "WSTG-CRYP-01",
+    "category": "Cryptography Testing",
+    "name": "Testing for Weak Transport Layer Security",
+    "description": "Test the SSL/TLS configuration for known weaknesses and insecure configurations.",
+    "objectives": [
+      "Identify supported SSL/TLS versions",
+      "Test for weak cipher suites",
+      "Check certificate validity and configuration"
+    ],
+    "test_cases": [
+      "Run testssl.sh: testssl.sh --full https://target.com",
+      "Check for SSLv2/SSLv3/TLS 1.0/1.1 support",
+      "Test for BEAST, POODLE, HEARTBLEED vulnerabilities",
+      "Verify certificate chain and expiration",
+      "Check for HSTS with long max-age: curl -I https://target.com | grep -i strict"
+    ],
+    "tools": ["testssl.sh", "SSLyze", "sslscan", "Nmap", "Qualys SSL Labs"],
+    "remediation": "Disable SSLv2, SSLv3, TLS 1.0, and TLS 1.1. Use only strong cipher suites. Implement HSTS."
+  }
+]

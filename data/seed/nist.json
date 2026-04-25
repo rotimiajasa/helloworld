@@ -1,0 +1,130 @@
+[
+  {
+    "id": "AC-1",
+    "family": "Access Control",
+    "name": "Policy and Procedures",
+    "description": "Develop, document, and disseminate access control policy and procedures that address purpose, scope, roles, responsibilities, management commitment, coordination, and compliance.",
+    "guidance": "Organizations should document access control policies, review them annually, and ensure all personnel are trained. Procedures should cover account management, access enforcement, and separation of duties.",
+    "baseline": "LOW"
+  },
+  {
+    "id": "AC-2",
+    "family": "Access Control",
+    "name": "Account Management",
+    "description": "Manage information system accounts including establishing, activating, modifying, reviewing, disabling, and removing accounts.",
+    "guidance": "Implement automated tools to support account management. Review accounts regularly (at least annually). Disable inactive accounts after 90 days. Remove accounts for terminated users within 24 hours.",
+    "baseline": "LOW"
+  },
+  {
+    "id": "AC-3",
+    "family": "Access Control",
+    "name": "Access Enforcement",
+    "description": "Enforce approved authorizations for logical access to information and system resources in accordance with applicable access control policies.",
+    "guidance": "Implement role-based access control (RBAC) or attribute-based access control (ABAC). Apply the principle of least privilege. Restrict access to sensitive data and system resources.",
+    "baseline": "LOW"
+  },
+  {
+    "id": "AC-17",
+    "family": "Access Control",
+    "name": "Remote Access",
+    "description": "Establish and document usage restrictions, configuration/connection requirements, and implementation guidance for each type of remote access allowed.",
+    "guidance": "Use VPN with MFA for remote access. Encrypt all remote sessions. Monitor remote access sessions. Disconnect inactive remote sessions after 15 minutes.",
+    "baseline": "LOW"
+  },
+  {
+    "id": "AU-2",
+    "family": "Audit and Accountability",
+    "name": "Event Logging",
+    "description": "Identify the types of events that the system is capable of logging in support of the audit function.",
+    "guidance": "Log authentication attempts (success and failure), privilege escalation, account management, system startup/shutdown, configuration changes, and access to sensitive data.",
+    "baseline": "LOW"
+  },
+  {
+    "id": "AU-6",
+    "family": "Audit and Accountability",
+    "name": "Audit Record Review, Analysis, and Reporting",
+    "description": "Review and analyze system audit records for indications of inappropriate or unusual activity, and report findings.",
+    "guidance": "Review audit logs at minimum weekly. Use SIEM for automated analysis. Establish baselines for normal behavior and alert on anomalies.",
+    "baseline": "LOW"
+  },
+  {
+    "id": "CM-6",
+    "family": "Configuration Management",
+    "name": "Configuration Settings",
+    "description": "Establish and document configuration settings for IT products employed within the information system.",
+    "guidance": "Use CIS Benchmarks or DISA STIGs as configuration baselines. Implement configuration management tools (Ansible, Chef, Puppet). Monitor for configuration drift.",
+    "baseline": "LOW"
+  },
+  {
+    "id": "CM-7",
+    "family": "Configuration Management",
+    "name": "Least Functionality",
+    "description": "Configure the system to provide only essential capabilities. Prohibit or restrict the use of functions, ports, protocols, and services not required.",
+    "guidance": "Disable unused services and ports. Remove unnecessary software. Implement application whitelisting. Regularly review enabled services.",
+    "baseline": "LOW"
+  },
+  {
+    "id": "IA-2",
+    "family": "Identification and Authentication",
+    "name": "Identification and Authentication (Organizational Users)",
+    "description": "Uniquely identify and authenticate organizational users and associate that unique identification with processes acting on behalf of those users.",
+    "guidance": "Implement multi-factor authentication (MFA) for all accounts, especially privileged accounts. Use unique identifiers for each user. Never share accounts.",
+    "baseline": "LOW"
+  },
+  {
+    "id": "IA-5",
+    "family": "Identification and Authentication",
+    "name": "Authenticator Management",
+    "description": "Manage system authenticators by establishing initial authenticator content, minimum and maximum lifetime restrictions, reuse conditions, and composition requirements.",
+    "guidance": "Enforce minimum 12-character passwords. Require complexity or passphrase approach. Prevent password reuse for last 24 passwords. Use password managers. Implement MFA.",
+    "baseline": "LOW"
+  },
+  {
+    "id": "IR-4",
+    "family": "Incident Response",
+    "name": "Incident Handling",
+    "description": "Implement an incident handling capability for security incidents that includes preparation, detection, analysis, containment, eradication, and recovery.",
+    "guidance": "Develop and test incident response plans annually. Define roles and responsibilities. Establish communication procedures. Conduct tabletop exercises.",
+    "baseline": "LOW"
+  },
+  {
+    "id": "RA-5",
+    "family": "Risk Assessment",
+    "name": "Vulnerability Monitoring and Scanning",
+    "description": "Monitor and scan for vulnerabilities in the system and hosted applications periodically and when new vulnerabilities potentially affecting the system are identified.",
+    "guidance": "Perform authenticated vulnerability scans at least quarterly. Remediate critical vulnerabilities within 30 days, high within 60 days. Conduct penetration testing annually.",
+    "baseline": "LOW"
+  },
+  {
+    "id": "SC-7",
+    "family": "System and Communications Protection",
+    "name": "Boundary Protection",
+    "description": "Monitor and control communications at the external boundary of the system and at key internal boundaries within the system.",
+    "guidance": "Deploy firewalls at network boundaries. Implement network segmentation. Use DMZ for externally facing systems. Monitor all ingress/egress traffic.",
+    "baseline": "LOW"
+  },
+  {
+    "id": "SC-28",
+    "family": "System and Communications Protection",
+    "name": "Protection of Information at Rest",
+    "description": "Protect the confidentiality and integrity of information at rest.",
+    "guidance": "Encrypt sensitive data at rest using AES-256. Protect encryption keys using HSM or key management services. Encrypt full disk on laptops and mobile devices.",
+    "baseline": "MODERATE"
+  },
+  {
+    "id": "SI-2",
+    "family": "System and Information Integrity",
+    "name": "Flaw Remediation",
+    "description": "Identify, report, and correct information system flaws. Test software updates before installation. Incorporate flaw remediation into the organizational configuration management process.",
+    "guidance": "Apply security patches within 30 days of release for critical/high vulnerabilities. Track patch status with vulnerability management tools. Test patches before production deployment.",
+    "baseline": "LOW"
+  },
+  {
+    "id": "SI-3",
+    "family": "System and Information Integrity",
+    "name": "Malicious Code Protection",
+    "description": "Implement malicious code protection mechanisms at system entry and exit points and at workstations, servers, or mobile computing devices on the network.",
+    "guidance": "Deploy EDR/AV on all endpoints. Update signatures frequently. Scan email attachments and downloads. Configure automatic scanning.",
+    "baseline": "LOW"
+  }
+]
