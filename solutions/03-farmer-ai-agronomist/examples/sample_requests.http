@@ -1,0 +1,54 @@
+### Health
+GET http://localhost:8002/health
+
+### English question
+POST http://localhost:8002/v1/chat
+Content-Type: application/json
+
+{
+  "question": "When should I plant maize in Lagos this season?",
+  "state": "Lagos",
+  "crop": "Maize"
+}
+
+### Pidgin question (auto-detected)
+POST http://localhost:8002/v1/chat
+Content-Type: application/json
+
+{
+  "question": "Abeg, my tomato dey die small small for Kaduna. Wetin I go do?"
+}
+
+### USSD first dial
+POST http://localhost:8002/v1/ussd
+Content-Type: application/json
+
+{
+  "sessionId": "s1",
+  "serviceCode": "*789#",
+  "phoneNumber": "+2348012345678",
+  "text": ""
+}
+
+### USSD: pick Maize -> Fertiliser
+POST http://localhost:8002/v1/ussd
+Content-Type: application/json
+
+{
+  "sessionId": "s1",
+  "serviceCode": "*789#",
+  "phoneNumber": "+2348012345678",
+  "text": "1*2"
+}
+
+### Image diagnosis (replace image_b64 with a real base64 leaf photo)
+POST http://localhost:8002/v1/diagnose
+Content-Type: application/json
+
+{
+  "question": "What is wrong with my maize leaf?",
+  "image_b64": "REPLACE_WITH_BASE64",
+  "image_media_type": "image/jpeg",
+  "state": "Kaduna",
+  "crop": "Maize"
+}

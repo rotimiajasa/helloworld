@@ -1,0 +1,8 @@
+services:
+  credit-api:
+    build: .
+    ports:
+      - "8001:8000"
+    environment:
+      CREDIT_API_KEY: ${CREDIT_API_KEY:-}
+    restart: unless-stopped

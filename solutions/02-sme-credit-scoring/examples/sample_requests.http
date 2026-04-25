@@ -1,0 +1,69 @@
+### Health
+GET http://localhost:8001/health
+
+### Strong borrower -> approve
+POST http://localhost:8001/v1/score
+Content-Type: application/json
+
+{
+  "application_id": "APP-DEMO-001",
+  "business_name": "Mama Funke Provisions",
+  "bvn_hash": "deadbeefcafe",
+  "sector": "retail",
+  "state": "Lagos",
+  "business_age_months": 36,
+  "employees": 4,
+  "requested_amount_kobo": 50000000,
+  "requested_tenor_months": 6,
+  "statement": {
+    "months_observed": 6,
+    "total_credits_kobo": 9000000000,
+    "total_debits_kobo": 8400000000,
+    "avg_monthly_balance_kobo": 200000000,
+    "min_monthly_balance_kobo": 50000000,
+    "bounced_debits_count": 1,
+    "distinct_inflow_payers": 38,
+    "pos_terminal_volume_kobo": 3500000000,
+    "pos_active_days_per_month": 26
+  },
+  "existing_obligations": [],
+  "has_inventory_app": true,
+  "has_supplier_credit": true
+}
+
+### Weak borrower -> decline
+POST http://localhost:8001/v1/score
+Content-Type: application/json
+
+{
+  "application_id": "APP-DEMO-002",
+  "business_name": "New Hustle Store",
+  "bvn_hash": "abc",
+  "sector": "hospitality",
+  "state": "Rivers",
+  "business_age_months": 2,
+  "employees": 0,
+  "requested_amount_kobo": 200000000,
+  "requested_tenor_months": 12,
+  "statement": {
+    "months_observed": 3,
+    "total_credits_kobo": 1500000000,
+    "total_debits_kobo": 1650000000,
+    "avg_monthly_balance_kobo": 5000000,
+    "min_monthly_balance_kobo": -2000000,
+    "bounced_debits_count": 9,
+    "distinct_inflow_payers": 3,
+    "pos_terminal_volume_kobo": 0,
+    "pos_active_days_per_month": 0
+  },
+  "existing_obligations": [
+    {
+      "lender": "OtherFin",
+      "outstanding_kobo": 30000000,
+      "monthly_repayment_kobo": 8000000,
+      "days_past_due": 22
+    }
+  ],
+  "has_inventory_app": false,
+  "has_supplier_credit": false
+}

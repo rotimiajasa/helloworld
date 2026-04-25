@@ -1,0 +1,53 @@
+### Health check
+GET http://localhost:8000/health
+
+### Low-risk transaction -> allow
+POST http://localhost:8000/v1/score
+Content-Type: application/json
+
+{
+  "txn_id": "TXN-DEMO-001",
+  "timestamp": "2026-04-25T10:15:00Z",
+  "amount_kobo": 1500000,
+  "channel": "mobile",
+  "sender_account": "0123456789",
+  "beneficiary_account": "9876543210",
+  "beneficiary_bank_code": "058",
+  "device_id": "dev-001",
+  "ip_address": "102.89.1.1",
+  "geo_state": "Lagos",
+  "is_new_beneficiary": false,
+  "sender_kyc_tier": 2
+}
+
+### Mark a known mule
+POST http://localhost:8000/v1/feedback/mule?account=1111111111
+
+### High-risk transfer to known mule -> block
+POST http://localhost:8000/v1/score
+Content-Type: application/json
+
+{
+  "txn_id": "TXN-DEMO-002",
+  "timestamp": "2026-04-25T02:30:00Z",
+  "amount_kobo": 500000000,
+  "channel": "mobile",
+  "sender_account": "0987654321",
+  "beneficiary_account": "1111111111",
+  "beneficiary_bank_code": "058",
+  "device_id": "dev-002",
+  "geo_state": "Lagos",
+  "is_new_beneficiary": true,
+  "sender_kyc_tier": 1
+}
+
+### Submit fraud confirmation
+POST http://localhost:8000/v1/feedback
+Content-Type: application/json
+
+{
+  "txn_id": "TXN-DEMO-002",
+  "is_fraud": true,
+  "fraud_type": "account_takeover",
+  "notes": "Customer reported unauthorised drain via SIM swap"
+}

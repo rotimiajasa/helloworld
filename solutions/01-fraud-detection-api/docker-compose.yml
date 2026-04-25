@@ -1,0 +1,8 @@
+services:
+  fraud-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      FRAUD_API_KEY: ${FRAUD_API_KEY:-}
+    restart: unless-stopped

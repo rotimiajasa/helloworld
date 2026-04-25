@@ -1,0 +1,9 @@
+services:
+  agronomist:
+    build: .
+    ports:
+      - "8002:8000"
+    environment:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      AGRO_API_KEY: ${AGRO_API_KEY:-}
+    restart: unless-stopped
