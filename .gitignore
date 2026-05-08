@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.local
+.DS_Store
+*.log
+
+# Generated repurposed assets — included in PR but not on master
+# (the PR template moves them from `out/` to a delivery channel before merge)
+out/

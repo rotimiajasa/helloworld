@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+
+const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+);
+---
+
+<BaseLayout>
+  <h1>{SITE_TITLE}</h1>
+  <p>{SITE_DESCRIPTION}</p>
+
+  <h2>Latest</h2>
+  <ul>
+    {posts.map((p) => (
+      <li>
+        <a href={`/posts/${p.slug}`}>{p.data.title}</a>
+        <small> — {p.data.publishedAt.toISOString().slice(0, 10)}</small>
+      </li>
+    ))}
+  </ul>
+  {posts.length === 0 && (
+    <p><em>No posts published yet. Drafts live in <code>src/content/posts/</code> and appear here when <code>draft: false</code>.</em></p>
+  )}
+</BaseLayout>

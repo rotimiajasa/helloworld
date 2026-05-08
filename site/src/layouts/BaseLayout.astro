@@ -1,0 +1,64 @@
+---
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href="/rss.xml" />
+    <style is:global>
+      :root {
+        --fg: #1a1a1a;
+        --bg: #fefefe;
+        --muted: #666;
+        --accent: #008753;
+      }
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 1.5rem;
+        color: var(--fg);
+        background: var(--bg);
+        line-height: 1.65;
+      }
+      a { color: var(--accent); }
+      h1, h2, h3 { line-height: 1.25; }
+      header nav { display: flex; gap: 1rem; margin-bottom: 2rem; }
+      footer { margin-top: 4rem; color: var(--muted); font-size: 0.9rem; }
+      table { border-collapse: collapse; width: 100%; }
+      th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; }
+      blockquote {
+        border-left: 3px solid var(--accent);
+        margin: 1rem 0;
+        padding: 0.5rem 1rem;
+        background: #f6f8f7;
+      }
+      pre { background: #f6f8f7; padding: 1rem; overflow-x: auto; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/"><strong>{SITE_TITLE}</strong></a>
+        <a href="/posts">All posts</a>
+        <a href="/about">About</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <p>© {new Date().getFullYear()} {SITE_TITLE}. Some links are affiliate links — they don't change the price you pay.</p>
+    </footer>
+  </body>
+</html>

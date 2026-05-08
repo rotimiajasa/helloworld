@@ -1,0 +1,68 @@
+{
+  "Payoneer": {
+    "name": "Payoneer",
+    "url": "https://payoneer.com/?rid=YOUR_REF",
+    "context": "USD/EUR receiving + withdrawal to Nigerian bank",
+    "payout": "$25 referral bonus when referee earns $1000"
+  },
+  "Wise": {
+    "name": "Wise",
+    "url": "https://wise.com/invite/u/YOUR_REF",
+    "context": "USD/EUR account, low FX spread to NGN",
+    "payout": "Variable per geo"
+  },
+  "Geegpay": {
+    "name": "Geegpay",
+    "url": "https://geegpay.app/r/YOUR_REF",
+    "context": "Nigerian-built receiver for international invoices",
+    "payout": "TBD"
+  },
+  "Grey": {
+    "name": "Grey",
+    "url": "https://grey.co/?ref=YOUR_REF",
+    "context": "Multi-currency virtual accounts for Nigerians",
+    "payout": "TBD"
+  },
+  "Fiverr CPA": {
+    "name": "Fiverr",
+    "url": "https://go.fiverr.com/visit/?bta=YOUR_REF",
+    "context": "Freelance marketplace, hires Nigerians",
+    "payout": "$15-150 CPA"
+  },
+  "Upwork": {
+    "name": "Upwork",
+    "url": "https://upwork.com",
+    "context": "Top freelance platform; no public affiliate program",
+    "payout": "(none)"
+  },
+  "Hostinger": {
+    "name": "Hostinger",
+    "url": "https://hostinger.com?REFERRALCODE=YOUR_REF",
+    "context": "Cheap hosting Nigerians can pay with Naira card",
+    "payout": "60% of first sale"
+  },
+  "Deriv IB": {
+    "name": "Deriv",
+    "url": "https://deriv.com/partners/affiliate/?ref=YOUR_REF",
+    "context": "Forex/synthetic indices broker active in Nigeria",
+    "payout": "$5-15 CPA + revshare"
+  },
+  "Binance": {
+    "name": "Binance",
+    "url": "https://www.binance.com/en/register?ref=YOUR_REF",
+    "context": "USDT off-ramp via P2P (Naira)",
+    "payout": "20-40% commission share"
+  },
+  "Selar": {
+    "name": "Selar",
+    "url": "https://selar.co/refer/YOUR_REF",
+    "context": "Nigerian creator platform, pays NGN next-day",
+    "payout": "Commission per merchant"
+  },
+  "Coursera": {
+    "name": "Coursera",
+    "url": "https://imp.i384100.net/YOUR_REF",
+    "context": "Online courses (Google certs etc.)",
+    "payout": "10-45% per sale"
+  }
+}
