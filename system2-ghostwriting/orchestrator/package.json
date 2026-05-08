@@ -1,0 +1,25 @@
+{
+  "name": "ghostwriting-ops",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prospect": "tsx src/prospect.ts",
+    "voice-extract": "tsx src/voice-extract.ts",
+    "client-week": "tsx src/client-week.ts",
+    "reply-triage": "tsx src/reply-triage.ts",
+    "monthly-report": "tsx src/monthly-report.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.40.0",
+    "csv-parse": "^5.5.6",
+    "dotenv": "^16.4.5",
+    "gray-matter": "^4.0.3",
+    "slugify": "^1.6.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.3"
+  }
+}
