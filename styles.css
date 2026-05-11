@@ -1,0 +1,507 @@
+/* ============================================
+   PINNACLE WELLNESS — DESIGN SYSTEM
+   Editorial luxury + brand gradient accent
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700;800&family=Caveat:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Brand gradient */
+  --grad-purple: #6B2BB8;
+  --grad-blue: #1E5BC6;
+  --grad-green: #4FB14A;
+  --brand-gradient: linear-gradient(135deg, #6B2BB8 0%, #1E5BC6 50%, #4FB14A 100%);
+  --brand-gradient-soft: linear-gradient(135deg, rgba(107,43,184,0.08) 0%, rgba(30,91,198,0.06) 50%, rgba(79,177,74,0.08) 100%);
+
+  /* Editorial palette */
+  --ink: #1a1814;
+  --ink-soft: #2d2820;
+  --ink-mute: #5a5448;
+  --paper: #faf7f2;
+  --paper-warm: #f3ede2;
+  --cream: #ede4d3;
+  --gold: #c9a961;
+  --gold-deep: #a8893f;
+  --gold-soft: #e8d9b0;
+
+  /* Functional */
+  --line: #e3dccd;
+  --line-soft: #efe9dc;
+  --success: #4FB14A;
+  --danger: #b84a3a;
+
+  /* Type */
+  --serif: 'Cormorant Garamond', 'Times New Roman', serif;
+  --sans: 'Manrope', system-ui, sans-serif;
+  --script: 'Caveat', cursive;
+
+  /* Spacing rhythm */
+  --shadow-sm: 0 2px 8px rgba(26,24,20,0.06);
+  --shadow-md: 0 8px 24px rgba(26,24,20,0.08);
+  --shadow-lg: 0 24px 60px rgba(26,24,20,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+/* === Type === */
+.serif { font-family: var(--serif); font-weight: 500; letter-spacing: -0.01em; }
+.script { font-family: var(--script); }
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink-mute);
+}
+.eyebrow-gold { color: var(--gold-deep); }
+
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; letter-spacing: -0.015em; line-height: 1.05; color: var(--ink); }
+.display { font-family: var(--serif); font-weight: 400; letter-spacing: -0.025em; line-height: 0.95; }
+
+.gold-text { color: var(--gold-deep); }
+.italic-script { font-family: var(--serif); font-style: italic; font-weight: 400; }
+
+/* gradient text (used sparingly) */
+.grad-text {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* === Buttons === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  border-radius: 0;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+.btn-primary:hover { background: #000; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-gold {
+  background: var(--gold);
+  color: var(--ink);
+}
+.btn-gold:hover { background: var(--gold-deep); color: var(--paper); }
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+}
+.btn-outline:hover { background: var(--ink); color: var(--paper); }
+.btn-grad {
+  background: var(--brand-gradient);
+  color: white;
+  position: relative;
+}
+.btn-grad:hover { box-shadow: 0 8px 24px rgba(107,43,184,0.3); transform: translateY(-1px); }
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--ink);
+  letter-spacing: 0.16em;
+}
+.btn-ghost:hover { color: var(--gold-deep); border-color: var(--gold-deep); }
+
+/* === Layout === */
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.container-narrow { max-width: 980px; margin: 0 auto; padding: 0 32px; }
+
+/* divider */
+.rule {
+  height: 1px;
+  background: var(--line);
+  width: 100%;
+}
+.rule-gold {
+  height: 1px;
+  background: var(--gold);
+  width: 60px;
+}
+
+/* badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 6px 12px;
+  border: 1px solid currentColor;
+  color: var(--gold-deep);
+  background: rgba(255,255,255,0.6);
+}
+.badge-grad {
+  background: var(--brand-gradient);
+  color: white;
+  border: none;
+}
+.badge-solid {
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+}
+
+/* product card hover */
+.product-card { cursor: pointer; transition: transform 0.4s ease; }
+.product-card:hover { transform: translateY(-4px); }
+.product-card .img-wrap { position: relative; overflow: hidden; }
+.product-card .img-wrap img,
+.product-card .img-wrap .placeholder {
+  transition: transform 0.7s ease;
+}
+.product-card:hover .img-wrap img,
+.product-card:hover .img-wrap .placeholder {
+  transform: scale(1.04);
+}
+
+/* nav */
+.nav-link {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+  padding: 4px 0;
+  cursor: pointer;
+}
+.nav-link:hover { color: var(--gold-deep); }
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* tag pill */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 999px;
+}
+.pill:hover { border-color: var(--ink); }
+.pill.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+/* placeholder image */
+.placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--paper-warm) 0%, var(--cream) 100%);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-mute);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid var(--gold-soft);
+}
+.placeholder.grad {
+  background: var(--brand-gradient-soft);
+}
+.placeholder.dark {
+  background: linear-gradient(135deg, #2a2520 0%, #1a1814 100%);
+  color: var(--gold-soft);
+}
+.placeholder.dark::before {
+  border-color: var(--gold-deep);
+  opacity: 0.4;
+}
+
+/* gradient ring (decorative, used for the cover seal) */
+.seal {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  background: var(--brand-gradient);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  padding: 12px;
+}
+
+/* fade-in helper */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.6s ease both; }
+
+/* hide scrollbar in chat */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* Inputs */
+.input {
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--ink);
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input:focus { border-color: var(--ink); }
+.input-underline {
+  border: none;
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
+  background: transparent;
+  font-size: 14px;
+  font-family: var(--sans);
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input-underline:focus { border-color: var(--ink); }
+
+/* AI chat bubble look */
+.chat-bubble {
+  max-width: 85%;
+  padding: 14px 18px;
+  font-size: 14px;
+  line-height: 1.55;
+  border-radius: 4px;
+  white-space: pre-wrap;
+}
+.chat-bubble.ai {
+  background: white;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  align-self: flex-start;
+  border-top-left-radius: 0;
+}
+.chat-bubble.user {
+  background: var(--ink);
+  color: var(--paper);
+  align-self: flex-end;
+  border-top-right-radius: 0;
+}
+
+/* dot pulse for typing */
+@keyframes pulse-dot {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+.typing-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  background: var(--ink-mute);
+  border-radius: 50%;
+  margin: 0 2px;
+  animation: pulse-dot 1.4s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* small marquee/ticker */
+.ticker {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-track {
+  display: inline-block;
+  animation: ticker 40s linear infinite;
+  padding-left: 100%;
+}
+.ticker span { padding: 0 32px; }
+.ticker .dot { color: var(--gold); }
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* responsive */
+
+/* Tablet and below — collapse big grids to 2 columns */
+@media (max-width: 1024px) {
+  .container, .container-narrow { padding: 0 24px; }
+
+  /* Any inline grid with 3+ columns becomes 2 columns on tablet */
+  [style*="grid-template-columns: repeat(4"],
+  [style*="gridTemplateColumns: repeat(4"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Footer 5-col layout becomes 2-col */
+  footer [style*="1.4fr 1fr 1fr 1fr 1.2fr"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 36px !important;
+  }
+}
+
+/* Mobile breakpoint — single column everywhere */
+@media (max-width: 768px) {
+  .container, .container-narrow { padding: 0 18px; }
+
+  /* Hide desktop nav links inside header, show hamburger */
+  .nav-desktop { display: none !important; }
+  .nav-mobile-toggle { display: flex !important; }
+
+  /* Re-balance header grid: hamburger | logo | actions */
+  .header-grid {
+    grid-template-columns: auto 1fr auto !important;
+    padding: 14px 18px !important;
+    gap: 12px !important;
+  }
+  .header-grid > a { justify-self: center; }
+
+  /* Force ALL inline column grids to a single column on mobile.
+     This targets cards, pillars, hero pairs, services, journal, footer, etc. */
+  [style*="grid-template-columns: repeat"],
+  [style*="gridTemplateColumns: repeat"],
+  [style*="grid-template-columns: 1fr 1.1fr"],
+  [style*="grid-template-columns: 1.1fr 1fr"],
+  [style*="grid-template-columns: 1.4fr 1fr"],
+  [style*="grid-template-columns: 1fr 1.4fr"],
+  [style*="grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr"],
+  [style*="grid-template-columns: 2fr 1fr"],
+  [style*="grid-template-columns: 1fr 2fr"],
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns: 140px 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  /* Restore the "label · value" rows in service meta — they look fine stacked */
+  [style*="grid-template-columns: 140px 1fr"] {
+    gap: 4px !important;
+    padding: 12px 0 !important;
+  }
+
+  /* Pillar dividers — borders make no sense when stacked */
+  section [style*="border-right: 1px solid"] { border-right: none !important; }
+
+  /* Slim down generous vertical padding */
+  section[style*="padding: 100px"],
+  section[style*="padding: 120px"],
+  section[style*="padding: 90px"] {
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+  }
+  section[style*="padding: 80px"],
+  section[style*="padding: 70px"] {
+    padding-top: 44px !important;
+    padding-bottom: 44px !important;
+  }
+
+  /* Pillar tile padding */
+  [style*="padding: 40px 36px"] {
+    padding: 28px 4px !important;
+  }
+
+  /* Display headings: clamp() already adapts, but make sure line-height is tight */
+  .display { line-height: 1.02; }
+  .serif { word-wrap: break-word; }
+
+  /* Hero side-by-side → stacked, image first */
+  .hero-grid { grid-template-columns: 1fr !important; }
+
+  /* Ticker dimmer/smaller */
+  .ticker { font-size: 11px; }
+
+  /* Cart drawer / chat panel — full width on phones */
+  .cart-drawer, .chat-panel, [class*="drawer"], [class*="Drawer"] {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Sticky-side product page on mobile shouldn't stick */
+  [style*="position: sticky"][style*="top: "] {
+    position: static !important;
+  }
+
+  /* Buttons in CTA rows wrap nicely */
+  .btn { white-space: normal; }
+
+  /* Tables of nav links in footer get more room */
+  footer h4, footer .eyebrow { font-size: 11px; }
+  footer { padding: 56px 0 32px !important; }
+
+  /* Flex rows that were "space-between, align flex-end" usually need to wrap */
+  [style*="justify-content: space-between"][style*="align-items: flex-end"] {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* Force any flex row used as page-level layout to wrap */
+  section [style*="display: flex"][style*="gap: "] { flex-wrap: wrap; }
+}
+
+/* Very small phones */
+@media (max-width: 420px) {
+  .container, .container-narrow { padding: 0 14px; }
+  .header-grid { padding: 12px 14px !important; }
+}
