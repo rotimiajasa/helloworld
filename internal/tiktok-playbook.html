@@ -1,0 +1,959 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pinnacle Wellness — TikTok Monetization Playbook</title>
+<style>
+  @page { size: A4; margin: 22mm 18mm 22mm 18mm; }
+  @page :first { margin: 0; }
+
+  :root {
+    --ink: #1a1410;
+    --soft-ink: #4a3f37;
+    --rose: #b86b80;
+    --rose-deep: #7d3a4f;
+    --cream: #faf3ea;
+    --cream-deep: #f0e3d3;
+    --amber: #b88040;
+    --plum: #4a2a3d;
+    --rule: #d9c8b3;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Georgia, 'Cormorant Garamond', serif;
+    color: var(--ink);
+    font-size: 10.5pt;
+    line-height: 1.55;
+    background: white;
+  }
+  .sans { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; }
+
+  /* COVER */
+  .cover {
+    page-break-after: always;
+    height: 297mm;
+    width: 210mm;
+    padding: 30mm 22mm;
+    background: linear-gradient(155deg, #fff6ec 0%, #f3dcc5 55%, #d9a994 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--plum);
+  }
+  .cover .logo { font-family: Georgia, serif; font-style: italic; letter-spacing: 0.18em; font-size: 11pt; text-transform: uppercase; opacity: 0.8; }
+  .cover h1 { font-size: 38pt; font-weight: 400; line-height: 1.05; margin: 0 0 18px 0; max-width: 145mm; }
+  .cover h1 em { font-style: italic; color: var(--rose-deep); }
+  .cover .sub { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 11pt; max-width: 130mm; line-height: 1.55; }
+  .cover .meta { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 9pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--plum); opacity: 0.7; }
+  .cover .stamp { display: inline-block; padding: 6px 12px; border: 1px solid var(--plum); border-radius: 999px; font-family: -apple-system, sans-serif; font-size: 8.5pt; letter-spacing: 0.18em; text-transform: uppercase; }
+
+  /* PAGE */
+  h2 {
+    font-family: Georgia, serif;
+    font-size: 22pt;
+    font-weight: 400;
+    color: var(--plum);
+    margin: 0 0 6mm 0;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule);
+    page-break-after: avoid;
+  }
+  h2 .num { font-style: italic; color: var(--rose); margin-right: 12px; }
+  h3 {
+    font-family: -apple-system, sans-serif;
+    font-size: 11pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--rose-deep);
+    margin: 8mm 0 2mm 0;
+    page-break-after: avoid;
+  }
+  h4 {
+    font-family: -apple-system, sans-serif;
+    font-size: 10.5pt;
+    font-weight: 700;
+    margin: 5mm 0 1mm 0;
+    color: var(--ink);
+    page-break-after: avoid;
+  }
+  p { margin: 0 0 3mm 0; }
+  ul, ol { margin: 0 0 3mm 0; padding-left: 18px; }
+  li { margin-bottom: 1.5mm; }
+  strong { color: var(--plum); }
+  em { color: var(--rose-deep); }
+
+  .lede {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 12pt;
+    color: var(--soft-ink);
+    line-height: 1.5;
+    margin: 0 0 6mm 0;
+  }
+
+  .callout {
+    background: var(--cream);
+    border-left: 3px solid var(--rose);
+    padding: 4mm 5mm;
+    margin: 4mm 0;
+    font-size: 9.5pt;
+    page-break-inside: avoid;
+  }
+  .callout.warning { border-left-color: var(--amber); background: #fdf2e1; }
+  .callout.danger { border-left-color: #c0392b; background: #fbeae7; }
+  .callout strong { display: block; font-family: -apple-system, sans-serif; text-transform: uppercase; font-size: 8.5pt; letter-spacing: 0.14em; margin-bottom: 2mm; color: var(--rose-deep); }
+  .callout.warning strong { color: var(--amber); }
+  .callout.danger strong { color: #8b1e10; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 3mm 0 4mm 0;
+    font-size: 9.5pt;
+    font-family: -apple-system, sans-serif;
+  }
+  th { text-align: left; padding: 2mm 3mm; background: var(--cream-deep); color: var(--plum); border-bottom: 1px solid var(--rule); font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.08em; }
+  td { padding: 2mm 3mm; border-bottom: 1px solid #ece0cf; vertical-align: top; }
+  td.label { font-weight: 700; color: var(--rose-deep); }
+
+  .pair { display: flex; gap: 6mm; margin: 3mm 0; }
+  .pair > div { flex: 1; }
+
+  .product-card {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 4mm 5mm;
+    margin: 0 0 4mm 0;
+    page-break-inside: avoid;
+  }
+  .product-card .name { font-family: Georgia, serif; font-size: 13pt; color: var(--plum); margin: 0 0 1mm 0; }
+  .product-card .tag { font-family: -apple-system, sans-serif; font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.1em; color: var(--rose-deep); margin-bottom: 2mm; }
+  .product-card ul { margin-top: 1mm; padding-left: 16px; font-size: 9.5pt; }
+
+  .day {
+    border-left: 2px solid var(--rose);
+    padding: 1mm 0 1mm 4mm;
+    margin: 0 0 2mm 0;
+    font-size: 9.5pt;
+    font-family: -apple-system, sans-serif;
+    page-break-inside: avoid;
+  }
+  .day .label { font-weight: 700; color: var(--plum); }
+  .day .acct { display: inline-block; padding: 1px 7px; border-radius: 999px; font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.08em; margin-right: 4px; font-weight: 600; }
+  .acct.mercy { background: #f6dbe2; color: var(--rose-deep); }
+  .acct.faceless { background: #e5d8c2; color: var(--amber); }
+  .acct.live { background: var(--plum); color: white; }
+
+  .hooks { font-family: -apple-system, sans-serif; font-size: 9.5pt; }
+  .hooks li { margin-bottom: 1mm; }
+
+  .stream {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 4mm 5mm;
+    margin-bottom: 4mm;
+    page-break-inside: avoid;
+  }
+  .stream .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2mm; }
+  .stream .head h4 { margin: 0; font-family: Georgia, serif; font-size: 13pt; font-weight: 400; color: var(--plum); text-transform: none; letter-spacing: 0; }
+  .stream .tag { font-family: -apple-system, sans-serif; font-size: 8pt; text-transform: uppercase; letter-spacing: 0.1em; padding: 2px 8px; border-radius: 999px; }
+  .tag.priority { background: var(--rose-deep); color: white; }
+  .tag.secondary { background: var(--cream-deep); color: var(--plum); }
+  .tag.future { background: transparent; color: var(--soft-ink); border: 1px solid var(--rule); }
+  .stream dl { display: grid; grid-template-columns: 32mm 1fr; gap: 1mm 4mm; font-family: -apple-system, sans-serif; font-size: 9.5pt; margin: 2mm 0 0 0; }
+  .stream dt { color: var(--rose-deep); font-weight: 600; }
+
+  footer {
+    position: fixed;
+    bottom: 8mm;
+    left: 18mm;
+    right: 18mm;
+    font-family: -apple-system, sans-serif;
+    font-size: 8pt;
+    color: var(--soft-ink);
+    border-top: 1px solid var(--rule);
+    padding-top: 2mm;
+    display: flex;
+    justify-content: space-between;
+  }
+  .pb { page-break-before: always; }
+
+  /* TOC */
+  .toc { font-family: -apple-system, sans-serif; font-size: 10.5pt; }
+  .toc .row { display: flex; justify-content: space-between; padding: 2mm 0; border-bottom: 1px dotted var(--rule); }
+  .toc .row .n { color: var(--rose); font-style: italic; font-family: Georgia, serif; margin-right: 8px; }
+
+  .small { font-size: 9pt; color: var(--soft-ink); }
+  .mono { font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace; font-size: 9pt; background: #f4ece0; padding: 1px 5px; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <div>
+    <div class="logo">— Pinnacle Wellness —</div>
+    <div style="margin-top: 6mm;"><span class="stamp">Internal · Confidential</span></div>
+  </div>
+  <div>
+    <h1>The TikTok Monetization <em>Playbook</em></h1>
+    <p class="sub">An end-to-end operating manual for turning a brand-new TikTok presence into a measurable revenue channel for Pinnacle Wellness — across Nigeria and the diaspora, anchored on Mercy as the face and a faceless brand account for product-led content.</p>
+  </div>
+  <div>
+    <div class="meta">Version 1.0 · May 2026</div>
+    <div class="meta" style="margin-top: 2mm;">Prepared for the founder · Mercy Ikpe</div>
+  </div>
+</div>
+
+<!-- ============ TOC ============ -->
+<h2><span class="num">00</span>Contents</h2>
+<p class="lede">A short tour of what is in this document, and the order to read it in if you are short on time.</p>
+
+<div class="toc">
+  <div class="row"><span><span class="n">I.</span>Reality check — what monetization actually means on TikTok in 2026</span><span>p.3</span></div>
+  <div class="row"><span><span class="n">II.</span>Account architecture — the two-account strategy</span><span>p.4</span></div>
+  <div class="row"><span><span class="n">III.</span>Positioning — who Pinnacle is for on TikTok</span><span>p.6</span></div>
+  <div class="row"><span><span class="n">IV.</span>The seven revenue streams, ranked</span><span>p.7</span></div>
+  <div class="row"><span><span class="n">V.</span>The content engine — pillars, hooks, formats</span><span>p.11</span></div>
+  <div class="row"><span><span class="n">VI.</span>Per-product content angles — all 17 SKUs</span><span>p.14</span></div>
+  <div class="row"><span><span class="n">VII.</span>The 30-day launch calendar</span><span>p.17</span></div>
+  <div class="row"><span><span class="n">VIII.</span>TikTok Shop & diaspora distribution setup</span><span>p.20</span></div>
+  <div class="row"><span><span class="n">IX.</span>LIVE selling — the highest-leverage activity</span><span>p.22</span></div>
+  <div class="row"><span><span class="n">X.</span>The rules — claims you can and cannot make</span><span>p.24</span></div>
+  <div class="row"><span><span class="n">XI.</span>Analytics — what to look at, what to ignore</span><span>p.25</span></div>
+  <div class="row"><span><span class="n">XII.</span>Crisis playbook — bans, strikes, slumps</span><span>p.26</span></div>
+  <div class="row"><span><span class="n">XIII.</span>Checklists & appendix</span><span>p.27</span></div>
+</div>
+
+<div class="callout">
+  <strong>How to use this document</strong>
+  This is an operating manual, not an inspirational deck. Sections I–IV are strategy and should be read end-to-end before any video is filmed. Sections V–VII are the execution plan for the first 30 days. Sections VIII–XII are running references — open them as needed.
+</div>
+
+<!-- ============ I. REALITY CHECK ============ -->
+<div class="pb"></div>
+<h2><span class="num">I</span>Reality check</h2>
+<p class="lede">Before tactics, the truth about what TikTok monetization actually looks like for a Nigerian-founded wellness brand in 2026.</p>
+
+<h3>What "monetization" really means here</h3>
+<p>TikTok's own creator payouts (Creator Fund, Creator Rewards Program, LIVE Gifts) are the most over-promised, under-delivering income source on the internet. They pay creators in the US/UK roughly <strong>$0.40 to $1.00 per 1,000 qualified views</strong> — and they are not available to creators registered in Nigeria at all. Building a strategy around platform payouts would be a strategic error.</p>
+<p>For Pinnacle, the real money on TikTok flows through three channels, in this order:</p>
+<ol>
+  <li><strong>Direct sales to pinnacleorg.com</strong> driven by content. This is the heart of it. Every other channel is a feeder to this one.</li>
+  <li><strong>The Pinnacle Circle membership ($29/month, recurring)</strong> driven by content that builds long-term trust in Mercy.</li>
+  <li><strong>1:1 coaching ($180/session)</strong> and <strong>diaspora TikTok Shop sales</strong> as higher-margin add-ons.</li>
+</ol>
+
+<h3>What this means for Mercy and for the faceless account</h3>
+<p>The two accounts have very different jobs and very different success metrics. Confusing them is the single most common mistake.</p>
+<table>
+  <tr><th></th><th>Mercy (face account)</th><th>Pinnacle (faceless)</th></tr>
+  <tr><td class="label">Job</td><td>Build authority and trust in <em>the person</em></td><td>Drive direct product purchase</td></tr>
+  <tr><td class="label">Sells</td><td>Coaching · Circle membership · halo for products</td><td>Individual SKUs · sets · subscriptions</td></tr>
+  <tr><td class="label">Tone</td><td>Personal, opinionated, mentor</td><td>Aspirational, sensorial, demonstrative</td></tr>
+  <tr><td class="label">Success metric</td><td>Saves &amp; shares per video; profile visits; DMs</td><td>Link clicks &amp; conversions; Shop add-to-carts</td></tr>
+  <tr><td class="label">Posting</td><td>4–6 a week, batched weekly</td><td>1–2 a day, ruthlessly templated</td></tr>
+</table>
+
+<h3>Realistic expectations — the first 90 days</h3>
+<p>Anyone promising you "millions of views in 30 days" is selling you something. Here is what a well-executed Pinnacle launch looks like in the first quarter:</p>
+<ul>
+  <li><strong>Days 0–30:</strong> 5,000–25,000 followers across both accounts. First 10–40 product sales <em>attributable to TikTok</em> (measured with a TikTok-only discount code). One or two videos break 100k views — most settle under 5k. This is normal.</li>
+  <li><strong>Days 31–60:</strong> First viral video (200k+) — almost always not the one you predicted. First 5–15 Circle memberships from TikTok. First 1–3 coaching bookings. You begin to see what the audience actually wants.</li>
+  <li><strong>Days 61–90:</strong> Predictable inbound — somewhere between 30 and 200 product orders/month from TikTok traffic, 10–40 new Circle members, a clear sense of the two or three video formats that print money for you.</li>
+</ul>
+<div class="callout warning">
+  <strong>If by day 60 you have not had any video over 50,000 views and no measurable sales</strong>
+  Something in the content/positioning is wrong — not the platform. Re-read sections III and V and rework the hook formula. Do not double the volume; double the iteration.
+</div>
+
+<!-- ============ II. ACCOUNT ARCHITECTURE ============ -->
+<div class="pb"></div>
+<h2><span class="num">II</span>Account architecture</h2>
+<p class="lede">Two accounts, run from two phones, with two completely different briefs. This is the structural decision the rest of the plan rests on.</p>
+
+<h3>Account A — @mercyikpe (the face account)</h3>
+<p>The flagship. Mercy on camera, almost always speaking directly to a single woman through the screen. This account is not about Pinnacle products in the foreground — it is about Mercy being the most trusted wellness voice in your audience's feed. Products are mentioned <em>in passing</em>, the way a friend mentions what is on her bedside table.</p>
+<ul>
+  <li><strong>Display name:</strong> "Mercy Ikpe · Wellness, honestly"</li>
+  <li><strong>Bio:</strong> Wellness for the woman with a full life · Founder, Pinnacle · Lagos &amp; London. Link: pinnacleorg.com</li>
+  <li><strong>Profile picture:</strong> the mercy-portrait shot, cropped tightly to the face. Warm, smiling but composed.</li>
+  <li><strong>Pinned videos:</strong> rotate every 3–4 weeks — one "who I am," one signature take, one tutorial.</li>
+  <li><strong>Linktree vs. direct link:</strong> use a single direct link to <span class="mono">pinnacleorg.com/?utm_source=tt&amp;utm_medium=bio&amp;utm_campaign=mercy</span>. No Linktree — friction kills conversion.</li>
+</ul>
+
+<h3>Account B — @pinnacle.wellness (the faceless brand account)</h3>
+<p>The product channel. No Mercy on camera. The aesthetic is sensorial and shoppable: hands, surfaces, glass, water, light, satin, ritual. Voice is voice-over (Mercy or a hired voice — both work; consistency matters more than identity). The content is closer to a Sephora reel than a personal vlog.</p>
+<ul>
+  <li><strong>Display name:</strong> "Pinnacle · Wellness rituals"</li>
+  <li><strong>Bio:</strong> Skin · supplements · scent · stillness · A women-led wellness house from Lagos. Shop ↓</li>
+  <li><strong>Profile picture:</strong> the pinnacle-logo asset on cream background.</li>
+  <li><strong>Pinned videos:</strong> the highest-converting product demo, the founder-story 60-sec edit, and a "what we make" carousel video.</li>
+</ul>
+
+<h3>Why not just one account</h3>
+<p>The TikTok algorithm rewards niche tightness. A face account that suddenly posts a faceless product B-roll trains the algorithm against both kinds of content and dilutes the audience. The two-account split also lets you post 2–3× more total content per day without burning Mercy out — the faceless account is templated and can be run by a junior teammate from a content shoot day.</p>
+
+<h3>Should you also run niche pages (Account C, D…)</h3>
+<p>Eventually yes; not at launch. Once one of your existing pages is consistently breaking 100k views per post, spin up a single-product niche page — for example a Velvet Glow Serum-only page that lives or dies on skincare-results content. Until then, focus is the multiplier.</p>
+
+<div class="callout">
+  <strong>Concrete setup steps</strong>
+  Both accounts should be created on the SIM and device they will live on — never transferred between devices later (it can trigger review). Use Mercy's business email for Account A and a dedicated wellness operations email (e.g. <span class="mono">tiktok@pinnacleorg.com</span>) for Account B. Switch both to <strong>Business accounts</strong> after the first 7 days, choosing the category "Beauty &amp; Personal Care."
+</div>
+
+<h3>The two-phone rule</h3>
+<p>Each account on its own device, its own SIM, its own Wi-Fi-or-mobile pattern. TikTok's risk system pays attention to device fingerprints. Running both accounts from one phone, switching back and forth, is the single most common trigger for low-reach periods on new accounts. Even an inexpensive second Android dedicated to the faceless account pays for itself.</p>
+
+<!-- ============ III. POSITIONING ============ -->
+<div class="pb"></div>
+<h2><span class="num">III</span>Positioning</h2>
+<p class="lede">Who Pinnacle is for on TikTok — narrower than the website's audience, on purpose.</p>
+
+<h3>The TikTok persona, written sharply</h3>
+<p>She is 28–42. She lives in Lagos, Abuja, London, or Houston. She has a job, possibly children, and a body that has started to ask different things of her than it did at 25. She has tried random supplements and given up. She is suspicious of "wellness influencers" but hungry for someone who sounds like she could be her older sister. She buys things that make her feel like she is taking herself seriously.</p>
+<p>She is <strong>not</strong>: a teenager, a "clean girl" aesthetic chaser, a quick-fix shopper, a deal hunter. None of these convert to Circle membership or repeat collagen orders, which is where Pinnacle actually makes money.</p>
+
+<h3>The four content lanes, and what each is for</h3>
+<div class="pair">
+  <div>
+    <h4>1. Authority &amp; education</h4>
+    <p class="small">Mercy explaining why something works or doesn't — collagen types, magnesium forms, retinol vs. bakuchiol, hyperpigmentation in melanin-rich skin. This builds the trust that makes Circle membership and coaching feel obvious.</p>
+  </div>
+  <div>
+    <h4>2. Personal &amp; behind-the-curtain</h4>
+    <p class="small">Mercy's actual mornings, her own routine, why she started Pinnacle, the things her customers say to her in DMs. This is the parasocial layer. People buy from people they feel they know.</p>
+  </div>
+</div>
+<div class="pair">
+  <div>
+    <h4>3. Sensorial product</h4>
+    <p class="small">Faceless. The roll-on gliding, the serum dropper, the collagen powder dissolving, the candle being lit. Close, slow, beautiful. Designed to be re-watched and saved.</p>
+  </div>
+  <div>
+    <h4>4. Results &amp; proof</h4>
+    <p class="small">Customer DMs read aloud (with permission). Real before-and-afters. Mercy reacting to messages. This is the highest-converting lane but it must be earned — never fabricated.</p>
+  </div>
+</div>
+
+<h3>The voice rules — written in one paragraph</h3>
+<p>Direct. Warm. Specific. Never breathless. Never "babe" or "girlies." Never "literally obsessed." Mercy speaks the way an older Nigerian woman who works in healthcare speaks — clear, slightly amused, willing to disagree. The faceless account uses the same vocabulary but in short, declarative voice-over: <em>"Three drops. On clean skin. Before the moisturizer. Every morning."</em></p>
+
+<h3>What we never do</h3>
+<ul>
+  <li>Trend-chase content that has nothing to do with skin, sleep, supplements, scent, or self.</li>
+  <li>Dances. Trending sounds for the sake of them. Lip-syncs.</li>
+  <li>Aggressive promotional language: "RUN don't walk," "you NEED this." It cheapens the brand and depresses conversion in our demographic.</li>
+  <li>Comparing or naming competitors directly. Always speak to the category, never the rival.</li>
+  <li>Health claims we cannot defend on paper. See Section X.</li>
+</ul>
+
+<!-- ============ IV. REVENUE STREAMS ============ -->
+<div class="pb"></div>
+<h2><span class="num">IV</span>The seven revenue streams</h2>
+<p class="lede">Ranked from highest expected contribution to lowest, with what each requires and what to expect.</p>
+
+<div class="stream">
+  <div class="head"><h4>1 · Direct sales to pinnacleorg.com</h4><span class="tag priority">Primary</span></div>
+  <p>The single largest revenue line on TikTok for Pinnacle, by a wide margin. Every video — even pure authority content — should ladder back to "if you want to try this, the link is in my bio." Use a TikTok-only discount code (<span class="mono">TT15</span> or similar, 15% off first order) so you can attribute revenue cleanly.</p>
+  <dl>
+    <dt>What you need</dt><dd>The auto-deploy is live (PR #6), so the site updates fast. A TikTok-only discount code in your checkout. UTM parameters on the bio link.</dd>
+    <dt>What it pays</dt><dd>Average order value of $35–80, blended margin around 55–70%. Expect 1–3% link-click-to-purchase conversion once you find your audience.</dd>
+    <dt>Watch out for</dt><dd>The "link in bio" friction. Every step costs you 30–60% of clicks. Direct URL, no Linktree, no app installs.</dd>
+  </dl>
+</div>
+
+<div class="stream">
+  <div class="head"><h4>2 · Pinnacle Circle membership ($29/month, recurring)</h4><span class="tag priority">Primary</span></div>
+  <p>The most underrated revenue stream you have. A Circle member is worth roughly $200–$400 in lifetime value at typical wellness-membership churn. TikTok is unusually good at driving membership signups because it builds the parasocial trust membership requires. The bridge: Mercy talks honestly about wellness for a few weeks, viewers become fans, fans want more access — Circle is the obvious next step.</p>
+  <dl>
+    <dt>How to drive it</dt><dd>One Circle-mention video per week on Mercy's account ("we did our member call this morning and someone asked the question I get every week..."). Never a hard sell — always a peek through the curtain.</dd>
+    <dt>What it pays</dt><dd>$29 × 12 months × retention rate (target 65%+) ≈ $225 LTV per member.</dd>
+  </dl>
+</div>
+
+<div class="stream">
+  <div class="head"><h4>3 · 1:1 Coaching with Mercy ($180/session)</h4><span class="tag priority">Primary</span></div>
+  <p>The highest-ticket item in the catalog and the one TikTok converts surprisingly well. Authority content earns its keep here. A single 60-second video where Mercy answers a real question from her DMs can fill her booking calendar for weeks. The bottleneck is Mercy's time — cap visible booking slots at what is sustainable (start with 4/week).</p>
+  <dl>
+    <dt>How to drive it</dt><dd>Q&amp;A-style videos answering one specific reader question per video, ending with "if you want to actually map this out for your own body, my 1:1 is in the bio."</dd>
+    <dt>What it pays</dt><dd>$180 per session, ~85% margin. Halo effect: ~60% of coaching clients become product or Circle customers.</dd>
+  </dl>
+</div>
+
+<div class="stream">
+  <div class="head"><h4>4 · TikTok Shop sales (diaspora — UK, US)</h4><span class="tag secondary">Secondary</span></div>
+  <p>TikTok Shop is fully operational in the US and UK, partially in select EU markets, and <strong>not yet live for Nigerian-registered sellers</strong> as of mid-2026. This is workable but requires you set up a fulfillment node in either the UK or the US — a 3PL warehouse that holds 60–90 days of inventory of your highest-velocity SKUs (Collagen, Velvet Serum, Calm Magnesium, the bestseller roll-ons). The TikTok Shop entity must be registered in that country.</p>
+  <dl>
+    <dt>What you need</dt><dd>A UK Ltd or US LLC (a corporate services agent can set this up for £400–$800), a 3PL contract (ShipBob, Fulfillrite, James &amp; James), and a bank account in that geography for payouts.</dd>
+    <dt>What it pays</dt><dd>TikTok Shop takes ~5% referral fee + payment processing. Net margins lower than DTC but the cart friction is lower, so conversion is 2–4× higher on the same content.</dd>
+    <dt>Watch out for</dt><dd>Supplements have additional content restrictions on TikTok Shop. Skincare and fragrance pass through more easily. Start with the skincare and fragrance SKUs.</dd>
+  </dl>
+</div>
+
+<div class="stream">
+  <div class="head"><h4>5 · LIVE selling</h4><span class="tag secondary">Secondary</span></div>
+  <p>Mercy goes LIVE once or twice a week — 45–75 minutes — and walks through one product theme (e.g. "evening wind-down rituals" — features Magnesium + Silk Cream + Midnight Bloom). In NG the conversion is to a payment link dropped in chat; in UK/US it can be direct-to-shop checkout once TikTok Shop is live. See Section IX for the full LIVE playbook.</p>
+  <dl>
+    <dt>What it pays</dt><dd>A well-run 60-min LIVE in month three typically converts $300–$1,500 in sales for an audience of 50–200 concurrent viewers. The number scales roughly linearly.</dd>
+  </dl>
+</div>
+
+<div class="stream">
+  <div class="head"><h4>6 · Affiliate creators</h4><span class="tag secondary">Secondary</span></div>
+  <p>Wellness micro-creators with 5k–80k followers, paid 15–25% commission on tracked sales (use unique codes per creator). In NG you'll manage this manually — a creator gets a code and a UTM link. In UK/US it can go through TikTok Shop's official affiliate marketplace once your Shop is live. Start with 5–10 hand-picked creators, not 50.</p>
+  <dl>
+    <dt>How to find them</dt><dd>Search "collagen" / "magnesium for sleep" / "vitamin c serum" in TikTok, sort by recent, look for creators with strong engagement (likes &gt; 8% of follower count) and audiences that fit our persona. Cold DM with a sample box, not a long pitch.</dd>
+  </dl>
+</div>
+
+<div class="stream">
+  <div class="head"><h4>7 · Brand sponsorships (non-competing)</h4><span class="tag future">Later</span></div>
+  <p>Once Mercy's account passes ~50k followers with strong engagement, non-competing brands (lingerie, athleisure, slow-fashion, fertility, beauty tech, hospitality) will reach out. Reject anything that competes or that you wouldn't personally use. Charge $800–$3,500 per integrated post depending on follower count and engagement. This is gravy income, not the core plan. Cap it at one sponsored post per month to protect the audience.</p>
+</div>
+
+<div class="callout warning">
+  <strong>What is explicitly NOT on this list</strong>
+  Creator Fund / Creator Rewards: not available to Nigerian-registered accounts and not worth optimizing for elsewhere. LIVE Gifts: minor and not worth diluting tone for. Selling courses: don't — Circle does the same job better and stays recurring. Selling generic affiliate products (Amazon supplements): destroys trust, never do it.
+</div>
+
+<!-- ============ V. CONTENT ENGINE ============ -->
+<div class="pb"></div>
+<h2><span class="num">V</span>The content engine</h2>
+<p class="lede">The five pillars, the hook formula, the formats, and a bank of 30 hooks you can use this week.</p>
+
+<h3>Output target, month one</h3>
+<table>
+  <tr><th></th><th>Mercy account</th><th>Faceless account</th><th>Total</th></tr>
+  <tr><td class="label">Long-form (40–90s)</td><td>3/week</td><td>1/week</td><td>16/month</td></tr>
+  <tr><td class="label">Short-form (8–25s)</td><td>2/week</td><td>5/week</td><td>28/month</td></tr>
+  <tr><td class="label">LIVE</td><td>1/week, 45–75 min</td><td>—</td><td>4/month</td></tr>
+  <tr><td class="label">Total videos</td><td>~22</td><td>~24</td><td>~46</td></tr>
+</table>
+<p>This is hitting volume without grinding. The trick is <em>batch production</em>: one content shoot day every two weeks produces 12–16 Mercy videos; the faceless account produces 6–8 videos from a single afternoon of product B-roll.</p>
+
+<h3>The five content pillars</h3>
+<div class="pair">
+  <div>
+    <h4>P1. Honest education</h4>
+    <p class="small">"Most marine collagen on the market is under-dosed. Here is what the label should actually say." Builds authority. ~30% of Mercy posts.</p>
+  </div>
+  <div>
+    <h4>P2. Ritual &amp; routine</h4>
+    <p class="small">Mercy's evening, her morning, her travel routine, her wind-down. Products appear in the frame without being sold. ~25% of Mercy posts.</p>
+  </div>
+</div>
+<div class="pair">
+  <div>
+    <h4>P3. DMs &amp; replies</h4>
+    <p class="small">"Someone asked me yesterday whether you can take magnesium with iron. Here is the answer." Easy, recurring, high-trust. ~20% of Mercy posts.</p>
+  </div>
+  <div>
+    <h4>P4. Story &amp; conviction</h4>
+    <p class="small">Why Pinnacle exists, the customer she built it for, what makes her angry about the industry. ~15% of Mercy posts.</p>
+  </div>
+</div>
+<div style="margin-top: 2mm;">
+  <h4>P5. Sensorial product (faceless account, 100%)</h4>
+  <p class="small">Glass, hands, water, light, satin. Close, slow, beautiful. Voiceover or text-only. Designed for repeat-watch and save.</p>
+</div>
+
+<h3>The hook formula — the first 1.5 seconds</h3>
+<p>TikTok decides whether to keep showing your video to people based primarily on what happens in the first second and a half. Every video on either account needs a hook that does <strong>one</strong> of these four things, on screen and out loud at the same time:</p>
+<ol>
+  <li><strong>Contradict received wisdom.</strong> "Drinking more water won't fix your skin."</li>
+  <li><strong>Name the viewer's exact private problem.</strong> "If you wake up at 3am every single night —"</li>
+  <li><strong>Promise a specific small payoff.</strong> "Three things you can stop buying immediately."</li>
+  <li><strong>Pattern interrupt with a visual.</strong> Faceless account: extreme close-up of serum dropper on lid; pour; pull back to wide. One second total.</li>
+</ol>
+<div class="callout">
+  <strong>The hook test</strong>
+  Before you film, write the hook as a complete sentence. Read it aloud. If your only honest reaction is "okay, sure," scrap it. The reaction you want is "wait, what — really?"
+</div>
+
+<h3>30-hook bank — copy from this list</h3>
+<p class="small">Half of these are for Mercy (authority/personal), half for the faceless account (sensorial/product). Mix and match.</p>
+<ol class="hooks">
+  <li>"Most collagen powders in Nigeria are under-dosed. Here is how to read the label."</li>
+  <li>"The 3am wake-up isn't stress. It's magnesium."</li>
+  <li>"Your skin isn't dehydrated. It's inflamed. Different fix."</li>
+  <li>"I stopped buying these four things in 2024 and my skin completely changed."</li>
+  <li>"What no one tells you about hyperpigmentation in melanin-rich skin."</li>
+  <li>"A woman in my DMs asked me this last night and I'll answer it for everyone."</li>
+  <li>"If you take iron, do not take it with this."</li>
+  <li>"Three signs your gut is the actual problem (not your skin, not your hormones)."</li>
+  <li>"I founded a wellness brand and here is one product I genuinely think most people are wasting money on."</li>
+  <li>"The single hardest thing about being 38 that no one warned me about."</li>
+  <li>"What I take, in the order I take it. Nothing else."</li>
+  <li>"Stop buying retinol if you have not done these two things first."</li>
+  <li>"This is what I do the night before a long flight."</li>
+  <li>"The reason your serum isn't working is your moisturizer."</li>
+  <li>"Three drops. On clean skin. Before the moisturizer. Every morning." <em>(faceless, V.O.)</em></li>
+  <li>"Slow pour. Cold water. Dissolve in ten seconds." <em>(faceless, V.O.)</em></li>
+  <li>"Before any event, in this exact order." <em>(faceless)</em></li>
+  <li>"The fragrance you reach for when no one will see you." <em>(faceless)</em></li>
+  <li>"Two capsules. Thirty minutes before bed. That's the whole instruction." <em>(faceless)</em></li>
+  <li>"Why we put bakuchiol in the night cream instead of retinol." <em>(faceless, V.O. + label closeup)</em></li>
+  <li>"The roll-on you wear when you don't want to be remembered for your perfume." <em>(faceless)</em></li>
+  <li>"This is the difference between a $20 collagen and a $48 collagen — on the label." <em>(faceless, side-by-side)</em></li>
+  <li>"How a Nigerian woman in Lagos and one in Houston use this exact same routine."</li>
+  <li>"My customer wrote me this. I cried in the car."</li>
+  <li>"The supplement I quietly recommend to my own sister."</li>
+  <li>"What my morning looks like on the day before a Pinnacle Circle call."</li>
+  <li>"If you can only do one thing for your skin this week, do this."</li>
+  <li>"The reason I started Pinnacle, in 45 seconds."</li>
+  <li>"What you should actually do in the first 5 minutes after you wake up."</li>
+  <li>"Why I priced the 1:1 the way I did — and who it isn't for."</li>
+</ol>
+
+<h3>Six repeatable formats</h3>
+<table>
+  <tr><th>Format</th><th>Account</th><th>Length</th><th>Production</th></tr>
+  <tr><td class="label">The DM answer</td><td>Mercy</td><td>30–60s</td><td>Phone, soft window light, ring light optional</td></tr>
+  <tr><td class="label">The contrarian take</td><td>Mercy</td><td>20–45s</td><td>Same as above; tighter edit</td></tr>
+  <tr><td class="label">The unboxing/ritual</td><td>Faceless</td><td>15–30s</td><td>Tripod, side-light, table top set</td></tr>
+  <tr><td class="label">The pour/texture/glide</td><td>Faceless</td><td>8–15s</td><td>Macro lens phone clip, slow-mo</td></tr>
+  <tr><td class="label">The customer message</td><td>Mercy</td><td>30–60s</td><td>Screenshot overlay, Mercy reaction</td></tr>
+  <tr><td class="label">The before/after</td><td>Either</td><td>20–40s</td><td>Permissioned customer photos or Mercy's own</td></tr>
+</table>
+
+<!-- ============ VI. PER-PRODUCT ANGLES ============ -->
+<div class="pb"></div>
+<h2><span class="num">VI</span>Per-product content angles</h2>
+<p class="lede">Three angles per SKU — one authority, one sensorial, one personal — so no product gets ignored and no angle gets stale.</p>
+
+<div class="product-card">
+  <div class="name">Radiant Glow Collagen+ &nbsp;<span class="small">· $48 · supplements</span></div>
+  <div class="tag">Bestseller · highest LTV anchor</div>
+  <ul>
+    <li><strong>Authority:</strong> "Why marine collagen, not bovine — and why dosing under 10g is a waste." Read the label of three competitors on camera.</li>
+    <li><strong>Sensorial:</strong> The slow pour into glass water; the dissolve; the morning light; voiceover "ten seconds, one scoop, every day."</li>
+    <li><strong>Personal:</strong> Mercy's "what 6 weeks of consistent collagen actually looked like" — own photos at week 0 and week 8.</li>
+  </ul>
+</div>
+
+<div class="product-card">
+  <div class="name">Deep Calm Magnesium &nbsp;<span class="small">· $32 · supplements</span></div>
+  <div class="tag">Highest-velocity hook potential — sleep is universal</div>
+  <ul>
+    <li><strong>Authority:</strong> "Glycinate vs. citrate vs. oxide — which to take, which to skip." A 45-second teach.</li>
+    <li><strong>Sensorial:</strong> Two capsules, glass of water at bedside, dim warm light, voiceover "thirty minutes before you sleep."</li>
+    <li><strong>Personal:</strong> "If you wake up at 3am every night, this was me too." Mercy's own story.</li>
+  </ul>
+</div>
+
+<div class="product-card">
+  <div class="name">Gut Reset Probiotic &nbsp;<span class="small">· $39 · supplements</span></div>
+  <div class="tag">Pairs naturally with Collagen and Magnesium in a "stack"</div>
+  <ul>
+    <li><strong>Authority:</strong> "Why CFU count is not what matters — strain diversity is."</li>
+    <li><strong>Sensorial:</strong> Capsule taken with morning water; the bottle on the kitchen shelf.</li>
+    <li><strong>Personal:</strong> "How I knew my bloating was actually a gut thing, not a food thing."</li>
+  </ul>
+</div>
+
+<div class="product-card">
+  <div class="name">Velvet Glow Vitamin C Serum &nbsp;<span class="small">· $54 · skincare</span></div>
+  <div class="tag">Bestseller · best TikTok Shop velocity in diaspora</div>
+  <ul>
+    <li><strong>Authority:</strong> "Why most vitamin C serums you've bought went off in three weeks." L-ascorbic instability explained.</li>
+    <li><strong>Sensorial:</strong> Macro of dropper, four drops on the back of the hand, the spread, the absorption.</li>
+    <li><strong>Personal:</strong> "Hyperpigmentation after pregnancy — what worked, what didn't, what took 8 weeks."</li>
+  </ul>
+</div>
+
+<div class="product-card">
+  <div class="name">Silk Repair Night Cream &nbsp;<span class="small">· $62 · skincare</span></div>
+  <div class="tag">Pregnancy-safe positioning is a real differentiator</div>
+  <ul>
+    <li><strong>Authority:</strong> "Bakuchiol vs. retinol — when each one wins, and when they don't."</li>
+    <li><strong>Sensorial:</strong> Whipped texture scooped, melted between fingers, pressed into clean skin under warm lamp.</li>
+    <li><strong>Personal:</strong> "The first product I formulated thinking about my own face after 35."</li>
+  </ul>
+</div>
+
+<div class="product-card">
+  <div class="name">Gentle Renewal Cleanser &nbsp;<span class="small">· $28 · skincare</span></div>
+  <div class="tag">Entry-tier SKU — gateway product for new customers</div>
+  <ul>
+    <li><strong>Authority:</strong> "If your skin feels 'squeaky clean' after washing, you are damaging your barrier."</li>
+    <li><strong>Sensorial:</strong> Pump, lather between damp palms, the rinse, the skin afterwards.</li>
+    <li><strong>Personal:</strong> "The product I tell every new customer to start with — and why it's the cheapest one we make."</li>
+  </ul>
+</div>
+
+<div class="product-card">
+  <div class="name">Wellness 1:1 with Mercy &nbsp;<span class="small">· $180 · coaching</span></div>
+  <div class="tag">Highest margin item · TikTok converts these well</div>
+  <ul>
+    <li><strong>Authority:</strong> A Q&amp;A format where Mercy answers one specific question and ends with "if you want to map this out for your body, the 1:1 is in my bio."</li>
+    <li><strong>Sensorial:</strong> Faceless account: the booking interface, the intake form, the Zoom open. "What an hour with me looks like."</li>
+    <li><strong>Personal:</strong> "The person I genuinely cannot help — please don't book if you're looking for this."</li>
+  </ul>
+</div>
+
+<div class="product-card">
+  <div class="name">The Pinnacle Circle &nbsp;<span class="small">· $29/month · coaching · recurring</span></div>
+  <div class="tag">Compounding LTV engine — protect this carefully</div>
+  <ul>
+    <li><strong>Authority:</strong> "What we covered on this month's Circle call." Don't reveal the actual answer — name the question.</li>
+    <li><strong>Sensorial:</strong> Welcome kit unboxing, faceless. The card, the candle, the booklet.</li>
+    <li><strong>Personal:</strong> "Why I built the Circle and the woman I built it for."</li>
+  </ul>
+</div>
+
+<div class="product-card">
+  <div class="name">Midnight Bloom EDP &nbsp;<span class="small">· $38 · fragrance</span></div>
+  <div class="tag">High shoppability — fragrance does well on faceless accounts</div>
+  <ul>
+    <li><strong>Authority:</strong> "How to read a fragrance pyramid — top, heart, base — and what it really tells you."</li>
+    <li><strong>Sensorial:</strong> Bottle on velvet, spray on wrist, pull back to evening dress and earrings.</li>
+    <li><strong>Personal:</strong> "The scent I wear when I want to be remembered for being in the room, not for the perfume."</li>
+  </ul>
+</div>
+
+<div class="product-card">
+  <div class="name">First Light EDT &nbsp;<span class="small">· $26 · fragrance</span></div>
+  <div class="tag">Daytime, lighter — sells well into younger half of audience</div>
+  <ul>
+    <li><strong>Authority:</strong> "EDT vs EDP — when each one is the right call."</li>
+    <li><strong>Sensorial:</strong> Bottle by morning window, spray into the air, walks through it (classic).</li>
+    <li><strong>Personal:</strong> "The scent that survived the move from Lagos to London."</li>
+  </ul>
+</div>
+
+<div class="product-card">
+  <div class="name">Pinnacle Daily Roll-Ons (Silk Bloom · Cool Cedar · Amber Veil · Oak Grove · Soft Glow) &nbsp;<span class="small">· $8 each · bodycare</span></div>
+  <div class="tag">Five SKUs, all $8 — perfect for the "set of three" upsell</div>
+  <ul>
+    <li><strong>Authority:</strong> "Why we made a roll-on and not a spray — and which one to choose for which skin."</li>
+    <li><strong>Sensorial:</strong> Glide on skin macro, x5 scents lined up, the morning ritual sequence.</li>
+    <li><strong>Personal:</strong> "The most ordinary product we make — and the one I get the most DMs about."</li>
+    <li><strong>Cross-sell hook:</strong> "Any three for $20" — drive bundle orders.</li>
+  </ul>
+</div>
+
+<div class="product-card">
+  <div class="name">Event-Ready Skincare Set &nbsp;<span class="small">· $78 · skincare set</span></div>
+  <div class="tag">Built for shareable "get ready with me" content</div>
+  <ul>
+    <li><strong>Authority:</strong> "Three steps. In this order. Why the order matters."</li>
+    <li><strong>Sensorial:</strong> The three-step ritual in sequence, before-and-after-shoot under same light.</li>
+    <li><strong>Personal:</strong> Mercy gets ready for a Lagos event — the set is what she actually uses.</li>
+  </ul>
+</div>
+
+<!-- ============ VII. CALENDAR ============ -->
+<div class="pb"></div>
+<h2><span class="num">VII</span>The 30-day launch calendar</h2>
+<p class="lede">An exact day-by-day plan. Adapt the topics, keep the rhythm.</p>
+
+<h3>Week 1 — establish the voice</h3>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 1 ·</span> "The reason I started Pinnacle, in 45 seconds." (Pillar 4 · Story.) Pin for 3 weeks.</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 1 ·</span> Slow pour of Collagen into glass water; voiceover "ten seconds, one scoop, every day."</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 2 ·</span> "Most marine collagen sold in Nigeria is under-dosed." (Pillar 1 · Authority.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 2 ·</span> Velvet Glow Serum dropper macro; four drops on hand; absorption.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 3 ·</span> "If you wake up at 3am every night —" (Pillar 1 · Magnesium teaser.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 3 ·</span> The Silk Bloom roll-on glide; voiceover "soft floral, twenty-four hours."</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 4 ·</span> Q&amp;A — "Can you take magnesium with iron?" (Pillar 3.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 4 ·</span> Five Pinnacle Daily roll-ons lined up. "Any three for $20" overlay.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 5 ·</span> "What I take, in the order I take it." (Pillar 2 · Ritual.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 5 ·</span> Midnight Bloom bottle on velvet; spray; evening dress reveal.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 6 ·</span> "What no one tells you about hyperpigmentation in melanin-rich skin." (Pillar 1.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 6 ·</span> Night cream texture scoop; melt; press into skin under warm lamp.</div>
+<div class="day"><span class="acct live">LIVE</span><span class="label">Day 7 ·</span> First LIVE — "Sunday evening wind-down: my full nighttime routine, products in the frame." 45 minutes.</div>
+
+<h3>Week 2 — start converting</h3>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 8 ·</span> "Stop buying retinol until you've done these two things." (Pillar 1.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 8 ·</span> Side-by-side: a $20 collagen vs the Pinnacle one. Read the labels in silence.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 9 ·</span> Customer message reaction. (Pillar 3 — get permission first.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 9 ·</span> Gentle Renewal Cleanser — lather, rinse, after.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 10 ·</span> "The reason your serum isn't working is your moisturizer." (Pillar 1.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 10 ·</span> First Light EDT — bottle, daylight, walk-through.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 11 ·</span> "I priced the 1:1 the way I did, and here is who it isn't for." (Pillar 4.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 11 ·</span> The Pinnacle Circle welcome kit unbox — faceless, candle, card, booklet.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 12 ·</span> "Three signs your gut is the actual problem." (Pillar 1.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 12 ·</span> The Event-Ready Set in 3 frames.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 13 ·</span> Q&amp;A — "Can I take collagen if I'm pregnant?" (Pillar 3.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 13 ·</span> Two Calm Magnesium capsules · bedside lamp · "thirty minutes before."</div>
+<div class="day"><span class="acct live">LIVE</span><span class="label">Day 14 ·</span> "Skin Sunday" — Velvet Serum / Silk Cream / Cleanser. Run a 60-min LIVE with TT15 code.</div>
+
+<h3>Week 3 — push the membership angle</h3>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 15 ·</span> "Why I built the Pinnacle Circle." (Pillar 4 · membership-anchored.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 15 ·</span> The roll-on lineup again, this time with the "any three for $20" overlay sharper.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 16 ·</span> "What we covered in this month's Circle call — the question, not the answer." (Pillar 3.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 16 ·</span> Collagen + Magnesium + Probiotic — the "Pinnacle stack" arranged on shelf.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 17 ·</span> Contrarian — "Your skin isn't dehydrated. It's inflamed."</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 17 ·</span> Silk Repair Night Cream — slow whipped texture clip.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 18 ·</span> "The hardest thing about being 38 no one warned me about." (Pillar 4 · personal.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 18 ·</span> Midnight Bloom — evening shot.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 19 ·</span> "How a woman in Lagos and one in Houston use the same routine." (Pillar 2.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 19 ·</span> Gut Reset Probiotic — capsule with morning water, sunlight.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 20 ·</span> Q&amp;A — "What order do I put my skincare in?" (Pillar 3.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 20 ·</span> Cleanser → Serum → Cream — the three-step in sequence.</div>
+<div class="day"><span class="acct live">LIVE</span><span class="label">Day 21 ·</span> "Ask Mercy anything · 60 minutes." Pure Q&amp;A, no product pitch. Free trust-builder.</div>
+
+<h3>Week 4 — the first conversion sprint</h3>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 22 ·</span> "What an hour of 1:1 actually looks like." (Pillar 2.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 22 ·</span> Velvet Serum + Silk Cream pair shot, slow pan.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 23 ·</span> "If you can only do one thing for your skin this week..."</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 23 ·</span> The Event-Ready Set, repeated — these benefit from re-airing.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 24 ·</span> Customer message reaction — the strongest one you've collected.</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 24 ·</span> Collagen — repeat the highest-performing format from Week 1.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 25 ·</span> Contrarian — "Drinking more water won't fix your skin."</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 25 ·</span> First Light — daytime spray shot, walks through.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 26 ·</span> "The product I tell every new customer to start with." (Cleanser.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 26 ·</span> "Any three roll-ons for $20" — push the bundle.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 27 ·</span> "Five things I do every morning before I touch my phone." (Pillar 2.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 27 ·</span> Silk Repair Cream — closeup repeat.</div>
+<div class="day"><span class="acct live">LIVE</span><span class="label">Day 28 ·</span> "Founder Friday · Behind the brand" — month one recap, Circle invite at the end.</div>
+<div class="day"><span class="acct mercy">Mercy</span><span class="label">Day 29 ·</span> "Thirty days on TikTok: here is what I learned about you." (Honest reflection.)</div>
+<div class="day"><span class="acct faceless">Faceless</span><span class="label">Day 29–30 ·</span> Two product B-roll posts — your two highest-performing from the month.</div>
+
+<div class="callout">
+  <strong>Batch production calendar</strong>
+  Shoot day every other Saturday: 4 hours Mercy on camera (10–14 short videos written and shot back-to-back, three changes of outfit, two backdrops). Shoot day Wednesday afternoon for faceless: 2 hours of product B-roll yields 8–12 short videos. Editing fits a Sunday afternoon. Once the rhythm is in, the calendar runs itself.
+</div>
+
+<!-- ============ VIII. TIKTOK SHOP ============ -->
+<div class="pb"></div>
+<h2><span class="num">VIII</span>TikTok Shop &amp; diaspora distribution</h2>
+<p class="lede">The actual logistics of getting Pinnacle on TikTok Shop where it pays the best.</p>
+
+<h3>Where TikTok Shop is and isn't (mid-2026)</h3>
+<table>
+  <tr><th>Market</th><th>TikTok Shop status</th><th>Action</th></tr>
+  <tr><td class="label">Nigeria</td><td>Not live for NG-registered sellers</td><td>Drive to pinnacleorg.com directly; use NG-local payment links in LIVEs.</td></tr>
+  <tr><td class="label">United Kingdom</td><td>Fully operational</td><td>Set up UK Ltd + 3PL — recommended first international market.</td></tr>
+  <tr><td class="label">United States</td><td>Fully operational</td><td>Set up after UK is stable. Higher volume, more competition.</td></tr>
+  <tr><td class="label">Ireland, France, Germany, Italy, Spain</td><td>Partial — beauty &amp; skincare live; supplements gated</td><td>Wait for category to open or sell through UK pan-EU.</td></tr>
+  <tr><td class="label">Canada, Australia, UAE</td><td>Various rollouts</td><td>Skip until UK + US are running smoothly.</td></tr>
+</table>
+
+<h3>The minimum-viable UK setup</h3>
+<ol>
+  <li><strong>UK Ltd company.</strong> Use a service like 1st Formations or Companies Made Simple. £30–£100. Takes 24 hours.</li>
+  <li><strong>UK business bank account.</strong> Wise Business or Revolut Business. 7–14 days approval. Need company docs.</li>
+  <li><strong>3PL warehouse contract.</strong> James &amp; James, Huboo, or ShipBob UK. Send 60 days of inventory of: Collagen, Velvet Serum, Calm Magnesium, Silk Cream, all five roll-ons, both fragrances. Skip the Coaching/Circle SKUs — those stay on pinnacleorg.com.</li>
+  <li><strong>TikTok Shop seller registration.</strong> Through the UK Ltd. Category: Health &amp; Personal Care · Beauty &amp; Personal Care. Submit lab COAs for each supplement SKU; submit cosmetic safety reports for skincare. Allow 2–3 weeks for category approval.</li>
+  <li><strong>Link the Pinnacle TikTok account.</strong> Same TikTok handle, now Shop-enabled in UK geography. Mercy's account can also have Shop enabled — it will show product tags in her videos.</li>
+</ol>
+
+<h3>What to list, what not to list</h3>
+<ul>
+  <li><strong>List first:</strong> Velvet Glow Serum, Silk Cream, Gentle Cleanser, Event-Ready Set, all roll-ons, both fragrances. Skincare and fragrance clear TikTok Shop review fastest.</li>
+  <li><strong>List second (after first 30 days clean):</strong> Collagen+, Magnesium, Gut Reset. Supplements get more scrutiny — established seller history helps.</li>
+  <li><strong>Don't list:</strong> 1:1 Coaching, Pinnacle Circle. Services and subscriptions are awkward on TikTok Shop. Keep these on pinnacleorg.com where the experience is better.</li>
+</ul>
+
+<div class="callout warning">
+  <strong>Inventory commitment is the cost gate</strong>
+  Realistically, the UK Shop setup costs about £8,000–£15,000 in inventory + ~£600/month in 3PL minimums before you see meaningful revenue. Do not start this until Mercy's account or the faceless account has consistently broken 10k followers and you've validated that TikTok-attributed sales to pinnacleorg.com are happening at all. Setting it up too early ties up cash with nothing flowing through it.
+</div>
+
+<!-- ============ IX. LIVE SELLING ============ -->
+<div class="pb"></div>
+<h2><span class="num">IX</span>LIVE selling</h2>
+<p class="lede">The single highest-leverage hour of Mercy's TikTok week, if she runs it right.</p>
+
+<h3>The format that works</h3>
+<p>Once a week, Sunday evening Lagos time (which is good UK time too and acceptable US East Coast). 60 minutes. Mercy on camera, ring light, single product theme. Not "shop my whole store" — that loses people in five minutes.</p>
+
+<h3>The 60-minute LIVE structure</h3>
+<table>
+  <tr><th>Min</th><th>What happens</th></tr>
+  <tr><td class="label">0–8</td><td>Soft open. Mercy says hello, talks about her week. No selling. The algorithm is deciding whether to show this LIVE to more people based on early engagement.</td></tr>
+  <tr><td class="label">8–18</td><td>The theme of the night ("Sunday wind-down" / "Skin Sunday" / "Fragrance &amp; presence"). One core product explained slowly, with the science.</td></tr>
+  <tr><td class="label">18–25</td><td>Demo. Use the product on camera. Take questions while doing it.</td></tr>
+  <tr><td class="label">25–35</td><td>Open Q&amp;A — viewers ask about their own situations. Mercy answers honestly. This is the trust hour.</td></tr>
+  <tr><td class="label">35–45</td><td>Second product, paired with the first. Brief.</td></tr>
+  <tr><td class="label">45–55</td><td>The offer. LIVE-exclusive bundle, code <span class="mono">LIVE15</span>, 15% off, expires when LIVE ends. Drop the link/code repeatedly.</td></tr>
+  <tr><td class="label">55–60</td><td>Soft close. Thank-yous. Invite to Circle if it feels right. Sign off.</td></tr>
+</table>
+
+<h3>LIVE rules</h3>
+<ul>
+  <li>One topic per LIVE. Mercy is not running a department store. She is hosting a salon.</li>
+  <li>Stay for the full 60 minutes even if only 12 people are watching. The algorithm rewards endurance and you'll learn what early audiences ask about.</li>
+  <li>Have a moderator (your assistant or a Circle member) pinning the discount code, answering basic questions, blocking trolls. Do not moderate while presenting.</li>
+  <li>Always end with a single clear call to action. Either "code expires when this LIVE ends, here is the link," or "I'm opening 3 coaching slots tomorrow, watch my DMs." One.</li>
+  <li>Track per-LIVE: peak concurrent, total unique viewers, code redemptions, new follows. Note which themes converted best — this is your most valuable data.</li>
+</ul>
+
+<h3>What to LIVE-bundle, by theme</h3>
+<table>
+  <tr><th>Theme</th><th>Anchor product</th><th>Bundle pair</th><th>Offer</th></tr>
+  <tr><td class="label">Sunday wind-down</td><td>Calm Magnesium</td><td>+ Silk Cream + Midnight Bloom</td><td>$15 off the trio</td></tr>
+  <tr><td class="label">Skin Sunday</td><td>Velvet Serum</td><td>+ Silk Cream + Cleanser</td><td>Event-Ready Set + free roll-on</td></tr>
+  <tr><td class="label">Glow from within</td><td>Collagen+</td><td>+ Gut Reset</td><td>10% off the stack, free month of Circle for new buyers</td></tr>
+  <tr><td class="label">Fragrance &amp; presence</td><td>Midnight Bloom</td><td>+ matching Amber Veil roll-on</td><td>Bundle at $42 vs $46 separately</td></tr>
+</table>
+
+<!-- ============ X. THE RULES ============ -->
+<div class="pb"></div>
+<h2><span class="num">X</span>The rules — claims you can and cannot make</h2>
+<p class="lede">The single most likely reason a wellness brand's TikTok account is suspended or its content is suppressed.</p>
+
+<div class="callout danger">
+  <strong>This is not optional</strong>
+  TikTok's Community Guidelines on health content and Pinnacle's own regulatory exposure (NAFDAC in Nigeria, MHRA in the UK, FDA in the US) both demand the same discipline. Read this page twice. When in doubt, scrub the claim.
+</div>
+
+<h3>Never say — for supplements (Collagen, Magnesium, Gut Reset)</h3>
+<ul>
+  <li>"Cures" / "treats" / "prevents" any named condition (insomnia, IBS, depression, eczema, acne, anything).</li>
+  <li>"Doctor recommended" unless you can produce a specific named, licensed doctor who has on-record recommended Pinnacle.</li>
+  <li>"Clinically proven" unless you can produce a published study on the exact formulation. "Clinically formulated" is acceptable; "clinically proven" is not.</li>
+  <li>"Replaces medication" / "you can stop taking your [X]" — never, under any circumstance.</li>
+  <li>Specific percentages of efficacy you cannot cite ("85% of women see results in 14 days") unless you ran the study and have it on file.</li>
+</ul>
+
+<h3>Safe to say — for supplements</h3>
+<ul>
+  <li>"Supports [skin, sleep, gut, hair, mood]" — supplement-safe language in NG, UK, US.</li>
+  <li>"Customers tell me they sleep better/feel less bloated/their skin looks brighter." Attribution to customer testimony, not product claim.</li>
+  <li>"Designed to support" / "formulated to help with" — soft, defensible.</li>
+  <li>Personal experience: "Here is what I noticed." Mercy speaking about her own body is not a product claim.</li>
+</ul>
+
+<h3>Never say — for skincare</h3>
+<ul>
+  <li>"Eliminates" / "removes" wrinkles, scars, hyperpigmentation.</li>
+  <li>"Anti-aging" — increasingly regulated; use "supports skin firmness" instead.</li>
+  <li>"Dermatologist tested" without a dermatologist on file.</li>
+  <li>Before-and-after photos without explicit written permission from the person in the photo, and where you cannot prove the second photo was the same person under similar lighting conditions.</li>
+</ul>
+
+<h3>Safe to say — for skincare</h3>
+<ul>
+  <li>"Brightens the appearance of dark spots," "supports an even skin tone," "visibly firmer." The word "appearance" is your friend.</li>
+  <li>"In a survey of our customers, [X] said [Y]." Survey-style claims are defensible if you actually surveyed people.</li>
+  <li>"Pregnancy-safe" — only for the Silk Cream and the Cleanser. Confirm your formulator agrees on paper.</li>
+</ul>
+
+<h3>FTC, ASA, NAFDAC — disclosures</h3>
+<ul>
+  <li>Any video where Mercy is selling Pinnacle products is, by definition, an ad — even on her own account. Use <strong>#ad</strong> or <strong>"This is my brand"</strong> visibly in the first 3 seconds. TikTok provides a "Disclose video content" toggle in the post screen; use it.</li>
+  <li>Affiliate creators must declare a commercial relationship — provide them with the language to use.</li>
+  <li>Customer testimonials require written permission and should disclose if the person received the product free or for compensation.</li>
+</ul>
+
+<!-- ============ XI. ANALYTICS ============ -->
+<div class="pb"></div>
+<h2><span class="num">XI</span>Analytics — what to look at, what to ignore</h2>
+<p class="lede">A short list. Most TikTok dashboards are noise.</p>
+
+<h3>Weekly review — 15 minutes, every Monday morning</h3>
+<table>
+  <tr><th>Metric</th><th>Where</th><th>What to do with it</th></tr>
+  <tr><td class="label">TT15-attributed orders</td><td>Your e-commerce backend</td><td>The number that matters most. Compare week-over-week.</td></tr>
+  <tr><td class="label">Bio link clicks</td><td>TikTok Studio · Profile</td><td>Click-to-order ratio = your funnel health.</td></tr>
+  <tr><td class="label">Top 3 videos this week, by Saves</td><td>TikTok Studio · Content</td><td>Saves are the most reliable predictor of long-tail reach. Replicate the format.</td></tr>
+  <tr><td class="label">Top 3 videos by Profile Visits</td><td>TikTok Studio · Content</td><td>These are the ones converting viewers to followers. Replicate the topic.</td></tr>
+  <tr><td class="label">Watch time on Mercy &gt; 50%</td><td>TikTok Studio · per video</td><td>Anything under 50% means the hook is weak. Edit harder, cut the first 0.5 seconds.</td></tr>
+  <tr><td class="label">Follower growth, both accounts</td><td>TikTok Studio</td><td>Vanity metric — don't optimize for it directly, but it is a useful trailing indicator.</td></tr>
+</table>
+
+<h3>What to ignore</h3>
+<ul>
+  <li><strong>Likes.</strong> Cheap signal. Doesn't predict revenue.</li>
+  <li><strong>Comments count alone.</strong> A controversial video can get many comments and zero orders. Look at comment <em>sentiment</em>, not count.</li>
+  <li><strong>Single-video view counts in isolation.</strong> A 30k-view video about a $48 product can outearn a 500k-view video about something cheap.</li>
+  <li><strong>Other creators' follower counts.</strong> Comparisons make you mimic; mimics never convert as well as originals.</li>
+</ul>
+
+<!-- ============ XII. CRISIS PLAYBOOK ============ -->
+<div class="pb"></div>
+<h2><span class="num">XII</span>Crisis playbook</h2>
+<p class="lede">What to do when things go wrong — and they will, periodically.</p>
+
+<h3>The slump (views suddenly drop 80%+)</h3>
+<ol>
+  <li>First, check whether you violated a guideline — re-read your last 10 videos for any wording in Section X. If yes, delete and submit appeal.</li>
+  <li>If no violation, post nothing new for 48 hours. Do not "post your way out" of a slump — it deepens it.</li>
+  <li>Day 3, post a single, lower-stakes video. If that video gets normal reach, you're back. If not, post a 60-second simple-to-camera personal video the next day.</li>
+  <li>If after 7 days of normal posting reach is still suppressed, that is a shadowban. Take 14 days off the account completely. It almost always clears.</li>
+</ol>
+
+<h3>Copyright strike (using a sound or clip)</h3>
+<ol>
+  <li>Don't appeal on autopilot — strikes accumulate. Confirm whether you have actual rights or fair use; if not, accept the strike.</li>
+  <li>Switch all faceless account audio to original voice-over from now on. Use the TikTok Commercial Sounds library only.</li>
+  <li>Three strikes = permanent ban. Treat each one seriously.</li>
+</ol>
+
+<h3>A bad customer review going viral</h3>
+<ol>
+  <li>Do not delete the customer's video. Do not have legal send anything.</li>
+  <li>Reach out privately within 6 hours: "I saw your video. I want to make it right. Can I get a few details?"</li>
+  <li>Once it's resolved, ask the customer if they'd be willing to post a follow-up. ~40% will say yes. Their follow-up undoes the damage and then some.</li>
+  <li>Mercy publicly addresses it on her own account, calmly, within 24 hours. "Someone shared an experience that didn't meet our standard. Here is what I did about it." Honesty disarms.</li>
+</ol>
+
+<h3>Mercy is travelling / sick / cannot post</h3>
+<ol>
+  <li>The batched content library should cover 10 days minimum at any time. Maintain it.</li>
+  <li>The faceless account does not need Mercy at all — it should keep running.</li>
+  <li>If the gap will be longer than 2 weeks, post a single "I'm taking a quiet week, back on [date]" video. The audience appreciates the honesty, no algorithmic damage.</li>
+</ol>
+
+<!-- ============ XIII. CHECKLISTS ============ -->
+<div class="pb"></div>
+<h2><span class="num">XIII</span>Checklists &amp; appendix</h2>
+<p class="lede">Tear-off pages. Print these.</p>
+
+<h3>Pre-launch checklist (do all of these before Day 1)</h3>
+<ul>
+  <li>☐ Two phones, two SIMs, both accounts created on the right device</li>
+  <li>☐ Mercy's account: bio, profile picture, three pinned videos drafted</li>
+  <li>☐ Faceless account: bio, logo profile picture, three pinned videos drafted</li>
+  <li>☐ Discount code <span class="mono">TT15</span> created in the e-commerce backend, 15% off, no minimum, one-use per customer</li>
+  <li>☐ UTM parameters confirmed on bio link for both accounts</li>
+  <li>☐ Both accounts switched to Business after day 7</li>
+  <li>☐ First batch shoot day on the calendar (week 1 worth of Mercy content)</li>
+  <li>☐ First faceless product B-roll day on the calendar</li>
+  <li>☐ Mercy has read Section X twice</li>
+</ul>
+
+<h3>Weekly checklist</h3>
+<ul>
+  <li>☐ Monday: 15-minute analytics review per Section XI</li>
+  <li>☐ Monday: post-mortem on last week's LIVE — what worked, what didn't</li>
+  <li>☐ Tuesday: write hooks for the upcoming shoot day (~20 hooks)</li>
+  <li>☐ Wednesday: faceless product shoot (2 hours)</li>
+  <li>☐ Thursday: respond to DMs, reply to top 10 comments on best-performing videos</li>
+  <li>☐ Friday/Saturday: batch shoot Mercy content (4 hours)</li>
+  <li>☐ Sunday: edit and schedule the next week; LIVE at 7pm Lagos time</li>
+</ul>
+
+<h3>Monthly checklist</h3>
+<ul>
+  <li>☐ End-of-month revenue review: TT-attributed orders, Circle signups, coaching bookings</li>
+  <li>☐ Update the pinned videos on both accounts</li>
+  <li>☐ Refresh the hook bank — retire the ones that have been used twice, write 10 new ones</li>
+  <li>☐ Review LIVE bundles — rotate themes</li>
+  <li>☐ Review the top 3 videos from the past 90 days — turn the best one into a UK/US-localized version once TikTok Shop is live</li>
+</ul>
+
+<h3>Glossary — quick reference</h3>
+<table>
+  <tr><td class="label">Hook</td><td>The first 1–1.5 seconds of a video. Determines whether TikTok keeps showing it.</td></tr>
+  <tr><td class="label">Save</td><td>The strongest long-term engagement signal. Drives compounding reach.</td></tr>
+  <tr><td class="label">Profile visit</td><td>A viewer tapped through to the account from the video. Conversion-adjacent metric.</td></tr>
+  <tr><td class="label">UTM</td><td>URL parameters that attribute web traffic to its source. Essential for measuring TikTok's revenue contribution.</td></tr>
+  <tr><td class="label">3PL</td><td>Third-party logistics. A warehouse that holds your stock and ships orders for you.</td></tr>
+  <tr><td class="label">CFU</td><td>Colony-forming unit. Probiotic potency. Strain diversity matters more.</td></tr>
+  <tr><td class="label">LTV</td><td>Lifetime value of a customer. The number that justifies what you spend to acquire one.</td></tr>
+</table>
+
+<h3>A final word</h3>
+<p class="lede">TikTok rewards the brands that show up like a person, not like a brand. Pinnacle has the rare advantage of a real founder with a real voice and real products. Run this playbook for 90 days before judging it. Measure what matters. Edit what doesn't. The compounding starts later than you'd like — and lasts longer than you'd expect.</p>
+
+<p style="margin-top: 12mm; text-align: center; font-family: -apple-system, sans-serif; font-size: 8.5pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--soft-ink);">— End · Pinnacle Wellness · Internal — </p>
+
+</body>
+</html>
