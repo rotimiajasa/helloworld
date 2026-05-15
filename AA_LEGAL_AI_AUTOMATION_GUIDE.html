@@ -5,946 +5,1593 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AA Legal — AI Automation Guide</title>
 <style>
+  /* ===================================================================
+     AA LEGAL — AI AUTOMATION GUIDE
+     Professional, light, classical legal aesthetic.
+     Palette: ivory · burgundy · gold (with a touch of slate-teal for AI)
+     =================================================================== */
+
+  @page {
+    size: A4;
+    margin: 20mm 18mm 22mm 18mm;
+    @bottom-left {
+      content: "AA Legal · AI Automation Guide";
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 8.5pt;
+      color: #8a6a2a;
+      letter-spacing: 0.08em;
+    }
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+      font-family: Georgia, serif;
+      font-size: 8.5pt;
+      color: #6b1d1d;
+    }
+  }
+  @page cover {
+    margin: 0;
+    @bottom-left { content: none; }
+    @bottom-right { content: none; }
+  }
+  .cover { page: cover; }
+
   :root {
-    --burgundy: #4a1414;
-    --burgundy-deep: #2e0c0c;
-    --burgundy-soft: #5a1f1f;
-    --gold: #e6b54a;
-    --gold-soft: #f1cf7a;
-    --gold-deep: #b8851f;
-    --cream: #f8f0dc;
-    --ink: #1a0808;
-    --muted: #c9b89a;
-    --teal: #4ad2c9;
-    --rose: #e87a7a;
+    --burgundy: #6b1d1d;
+    --burgundy-deep: #4a1414;
+    --burgundy-soft: #8b3333;
+    --gold: #b8862a;
+    --gold-light: #d4b06a;
+    --gold-soft: #e8d39a;
+    --gold-pale: #f5ecd2;
+    --ivory: #fdfaf3;
+    --cream: #f8f1e2;
+    --paper: #ffffff;
+    --slate: #2f5a5e;
+    --slate-light: #e0eced;
+    --ink: #2a1f1a;
+    --text: #3d2f28;
+    --muted: #6b5a4e;
+    --border: #e0d0a8;
   }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html, body { background: var(--ivory); color: var(--text); }
   body {
-    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    background: var(--burgundy-deep);
-    color: var(--cream);
-    line-height: 1.65;
-    overflow-x: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
   }
 
-  /* ---------- HERO ---------- */
-  .hero {
+  h1, h2, h3, h4, h5 {
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--burgundy);
+    font-weight: 400;
+  }
+
+  /* ============== COVER PAGE ============== */
+  .cover-page {
+    height: 297mm; width: 210mm;
+    padding: 0;
     position: relative;
-    min-height: 100vh;
     background:
-      radial-gradient(circle at 70% 30%, rgba(230,181,74,0.20), transparent 45%),
-      radial-gradient(circle at 30% 80%, rgba(74,210,201,0.10), transparent 50%),
-      linear-gradient(135deg, var(--burgundy-deep) 0%, var(--burgundy) 60%, var(--burgundy-soft) 100%);
-    display: flex; align-items: center; justify-content: center;
-    padding: 60px 40px;
-    text-align: center;
-  }
-  .hero::before {
-    content: ""; position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(230,181,74,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(230,181,74,0.04) 1px, transparent 1px);
-    background-size: 50px 50px;
-    pointer-events: none;
-  }
-  .hero-inner { position: relative; z-index: 2; max-width: 1000px; }
-  .crest {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 140px; height: 140px;
-    border-radius: 50%;
-    border: 3px solid var(--gold);
-    background: radial-gradient(circle, var(--burgundy-soft), var(--burgundy-deep));
-    margin-bottom: 30px;
-    box-shadow: 0 0 60px rgba(230,181,74,0.4);
-    position: relative;
-  }
-  .crest-text { font-size: 48px; font-weight: 900; color: var(--gold); letter-spacing: 2px; }
-  .crest .ai-badge {
-    position: absolute; bottom: -10px; right: -10px;
-    background: var(--teal); color: var(--burgundy-deep);
-    padding: 6px 12px; border-radius: 20px;
-    font-size: 12px; font-weight: 800; letter-spacing: 2px;
-    border: 2px solid var(--burgundy-deep);
-  }
-  .hero h1 {
-    font-size: clamp(34px, 6vw, 64px);
-    font-weight: 800; color: var(--gold);
-    margin-bottom: 18px; letter-spacing: -1px;
-  }
-  .hero .tagline {
-    font-style: italic; font-size: 20px; color: var(--gold-soft); margin-bottom: 14px;
-  }
-  .hero .subtitle {
-    font-size: 18px; color: var(--cream); opacity: 0.88;
-    max-width: 760px; margin: 0 auto 40px;
-  }
-  .hero-meta {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 18px; max-width: 800px; margin: 40px auto 0;
-  }
-  .meta-card {
-    background: rgba(0,0,0,0.35);
-    border: 1px solid rgba(230,181,74,0.4);
-    border-radius: 12px; padding: 18px 14px;
-    backdrop-filter: blur(6px);
-  }
-  .meta-card .label { font-size: 11px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
-  .meta-card .value { font-size: 14px; color: var(--cream); font-weight: 500; }
-
-  /* ---------- SECTIONS ---------- */
-  section { padding: 90px 40px; position: relative; }
-  .container { max-width: 1200px; margin: 0 auto; }
-  .section-title {
-    font-size: 14px; color: var(--gold); letter-spacing: 4px;
-    text-transform: uppercase; margin-bottom: 12px; font-weight: 600;
-  }
-  .section-heading {
-    font-size: clamp(28px, 4vw, 44px); color: var(--gold-soft);
-    font-weight: 700; margin-bottom: 24px; line-height: 1.15;
-  }
-  .section-lead {
-    font-size: 18px; color: var(--cream); opacity: 0.85;
-    max-width: 820px; margin-bottom: 60px;
-  }
-  .strip-a { background: var(--burgundy-deep); }
-  .strip-b { background: linear-gradient(180deg, var(--burgundy-deep), var(--burgundy)); }
-
-  /* ---------- AUTOMATION CARDS ---------- */
-  .automation-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 26px;
-  }
-  .ax-card {
-    background: linear-gradient(160deg, var(--burgundy-soft), var(--burgundy-deep));
-    border: 1px solid rgba(230,181,74,0.25);
-    border-radius: 16px;
-    padding: 30px;
-    position: relative;
+      radial-gradient(circle at 80% 15%, rgba(212,176,106,0.20), transparent 45%),
+      radial-gradient(circle at 20% 85%, rgba(47,90,94,0.08), transparent 50%),
+      linear-gradient(180deg, #fdfaf3 0%, #f5ecd2 100%);
     overflow: hidden;
-    transition: transform .3s, border-color .3s;
   }
-  .ax-card:hover { transform: translateY(-4px); border-color: var(--gold); }
-  .ax-card::after {
-    content: ""; position: absolute;
-    top: 0; right: 0; width: 100%; height: 4px;
-    background: linear-gradient(90deg, var(--gold), var(--teal));
-  }
-  .ax-head { display: flex; gap: 14px; align-items: center; margin-bottom: 18px; }
-  .ax-icon {
-    width: 52px; height: 52px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--gold), var(--gold-deep));
-    color: var(--burgundy-deep);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px; font-weight: 900;
-    flex-shrink: 0;
-  }
-  .ax-card h3 { color: var(--gold-soft); font-size: 20px; line-height: 1.25; }
-  .ax-card .ax-tagline { color: var(--gold); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; }
-  .ax-body { color: var(--cream); font-size: 14.5px; opacity: 0.9; }
-  .ax-body strong { color: var(--gold-soft); }
-  .ax-section { margin-top: 16px; }
-  .ax-section h5 {
-    color: var(--gold); font-size: 12px; letter-spacing: 2px;
-    text-transform: uppercase; margin-bottom: 8px;
-  }
-  .ax-section ul { padding-left: 20px; }
-  .ax-section li { margin-bottom: 4px; font-size: 13.5px; }
-  .impact {
-    display: inline-block;
-    padding: 4px 10px; border-radius: 14px;
-    background: rgba(74,210,201,0.15);
-    color: var(--teal);
-    font-size: 11px; letter-spacing: 1.5px; font-weight: 700;
-    border: 1px solid rgba(74,210,201,0.4);
-    margin-right: 6px;
-  }
-  .impact.high { background: rgba(230,181,74,0.15); color: var(--gold); border-color: rgba(230,181,74,0.4); }
-  .impact.med  { background: rgba(232,122,122,0.10); color: var(--rose); border-color: rgba(232,122,122,0.35); }
-
-  /* ---------- VIRTUAL DIAGRAMS ---------- */
-  .diagram {
-    background: rgba(0,0,0,0.35);
-    border: 1px solid rgba(230,181,74,0.25);
-    border-radius: 14px;
-    padding: 36px 30px;
-    margin: 30px 0;
-  }
-  .diagram h4 {
-    color: var(--gold); text-align: center;
-    font-size: 16px; letter-spacing: 2px;
-    text-transform: uppercase; margin-bottom: 26px;
-  }
-  .flow {
-    display: flex; flex-wrap: wrap; align-items: stretch;
-    justify-content: center; gap: 0;
-  }
-  .flow-box {
-    flex: 1 1 160px;
-    min-width: 140px; max-width: 220px;
-    background: var(--burgundy-soft);
-    border: 1px solid rgba(230,181,74,0.4);
-    border-radius: 12px;
-    padding: 18px 14px;
-    text-align: center;
-    font-size: 13px;
-    color: var(--cream);
-    position: relative;
-    margin: 6px 18px 6px 0;
-  }
-  .flow-box::after {
-    content: "→";
+  .cover-frame {
     position: absolute;
-    right: -22px; top: 50%;
-    transform: translateY(-50%);
-    color: var(--gold);
-    font-size: 24px;
-    font-weight: 900;
+    inset: 12mm;
+    border: 1.5px solid var(--gold);
+    padding: 14mm 16mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
-  .flow-box:last-child::after { display: none; }
-  .flow-box .step-num {
+  .cover-frame::before, .cover-frame::after {
+    content: ""; position: absolute;
+    width: 18mm; height: 18mm;
+    border: 1px solid var(--gold-light);
+  }
+  .cover-frame::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+  .cover-frame::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+  .cover-top { text-align: center; }
+  .cover-logo-wrap {
+    display: inline-block;
+    padding: 14mm 18mm;
+    background: linear-gradient(180deg, var(--burgundy-deep), var(--burgundy));
+    border: 2px solid var(--gold);
+    border-radius: 4px;
+    box-shadow: 0 8px 30px rgba(74,20,20,0.20);
+    margin-bottom: 14mm;
+    position: relative;
+  }
+  .cover-logo-wrap svg { display: block; width: 70mm; height: auto; }
+  .ai-tag {
+    position: absolute;
+    bottom: 4mm; right: 4mm;
     background: var(--gold);
     color: var(--burgundy-deep);
-    width: 26px; height: 26px;
-    line-height: 26px;
-    border-radius: 50%;
-    font-weight: 900;
-    margin-bottom: 8px;
-    display: inline-block;
-  }
-  .flow-box .title { color: var(--gold-soft); font-weight: 700; display: block; margin-bottom: 6px; font-size: 13.5px; }
-  .flow-box.ai { border-color: var(--teal); background: linear-gradient(160deg, var(--burgundy-soft), #1a2f2e); }
-  .flow-box.ai .step-num { background: var(--teal); }
-
-  @media (max-width: 720px) {
-    .flow-box { margin-right: 0; margin-bottom: 30px; }
-    .flow-box::after { right: 50%; top: auto; bottom: -28px; transform: translateX(50%) rotate(90deg); }
-  }
-
-  /* ---------- LAYERED ARCHITECTURE ---------- */
-  .layers {
-    display: flex; flex-direction: column; gap: 14px;
-    margin: 30px 0;
-  }
-  .layer {
-    padding: 22px 26px;
-    border-radius: 12px;
-    border: 1px solid rgba(230,181,74,0.25);
-    background: var(--burgundy-soft);
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 24px;
-    align-items: center;
-  }
-  @media (max-width: 720px) {
-    .layer { grid-template-columns: 1fr; }
-  }
-  .layer .layer-title {
-    color: var(--gold); font-size: 16px;
-    text-transform: uppercase; letter-spacing: 2px;
+    font-family: Georgia, serif;
+    font-size: 8.5pt;
+    letter-spacing: 0.3em;
+    padding: 1.5mm 4mm;
+    border-radius: 2px;
     font-weight: 700;
   }
-  .layer .layer-title small { display: block; color: var(--gold-soft); font-size: 11px; margin-top: 4px; text-transform: none; letter-spacing: 0; font-weight: 400; }
-  .layer .layer-body { color: var(--cream); font-size: 14px; opacity: 0.9; }
-  .layer:nth-child(1) { border-left: 5px solid var(--gold); }
-  .layer:nth-child(2) { border-left: 5px solid var(--teal); }
-  .layer:nth-child(3) { border-left: 5px solid var(--gold-soft); }
-  .layer:nth-child(4) { border-left: 5px solid var(--gold-deep); }
-  .layer:nth-child(5) { border-left: 5px solid var(--rose); }
-  .layer:nth-child(6) { border-left: 5px solid var(--cream); }
 
-  /* ---------- PHASE ROADMAP ---------- */
-  .roadmap {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 20px;
+  .cover-middle { text-align: center; padding: 8mm 0; }
+  .ornament {
+    display: flex; align-items: center; justify-content: center;
+    gap: 6mm; margin: 6mm 0;
+    color: var(--gold);
   }
-  .phase {
-    background: linear-gradient(160deg, var(--burgundy-soft), var(--burgundy-deep));
-    border: 1px solid rgba(230,181,74,0.3);
-    border-radius: 14px;
-    padding: 26px 22px;
+  .ornament .line { flex: 1; max-width: 40mm; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  .ornament .mark { font-size: 14pt; }
+
+  .cover-doc-title {
+    font-family: Georgia, serif;
+    color: var(--burgundy);
+    font-size: 28pt;
+    letter-spacing: 0.04em;
+    margin: 4mm 0;
+    line-height: 1.15;
+  }
+  .cover-doc-sub {
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 12pt;
+    max-width: 130mm;
+    margin: 5mm auto 0;
+    line-height: 1.55;
+  }
+
+  .cover-bottom {
+    border-top: 1px solid var(--gold-light);
+    padding-top: 6mm;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5mm;
+    font-size: 9.5pt;
+  }
+  .cover-meta-item .label {
+    font-family: Georgia, serif;
+    color: var(--gold);
+    font-size: 7.5pt;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1mm;
+  }
+  .cover-meta-item .value {
+    color: var(--burgundy-deep);
+    font-weight: 600;
+  }
+
+  /* ============== GENERAL ============== */
+  .page-break { page-break-before: always; }
+  .section { padding: 4mm 0 10mm; }
+
+  .eyebrow {
+    font-family: Georgia, serif;
+    font-size: 8.5pt;
+    color: var(--gold);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 3mm;
+  }
+  .eyebrow::before { content: "❦  "; color: var(--gold-light); }
+  h2.section-heading {
+    font-size: 22pt;
+    color: var(--burgundy-deep);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 4mm;
+  }
+  .lead {
+    font-family: Georgia, serif;
+    font-size: 11.5pt;
+    color: var(--text);
+    line-height: 1.55;
+    margin-bottom: 7mm;
+    max-width: 165mm;
+  }
+  .divider {
+    display: flex; align-items: center; gap: 4mm;
+    margin: 6mm 0 8mm;
+  }
+  .divider .line { flex: 1; height: 1px; background: var(--gold-light); }
+  .divider .mark { color: var(--gold); font-size: 12pt; }
+
+  p { margin-bottom: 3mm; }
+  strong { color: var(--burgundy); font-weight: 600; }
+
+  /* ============== TOC ============== */
+  .toc {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10mm 12mm;
+  }
+  .toc h3 {
+    font-size: 14pt;
+    text-align: center;
+    color: var(--burgundy-deep);
+    margin-bottom: 6mm;
+    letter-spacing: 0.05em;
+  }
+  .toc ol { list-style: none; counter-reset: tocitem; }
+  .toc ol li {
+    counter-increment: tocitem;
+    display: flex; align-items: baseline;
+    padding: 2.5mm 0;
+    border-bottom: 1px dotted var(--border);
+    font-size: 10.5pt;
+  }
+  .toc ol li::before {
+    content: counter(tocitem, decimal-leading-zero);
+    color: var(--gold);
+    font-family: Georgia, serif;
+    font-weight: 600;
+    width: 14mm;
+    flex-shrink: 0;
+    letter-spacing: 0.1em;
+  }
+  .toc ol li .title { flex: 1; color: var(--burgundy-deep); }
+  .toc ol li .pg { color: var(--muted); font-size: 9pt; }
+
+  /* ============== WHY CARDS ============== */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5mm;
+  }
+  .why-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    padding: 6mm;
+    border-radius: 3px;
+    page-break-inside: avoid;
+  }
+  .why-card .ic {
+    font-family: Georgia, serif;
+    color: var(--gold);
+    font-size: 9pt;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1mm;
+  }
+  .why-card h3 { font-size: 13pt; color: var(--burgundy-deep); margin-bottom: 2mm; }
+  .why-card p { font-size: 10pt; color: var(--text); margin: 0; }
+
+  /* ============== AUTOMATION USE-CASE ============== */
+  .uc-list { }
+  .uc {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6mm 7mm;
+    margin-bottom: 5mm;
+    page-break-inside: avoid;
     position: relative;
   }
-  .phase .phase-label {
-    background: var(--gold);
-    color: var(--burgundy-deep);
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 11px;
-    letter-spacing: 2px;
-    font-weight: 800;
-    display: inline-block;
-    margin-bottom: 14px;
+  .uc::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--gold), var(--burgundy));
+    border-radius: 2px 0 0 2px;
   }
-  .phase h4 { color: var(--gold-soft); font-size: 18px; margin-bottom: 10px; }
-  .phase ul { padding-left: 18px; }
-  .phase li { font-size: 13.5px; margin-bottom: 5px; opacity: 0.92; }
-  .phase .timeframe { color: var(--teal); font-size: 12px; margin-bottom: 12px; letter-spacing: 1px; }
+  .uc-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 3mm;
+    padding-bottom: 2.5mm;
+    border-bottom: 1px solid var(--border);
+  }
+  .uc-head h3 {
+    font-size: 13pt;
+    color: var(--burgundy-deep);
+    margin: 0;
+  }
+  .uc-head .num {
+    font-family: Georgia, serif;
+    color: var(--gold);
+    font-size: 9pt;
+    letter-spacing: 0.2em;
+  }
+  .uc-tags { margin-top: 1mm; }
+  .tag {
+    display: inline-block;
+    font-size: 7.5pt;
+    letter-spacing: 0.12em;
+    padding: 0.5mm 2.5mm;
+    border-radius: 10px;
+    font-family: Georgia, serif;
+    border: 1px solid var(--border);
+    background: var(--cream);
+    color: var(--burgundy);
+    margin-right: 2mm;
+    text-transform: uppercase;
+  }
+  .tag.high { background: var(--burgundy); color: var(--gold-soft); border-color: var(--burgundy); }
+  .tag.med { background: var(--gold); color: var(--burgundy-deep); border-color: var(--gold); }
+  .uc-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 5mm;
+  }
+  .uc-body p { font-size: 10pt; margin-bottom: 2mm; }
+  .uc-side h5 {
+    font-family: Georgia, serif;
+    color: var(--burgundy);
+    font-size: 9pt;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5mm;
+  }
+  .uc-side ul {
+    list-style: none;
+    padding: 0;
+  }
+  .uc-side ul li {
+    font-size: 9pt;
+    padding: 0.8mm 0 0.8mm 4mm;
+    position: relative;
+    color: var(--text);
+  }
+  .uc-side ul li::before {
+    content: "▸";
+    position: absolute; left: 0;
+    color: var(--gold);
+  }
 
-  /* ---------- TABLE ---------- */
+  /* ============== LAYERED ARCHITECTURE ============== */
+  .layer {
+    display: grid;
+    grid-template-columns: 38mm 1fr;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    margin-bottom: 3mm;
+    page-break-inside: avoid;
+  }
+  .layer-label {
+    background: linear-gradient(135deg, var(--cream), var(--paper));
+    border-right: 1px solid var(--border);
+    padding: 4mm 4mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .layer-num {
+    font-family: Georgia, serif;
+    color: var(--gold);
+    font-size: 14pt;
+    line-height: 1;
+  }
+  .layer-name {
+    font-family: Georgia, serif;
+    color: var(--burgundy);
+    font-size: 10.5pt;
+    margin-top: 1mm;
+    letter-spacing: 0.04em;
+  }
+  .layer-body {
+    padding: 4mm 5mm;
+    font-size: 9.5pt;
+    color: var(--text);
+  }
+  .layer-body .role {
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: var(--burgundy-soft);
+    font-size: 9pt;
+    margin-bottom: 1.5mm;
+    display: block;
+  }
+
+  /* ============== FLOW (DIAGRAM) ============== */
+  .flow-diagram {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8mm 6mm;
+  }
+  .flow-title {
+    text-align: center;
+    font-family: Georgia, serif;
+    color: var(--burgundy);
+    font-size: 11pt;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6mm;
+  }
+  .flow-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2mm;
+    margin-bottom: 4mm;
+  }
+  .flow-row.row-2 { grid-template-columns: repeat(5, 1fr); }
+  .flow-box {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 3mm 2.5mm;
+    text-align: center;
+    position: relative;
+    page-break-inside: avoid;
+  }
+  .flow-box.ai {
+    background: var(--slate-light);
+    border-color: var(--slate);
+  }
+  .flow-box.ai .step-num { background: var(--slate); color: var(--paper); }
+  .flow-box .step-num {
+    display: inline-block;
+    width: 6mm; height: 6mm; line-height: 6mm;
+    background: var(--burgundy); color: var(--gold-soft);
+    border-radius: 50%; font-family: Georgia, serif;
+    font-weight: 700; font-size: 8.5pt;
+    margin-bottom: 1.5mm;
+  }
+  .flow-box .step-title {
+    display: block;
+    font-family: Georgia, serif;
+    color: var(--burgundy);
+    font-size: 9pt;
+    margin-bottom: 1mm;
+    font-weight: 600;
+  }
+  .flow-box .step-desc {
+    font-size: 7.5pt;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+  .flow-legend {
+    margin-top: 4mm;
+    text-align: center;
+    font-size: 8.5pt;
+    color: var(--muted);
+    font-style: italic;
+    font-family: Georgia, serif;
+  }
+  .flow-legend .swatch {
+    display: inline-block;
+    width: 3mm; height: 3mm;
+    background: var(--slate);
+    vertical-align: middle;
+    margin: 0 1mm;
+    border-radius: 1px;
+  }
+
+  /* ============== CALLOUT ============== */
+  .callout {
+    background: var(--cream);
+    border-left: 4px solid var(--gold);
+    padding: 5mm 6mm;
+    margin: 5mm 0;
+    border-radius: 0 3px 3px 0;
+  }
+  .callout h4 {
+    font-family: Georgia, serif;
+    color: var(--burgundy);
+    font-size: 9.5pt;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 2mm;
+  }
+  .callout p {
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: var(--burgundy-deep);
+    font-size: 11pt;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ============== ROADMAP ============== */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4mm;
+  }
+  .phase {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold);
+    padding: 5mm 6mm;
+    border-radius: 3px;
+    page-break-inside: avoid;
+  }
+  .phase .ph-label {
+    font-family: Georgia, serif;
+    color: var(--gold);
+    font-size: 8.5pt;
+    letter-spacing: 0.25em;
+    margin-bottom: 1mm;
+  }
+  .phase .ph-time {
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: var(--burgundy-soft);
+    font-size: 9pt;
+    margin-bottom: 2mm;
+  }
+  .phase h4 {
+    font-size: 12pt;
+    color: var(--burgundy-deep);
+    margin-bottom: 2mm;
+  }
+  .phase ul { list-style: none; padding: 0; }
+  .phase ul li {
+    font-size: 9pt;
+    padding: 0.8mm 0 0.8mm 4mm;
+    position: relative;
+  }
+  .phase ul li::before {
+    content: "—";
+    position: absolute; left: 0;
+    color: var(--gold);
+  }
+
+  /* ============== TABLE ============== */
   table.elegant {
-    width: 100%; border-collapse: collapse;
-    background: rgba(0,0,0,0.25);
-    border: 1px solid rgba(230,181,74,0.3);
-    border-radius: 10px; overflow: hidden;
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    font-size: 9.5pt;
   }
   table.elegant th {
-    background: var(--burgundy-soft); color: var(--gold);
-    padding: 14px; text-align: left;
-    font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
-    border-bottom: 2px solid var(--gold);
+    background: var(--burgundy);
+    color: var(--gold-soft);
+    text-align: left;
+    padding: 3mm 4mm;
+    font-family: Georgia, serif;
+    font-weight: 400;
+    font-size: 9.5pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
   table.elegant td {
-    padding: 14px; color: var(--cream); font-size: 13.5px;
-    border-bottom: 1px solid rgba(230,181,74,0.12);
+    padding: 3mm 4mm;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
     vertical-align: top;
   }
-  table.elegant tr:hover td { background: rgba(230,181,74,0.05); }
+  table.elegant tr:nth-child(even) td { background: var(--cream); }
+  table.elegant tr:last-child td { border-bottom: none; font-weight: 600; color: var(--burgundy); }
 
-  /* ---------- RISK / GUARDRAIL CARDS ---------- */
-  .guardrails {
+  /* ============== GUARDRAILS ============== */
+  .guardrail-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4mm;
   }
   .guardrail {
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(232,122,122,0.3);
-    border-left: 5px solid var(--rose);
-    border-radius: 10px;
-    padding: 22px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--burgundy);
+    padding: 4mm 5mm;
+    border-radius: 2px;
+    page-break-inside: avoid;
   }
-  .guardrail h4 { color: var(--rose); font-size: 16px; margin-bottom: 10px; }
-  .guardrail p { font-size: 14px; color: var(--cream); opacity: 0.88; }
-
-  /* ---------- CALLOUT ---------- */
-  .callout {
-    background: linear-gradient(90deg, rgba(74,210,201,0.10), rgba(230,181,74,0.10));
-    border: 1px solid rgba(74,210,201,0.4);
-    border-left: 5px solid var(--teal);
-    border-radius: 12px;
-    padding: 24px 28px;
-    margin: 24px 0;
+  .guardrail h4 {
+    font-size: 11pt;
+    color: var(--burgundy);
+    margin-bottom: 1.5mm;
   }
-  .callout h4 { color: var(--teal); font-size: 16px; margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase; }
-  .callout p { color: var(--cream); opacity: 0.92; }
+  .guardrail p {
+    font-size: 9pt;
+    margin: 0;
+    color: var(--text);
+  }
 
-  /* ---------- FOOTER ---------- */
-  footer {
-    background: var(--burgundy-deep);
-    border-top: 3px solid var(--gold);
-    padding: 60px 40px;
+  /* ============== KPI ============== */
+  .kpi-band {
+    background: linear-gradient(180deg, var(--paper), var(--cream));
+    border: 1px solid var(--gold-light);
+    border-radius: 4px;
+    padding: 8mm;
+  }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4mm;
+  }
+  .kpi-item {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 4mm;
+    border-radius: 3px;
     text-align: center;
+  }
+  .kpi-item h5 {
+    font-size: 10pt;
+    color: var(--burgundy-deep);
+    margin-bottom: 1mm;
+  }
+  .kpi-item .target {
+    font-family: Georgia, serif;
+    color: var(--gold);
+    font-size: 9pt;
+    letter-spacing: 0.1em;
+    margin-bottom: 1mm;
+  }
+  .kpi-item p {
+    font-size: 9pt;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* ============== END PAGE ============== */
+  .end-page {
+    text-align: center;
+    padding: 30mm 0;
   }
   .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px; max-width: 1000px; margin: 30px auto;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4mm;
+    max-width: 150mm;
+    margin: 8mm auto;
+    text-align: left;
   }
   .contact-item {
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(230,181,74,0.25);
-    border-radius: 10px; padding: 18px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    padding: 4mm 5mm;
+    border-radius: 2px;
   }
-  .contact-item .ic { font-size: 24px; color: var(--gold); margin-bottom: 8px; }
-  .contact-item .lbl { font-size: 11px; color: var(--gold-soft); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
-  .contact-item .val { color: var(--cream); font-size: 14px; }
-  .copyright {
-    margin-top: 40px; color: var(--muted);
-    font-size: 13px; border-top: 1px solid rgba(230,181,74,0.2);
-    padding-top: 24px;
+  .contact-item .lbl {
+    font-family: Georgia, serif;
+    font-size: 8pt;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1mm;
+  }
+  .contact-item .val {
+    color: var(--burgundy-deep);
+    font-size: 10pt;
+    font-weight: 600;
   }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="crest">
-      <span class="crest-text">AAL</span>
-      <span class="ai-badge">AI · 2026</span>
-    </div>
-    <h1>AI Automation Guide</h1>
-    <p class="tagline">Practical, ethical AI for a modern Canadian law firm</p>
-    <p class="subtitle">A comprehensive playbook of what AA Legal can automate, the tools that fit each task, step-by-step implementation guides, and visual explanations of how the pieces work together — all designed to free lawyers from administrative friction and let them focus on judgement, advocacy, and clients.</p>
+<!-- =============== LOGO DEFS =============== -->
+<svg style="position:absolute; width:0; height:0; overflow:hidden;" aria-hidden="true">
+  <defs>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0d271"/>
+      <stop offset="35%" stop-color="#d4a83a"/>
+      <stop offset="70%" stop-color="#b8862a"/>
+      <stop offset="100%" stop-color="#8a6018"/>
+    </linearGradient>
+    <linearGradient id="goldShine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9a7320" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#f5e09a" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#9a7320" stop-opacity="0.5"/>
+    </linearGradient>
 
-    <div class="hero-meta">
-      <div class="meta-card"><div class="label">Document</div><div class="value">AI Automation Playbook</div></div>
-      <div class="meta-card"><div class="label">Audience</div><div class="value">Partners · Staff · IT</div></div>
-      <div class="meta-card"><div class="label">Jurisdiction</div><div class="value">Alberta, Canada</div></div>
-      <div class="meta-card"><div class="label">Edition</div><div class="value">2026 · v1.0</div></div>
+    <symbol id="aal-logo" viewBox="0 0 400 360">
+      <g fill="url(#goldGrad)">
+        <polygon points="40,80 100,18 160,80"/>
+        <rect x="32" y="78" width="136" height="14"/>
+        <rect x="44" y="92" width="112" height="8"/>
+        <polygon points="60,100 140,100 132,260 68,260"/>
+        <rect x="55" y="180" width="90" height="10"/>
+        <rect x="50" y="260" width="100" height="12"/>
+        <rect x="40" y="272" width="120" height="16"/>
+        <rect x="32" y="288" width="136" height="10"/>
+      </g>
+      <g opacity="0.35" fill="#7a5a18">
+        <rect x="74" y="105" width="2" height="150"/>
+        <rect x="86" y="103" width="2" height="153"/>
+        <rect x="98" y="102" width="2" height="155"/>
+        <rect x="110" y="103" width="2" height="153"/>
+        <rect x="122" y="105" width="2" height="150"/>
+      </g>
+      <g fill="url(#goldGrad)">
+        <polygon points="240,80 300,18 360,80"/>
+        <rect x="232" y="78" width="136" height="14"/>
+        <rect x="244" y="92" width="112" height="8"/>
+        <polygon points="260,100 340,100 332,260 268,260"/>
+        <rect x="255" y="180" width="90" height="10"/>
+        <rect x="250" y="260" width="100" height="12"/>
+        <rect x="240" y="272" width="120" height="16"/>
+        <rect x="232" y="288" width="136" height="10"/>
+      </g>
+      <g opacity="0.35" fill="#7a5a18">
+        <rect x="274" y="105" width="2" height="150"/>
+        <rect x="286" y="103" width="2" height="153"/>
+        <rect x="298" y="102" width="2" height="155"/>
+        <rect x="310" y="103" width="2" height="153"/>
+        <rect x="322" y="105" width="2" height="150"/>
+      </g>
+      <g fill="url(#goldGrad)">
+        <rect x="180" y="120" width="22" height="140"/>
+        <rect x="180" y="245" width="50" height="20"/>
+      </g>
+      <rect x="160" y="78" width="80" height="6" fill="url(#goldShine)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- =============== COVER =============== -->
+<div class="cover cover-page">
+  <div class="cover-frame">
+
+    <div class="cover-top">
+      <div class="cover-logo-wrap">
+        <svg viewBox="0 0 400 360" width="260" height="234">
+          <defs>
+      <linearGradient id="goldGrad2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#f0d271"/>
+        <stop offset="35%" stop-color="#d4a83a"/>
+        <stop offset="70%" stop-color="#b8862a"/>
+        <stop offset="100%" stop-color="#8a6018"/>
+      </linearGradient>
+      <linearGradient id="goldShine2" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#9a7320" stop-opacity="0.5"/>
+        <stop offset="50%" stop-color="#f5e09a" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#9a7320" stop-opacity="0.5"/>
+      </linearGradient>
+    </defs>
+    <g fill="url(#goldGrad2)">
+      <polygon points="40,80 100,18 160,80"/>
+      <rect x="32" y="78" width="136" height="14"/>
+      <rect x="44" y="92" width="112" height="8"/>
+      <polygon points="60,100 140,100 132,260 68,260"/>
+      <rect x="55" y="180" width="90" height="10"/>
+      <rect x="50" y="260" width="100" height="12"/>
+      <rect x="40" y="272" width="120" height="16"/>
+      <rect x="32" y="288" width="136" height="10"/>
+    </g>
+    <g opacity="0.35" fill="#7a5a18">
+      <rect x="74" y="105" width="2" height="150"/>
+      <rect x="86" y="103" width="2" height="153"/>
+      <rect x="98" y="102" width="2" height="155"/>
+      <rect x="110" y="103" width="2" height="153"/>
+      <rect x="122" y="105" width="2" height="150"/>
+    </g>
+    <g fill="url(#goldGrad2)">
+      <polygon points="240,80 300,18 360,80"/>
+      <rect x="232" y="78" width="136" height="14"/>
+      <rect x="244" y="92" width="112" height="8"/>
+      <polygon points="260,100 340,100 332,260 268,260"/>
+      <rect x="255" y="180" width="90" height="10"/>
+      <rect x="250" y="260" width="100" height="12"/>
+      <rect x="240" y="272" width="120" height="16"/>
+      <rect x="232" y="288" width="136" height="10"/>
+    </g>
+    <g opacity="0.35" fill="#7a5a18">
+      <rect x="274" y="105" width="2" height="150"/>
+      <rect x="286" y="103" width="2" height="153"/>
+      <rect x="298" y="102" width="2" height="155"/>
+      <rect x="310" y="103" width="2" height="153"/>
+      <rect x="322" y="105" width="2" height="150"/>
+    </g>
+    <g fill="url(#goldGrad2)">
+      <rect x="180" y="120" width="22" height="140"/>
+      <rect x="180" y="245" width="50" height="20"/>
+    </g>
+    <rect x="160" y="78" width="80" height="6" fill="url(#goldShine2)"/>
+        </svg>
+        <div style="margin-top:8mm; font-family:Georgia, serif; color:#e8d39a; font-size:18pt; letter-spacing:0.4em; font-weight:600;">AA LEGAL</div>
+        <div style="margin-top:3mm; font-family:Georgia, serif; color:#d4b06a; font-style:italic; font-size:11pt;">…Committed to excellence!!!</div>
+        <div class="ai-tag">AI · MMXXVI</div>
+      </div>
+    </div>
+
+    <div class="cover-middle">
+      <div class="ornament"><div class="line"></div><div class="mark">❦</div><div class="line"></div></div>
+      <h1 class="cover-doc-title">Artificial Intelligence<br/><span style="font-style:italic; font-size:20pt; color:var(--gold);">A Practical Automation Playbook</span></h1>
+      <p class="cover-doc-sub">A practical, ethical guide to what AA Legal can automate, the tools that fit each task, step-by-step implementation, and visual walk-throughs — designed to free lawyers from administrative friction and let them focus on judgement, advocacy, and clients.</p>
+      <div class="ornament" style="margin-top:8mm;"><div class="line"></div><div class="mark">❦</div><div class="line"></div></div>
+    </div>
+
+    <div class="cover-bottom">
+      <div class="cover-meta-item"><div class="label">Audience</div><div class="value">Partners · Staff · IT</div></div>
+      <div class="cover-meta-item"><div class="label">Jurisdiction</div><div class="value">Alberta, Canada</div></div>
+      <div class="cover-meta-item"><div class="label">Document</div><div class="value">AI Automation Playbook</div></div>
+      <div class="cover-meta-item"><div class="label">Edition</div><div class="value">2026 · Version 1.0</div></div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- WHY AI -->
-<section class="strip-b">
-  <div class="container">
-    <p class="section-title">Section 01 — The Case for AI</p>
-    <h2 class="section-heading">Why AI Now, And Why It Matters For AA Legal</h2>
-    <p class="section-lead">Roughly 40–60% of a typical lawyer’s day is spent on tasks that don’t require legal judgement — drafting boilerplate, summarising documents, hunting through emails, chasing payments, and re-typing intake data. AI can quietly eliminate most of that friction while keeping a human firmly in charge of every decision that matters.</p>
+<!-- =============== TOC =============== -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="eyebrow">Contents</div>
+  <h2 class="section-heading">In This Document</h2>
+  <div class="divider"><span class="line"></span><span class="mark">❦</span><span class="line"></span></div>
+  <div class="toc">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><span class="title">The Case for AI at AA Legal</span><span class="pg">03</span></li>
+      <li><span class="title">Automation Catalogue — Fourteen High-Value Use Cases</span><span class="pg">04</span></li>
+      <li><span class="title">The AI Stack — A Six-Layer Architecture</span><span class="pg">09</span></li>
+      <li><span class="title">A Day in the Life — Real Estate Walk-Through</span><span class="pg">10</span></li>
+      <li><span class="title">Under the Hood — How AI Drafts a Will</span><span class="pg">11</span></li>
+      <li><span class="title">A 90-Day Rollout Plan</span><span class="pg">12</span></li>
+      <li><span class="title">Vetted Tools by Function</span><span class="pg">13</span></li>
+      <li><span class="title">Ethics &amp; Non-Negotiable Guardrails</span><span class="pg">14</span></li>
+      <li><span class="title">Indicative Budget &amp; ROI</span><span class="pg">15</span></li>
+      <li><span class="title">Measuring Success</span><span class="pg">16</span></li>
+      <li><span class="title">Contact</span><span class="pg">17</span></li>
+    </ol>
+  </div>
+</div>
 
-    <div class="automation-grid">
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">⏱</div><div><h3>Reclaim Billable Hours</h3><div class="ax-tagline">Time → Value</div></div></div>
-        <p class="ax-body">Automate intake, drafting first cuts, and document review so lawyers can spend more time on strategy, advocacy, and client relationships.</p>
-      </div>
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">$</div><div><h3>Lower Cost-To-Serve</h3><div class="ax-tagline">Margin → Up</div></div></div>
-        <p class="ax-body">Flat-fee files (wills, real-estate, simple immigration) become dramatically more profitable when AI handles 50–70% of the production work.</p>
-      </div>
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">★</div><div><h3>Better Client Experience</h3><div class="ax-tagline">Speed + Clarity</div></div></div>
-        <p class="ax-body">24/7 intake, instant document explanations in plain English, faster turnaround, and proactive status updates without staff overhead.</p>
-      </div>
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">!</div><div><h3>Reduce Risk &amp; Errors</h3><div class="ax-tagline">Quality → Up</div></div></div>
-        <p class="ax-body">AI-assisted deadline tracking, conflict checks, and second-eye review reduce the chance of missed limitations, fees, or clauses.</p>
-      </div>
+<!-- =============== WHY AI =============== -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="eyebrow">Section 01 · The Case for AI</div>
+  <h2 class="section-heading">Why AI Now, &amp; Why It Matters for AA Legal</h2>
+  <div class="divider"><span class="line"></span><span class="mark">❦</span><span class="line"></span></div>
+  <p class="lead">Roughly 40–60% of a typical lawyer's day is spent on tasks that do not require legal judgement — drafting boilerplate, summarising documents, hunting through emails, chasing payments, and re-typing intake data. Artificial intelligence can quietly eliminate most of that friction while keeping a human firmly in charge of every decision that matters.</p>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="ic">Time → Value</div>
+      <h3>Reclaim Billable Hours</h3>
+      <p>Automate intake, drafting first cuts, and document review so lawyers can spend more time on strategy, advocacy, and clients.</p>
+    </div>
+    <div class="why-card">
+      <div class="ic">Margin → Up</div>
+      <h3>Lower Cost-to-Serve</h3>
+      <p>Flat-fee files become dramatically more profitable when AI handles 50–70% of the production work.</p>
+    </div>
+    <div class="why-card">
+      <div class="ic">Speed &amp; Clarity</div>
+      <h3>Better Client Experience</h3>
+      <p>Twenty-four-hour intake, plain-English document explanations, faster turnaround, and proactive status updates without staff overhead.</p>
+    </div>
+    <div class="why-card">
+      <div class="ic">Quality → Up</div>
+      <h3>Reduce Risk &amp; Errors</h3>
+      <p>AI-assisted deadline tracking, conflict checks, and second-eye review reduce the chance of missed limitations, fees, or clauses.</p>
     </div>
   </div>
-</section>
 
-<!-- WHAT CAN BE AUTOMATED — MASTER CATALOG -->
-<section class="strip-a">
-  <div class="container">
-    <p class="section-title">Section 02 — Automation Catalogue</p>
-    <h2 class="section-heading">14 High-Value Use Cases for AA Legal</h2>
-    <p class="section-lead">Each card below describes a discrete automation: what it does, the recommended technology, the steps to implement, and the business impact. Use these as building blocks — most firms start with 2–3 and grow from there.</p>
+  <div class="callout">
+    <h4>The Guiding Principle</h4>
+    <p>"AI helps us work faster and clearer, but every legal judgement, every document delivered to a client, and every word filed with a court is owned, reviewed, and signed by a human lawyer at AA Legal."</p>
+  </div>
+</div>
 
-    <div class="automation-grid">
+<!-- =============== USE CASES =============== -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="eyebrow">Section 02 · Automation Catalogue</div>
+  <h2 class="section-heading">Fourteen High-Value Use Cases</h2>
+  <div class="divider"><span class="line"></span><span class="mark">❦</span><span class="line"></span></div>
+  <p class="lead">Each entry describes a discrete automation: what it does, how to implement it, the recommended technology, the guardrails, and its business impact. These are building blocks — most firms start with two or three and grow from there.</p>
 
-      <!-- 1. Intake Chatbot -->
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">💬</div><div><h3>1 · 24/7 AI Intake Assistant</h3><div class="ax-tagline">Reception · After-hours</div></div></div>
-        <p class="ax-body"><strong>What it does:</strong> A chatbot on aalegal.ca greets visitors, asks structured questions, captures matter type, urgency, and contact info, and books a consult slot — even at 2 AM.</p>
-        <div class="ax-section">
-          <h5>How to Automate</h5>
-          <ul>
-            <li>Use an LLM-based chatbot (e.g., Smith.ai, LawDroid, or a custom GPT)</li>
-            <li>Train it with practice-area FAQs and intake forms</li>
-            <li>Integrate with Clio Grow / Calendly for booking</li>
-            <li>Push leads into the CRM with conflict-check pre-screen</li>
-          </ul>
+  <div class="uc-list">
+
+    <!-- 1 -->
+    <div class="uc">
+      <div class="uc-head">
+        <div>
+          <h3>24/7 Intake Assistant</h3>
+          <div class="uc-tags"><span class="tag high">Impact High</span><span class="tag">Effort Low</span></div>
         </div>
-        <div class="ax-section">
+        <div class="num">USE CASE · I</div>
+      </div>
+      <div class="uc-grid">
+        <div class="uc-body">
+          <p><strong>What it does.</strong> A chatbot on aalegal.ca greets visitors, asks structured questions, captures matter type, urgency and contact information, and books a consult slot — even at two in the morning.</p>
+          <p><strong>How to automate.</strong> Use an LLM-based chatbot (Smith.ai, LawDroid, or a custom GPT). Train it with practice-area FAQs, integrate with Clio Grow or Calendly for booking, and push leads into the CRM with conflict-check pre-screen.</p>
+        </div>
+        <div class="uc-side">
           <h5>Guardrails</h5>
-          <ul><li>Always discloses it is an AI assistant</li><li>Never gives legal advice — only collects information</li><li>Escalates urgent matters to a human</li></ul>
-        </div>
-        <div style="margin-top:14px;"><span class="impact high">Impact: High</span><span class="impact">Effort: Low</span></div>
-      </div>
-
-      <!-- 2. Document Drafting -->
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">📝</div><div><h3>2 · AI-Assisted Drafting</h3><div class="ax-tagline">Wills · Contracts · Letters</div></div></div>
-        <p class="ax-body"><strong>What it does:</strong> Generates first drafts of routine documents — wills, separation agreements, residential purchase contracts, demand letters — from a structured intake form.</p>
-        <div class="ax-section">
-          <h5>How to Automate</h5>
           <ul>
-            <li>Build precedent templates in Word / Google Docs</li>
-            <li>Use a tool like Gavel, LawYaw, or HotDocs to map intake fields to clauses</li>
-            <li>Add an AI layer (Harvey, Spellbook, or Microsoft Copilot for Word) for clause refinement and plain-English summaries</li>
-            <li>Lawyer reviews &amp; signs off before client delivery</li>
+            <li>Discloses it is an AI assistant</li>
+            <li>Never gives legal advice — only collects information</li>
+            <li>Escalates urgent matters to a human</li>
           </ul>
         </div>
-        <div style="margin-top:14px;"><span class="impact high">Impact: High</span><span class="impact">Effort: Medium</span></div>
       </div>
+    </div>
 
-      <!-- 3. Document Review -->
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">🔍</div><div><h3>3 · Contract &amp; Document Review</h3><div class="ax-tagline">Real Estate · Commercial</div></div></div>
-        <p class="ax-body"><strong>What it does:</strong> Scans inbound contracts (purchase agreements, leases, condo docs, separation drafts) and flags missing clauses, unusual terms, deadlines, and risks.</p>
-        <div class="ax-section">
-          <h5>How to Automate</h5>
+    <!-- 2 -->
+    <div class="uc">
+      <div class="uc-head">
+        <div>
+          <h3>AI-Assisted Drafting</h3>
+          <div class="uc-tags"><span class="tag high">Impact High</span><span class="tag med">Effort Medium</span></div>
+        </div>
+        <div class="num">USE CASE · II</div>
+      </div>
+      <div class="uc-grid">
+        <div class="uc-body">
+          <p><strong>What it does.</strong> Generates first drafts of routine documents — wills, separation agreements, residential purchase contracts, demand letters — from a structured intake form.</p>
+          <p><strong>How to automate.</strong> Build precedent templates in Word; use Gavel, LawYaw, or HotDocs to map intake fields to clauses; add an AI layer (Spellbook or Microsoft Copilot) for clause refinement and plain-English summaries. Lawyer reviews and signs off before client delivery.</p>
+        </div>
+        <div class="uc-side">
+          <h5>Best for</h5>
           <ul>
-            <li>Use Spellbook, Kira, or Harvey for clause extraction</li>
-            <li>Configure a checklist per matter type (e.g., condo doc review checklist)</li>
-            <li>AI produces a red-flag report; lawyer reviews</li>
+            <li>Wills &amp; POAs</li>
+            <li>Residential real-estate documents</li>
+            <li>Demand letters</li>
+            <li>Standard contracts</li>
           </ul>
         </div>
-        <div style="margin-top:14px;"><span class="impact high">Impact: High</span><span class="impact med">Effort: Medium</span></div>
       </div>
+    </div>
 
-      <!-- 4. Legal Research -->
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">⚖</div><div><h3>4 · AI Legal Research</h3><div class="ax-tagline">Case Law · Statutes</div></div></div>
-        <p class="ax-body"><strong>What it does:</strong> Answers legal questions with citations to Canadian case law and statutes, drafts memos, and surfaces analogous decisions.</p>
-        <div class="ax-section">
-          <h5>How to Automate</h5>
+    <!-- 3 -->
+    <div class="uc">
+      <div class="uc-head">
+        <div>
+          <h3>Contract &amp; Document Review</h3>
+          <div class="uc-tags"><span class="tag high">Impact High</span><span class="tag med">Effort Medium</span></div>
+        </div>
+        <div class="num">USE CASE · III</div>
+      </div>
+      <div class="uc-grid">
+        <div class="uc-body">
+          <p><strong>What it does.</strong> Scans inbound contracts (purchase agreements, leases, condo documents, separation drafts) and flags missing clauses, unusual terms, deadlines, and risks.</p>
+          <p><strong>How to automate.</strong> Use Spellbook, Kira, or Harvey for clause extraction; configure a checklist per matter type (e.g., a condo-document review checklist); the AI produces a red-flag report the lawyer then reviews.</p>
+        </div>
+        <div class="uc-side">
+          <h5>Typical Output</h5>
           <ul>
-            <li>Subscribe to Westlaw Edge Canada AI, Lexis+ AI, or CanLII</li>
-            <li>Use Harvey or Vincent AI for memo drafting</li>
-            <li>Always verify citations — never rely on raw LLM output</li>
+            <li>Red-flag clause list</li>
+            <li>Key dates calendar</li>
+            <li>Comparison vs. firm standard</li>
+            <li>Plain-English client summary</li>
           </ul>
         </div>
-        <div style="margin-top:14px;"><span class="impact high">Impact: High</span><span class="impact">Effort: Low</span></div>
       </div>
+    </div>
 
-      <!-- 5. Email Triage -->
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">✉</div><div><h3>5 · Email Triage &amp; Drafting</h3><div class="ax-tagline">Inbox Hygiene</div></div></div>
-        <p class="ax-body"><strong>What it does:</strong> Sorts incoming email by urgency &amp; matter, summarises long threads, and drafts reply suggestions in the lawyer’s voice.</p>
-        <div class="ax-section">
-          <h5>How to Automate</h5>
+    <!-- 4 -->
+    <div class="uc">
+      <div class="uc-head">
+        <div>
+          <h3>AI Legal Research</h3>
+          <div class="uc-tags"><span class="tag high">Impact High</span><span class="tag">Effort Low</span></div>
+        </div>
+        <div class="num">USE CASE · IV</div>
+      </div>
+      <div class="uc-grid">
+        <div class="uc-body">
+          <p><strong>What it does.</strong> Answers legal questions with citations to Canadian case law and statutes, drafts memos, and surfaces analogous decisions.</p>
+          <p><strong>How to automate.</strong> Subscribe to Lexis+ AI Canada, Westlaw Edge Canada, or vLex Vincent. Use Harvey for memo drafting. Always verify citations — never rely on raw LLM output.</p>
+        </div>
+        <div class="uc-side">
+          <h5>Rule One</h5>
           <ul>
-            <li>Microsoft Copilot for Outlook or Google Gemini in Gmail</li>
-            <li>Custom rules to auto-tag by client &amp; matter</li>
-            <li>Daily AI-summarised inbox briefing at 7 AM</li>
+            <li>Verify every citation</li>
+            <li>Confirm currency of case law</li>
+            <li>Cross-check with CanLII</li>
+            <li>Lawyer always re-reads cited authority</li>
           </ul>
         </div>
-        <div style="margin-top:14px;"><span class="impact">Impact: Medium</span><span class="impact">Effort: Low</span></div>
       </div>
+    </div>
 
-      <!-- 6. Time & Billing -->
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">⏲</div><div><h3>6 · Passive Time Capture &amp; Billing Narratives</h3><div class="ax-tagline">Revenue Leakage</div></div></div>
-        <p class="ax-body"><strong>What it does:</strong> Detects time spent in documents, emails, and calls; generates compliant billing narratives; flags non-billable items.</p>
-        <div class="ax-section">
-          <h5>How to Automate</h5>
+    <!-- 5 -->
+    <div class="uc">
+      <div class="uc-head">
+        <div>
+          <h3>Email Triage &amp; Drafting</h3>
+          <div class="uc-tags"><span class="tag">Impact Medium</span><span class="tag">Effort Low</span></div>
+        </div>
+        <div class="num">USE CASE · V</div>
+      </div>
+      <div class="uc-grid">
+        <div class="uc-body">
+          <p><strong>What it does.</strong> Sorts incoming email by urgency and matter, summarises long threads, and drafts reply suggestions in the lawyer's voice.</p>
+          <p><strong>How to automate.</strong> Microsoft Copilot for Outlook or Google Gemini for Gmail. Build custom rules to auto-tag by client and matter. Receive a daily AI-summarised inbox briefing at 7 a.m.</p>
+        </div>
+        <div class="uc-side">
+          <h5>Output</h5>
           <ul>
-            <li>Clio Duo, Smokeball AutoTime, or TimeSolv AI</li>
-            <li>Train the model on AA Legal’s preferred narrative style</li>
-            <li>Lawyer approves the daily timesheet in one click</li>
+            <li>Inbox briefing email</li>
+            <li>Thread summaries</li>
+            <li>Suggested replies</li>
+            <li>Matter auto-tagging</li>
           </ul>
         </div>
-        <div style="margin-top:14px;"><span class="impact high">Impact: High</span><span class="impact">Effort: Low</span></div>
       </div>
+    </div>
 
-      <!-- 7. Conflict & KYC -->
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">🛡</div><div><h3>7 · Conflict Check &amp; KYC Automation</h3><div class="ax-tagline">Compliance</div></div></div>
-        <p class="ax-body"><strong>What it does:</strong> Runs fuzzy-match conflict checks across past matters, automates LSA-compliant ID verification, and screens for PEPs / sanctions lists.</p>
-        <div class="ax-section">
-          <h5>How to Automate</h5>
+    <!-- 6 -->
+    <div class="uc">
+      <div class="uc-head">
+        <div>
+          <h3>Passive Time Capture &amp; Billing Narratives</h3>
+          <div class="uc-tags"><span class="tag high">Impact High</span><span class="tag">Effort Low</span></div>
+        </div>
+        <div class="num">USE CASE · VI</div>
+      </div>
+      <div class="uc-grid">
+        <div class="uc-body">
+          <p><strong>What it does.</strong> Detects time spent in documents, emails, and calls; generates compliant billing narratives; flags non-billable items.</p>
+          <p><strong>How to automate.</strong> Clio Duo, Smokeball AutoTime, or TimeSolv AI. Train the model on AA Legal's preferred narrative style. Lawyer approves the daily timesheet in one click.</p>
+        </div>
+        <div class="uc-side">
+          <h5>Revenue Impact</h5>
           <ul>
-            <li>Persona, Onfido, or Trulioo for ID verification</li>
-            <li>Clio Manage or LawConnect for conflict search with AI fuzzy match</li>
-            <li>Automated FINTRAC screening API</li>
+            <li>Recover 10–20% of lost time</li>
+            <li>Cleaner, more defensible narratives</li>
+            <li>Faster invoicing cycle</li>
           </ul>
         </div>
-        <div style="margin-top:14px;"><span class="impact high">Impact: High</span><span class="impact">Effort: Medium</span></div>
       </div>
+    </div>
 
-      <!-- 8. Deadline & Court Rules -->
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">📅</div><div><h3>8 · Deadline &amp; Court-Rules Engine</h3><div class="ax-tagline">Risk Control</div></div></div>
-        <p class="ax-body"><strong>What it does:</strong> Calculates limitation periods, court filing deadlines, and IRCC processing timelines automatically from the matter type and key dates.</p>
-        <div class="ax-section">
-          <h5>How to Automate</h5>
+    <!-- 7 -->
+    <div class="uc">
+      <div class="uc-head">
+        <div>
+          <h3>Conflict Check &amp; KYC Automation</h3>
+          <div class="uc-tags"><span class="tag high">Impact High</span><span class="tag med">Effort Medium</span></div>
+        </div>
+        <div class="num">USE CASE · VII</div>
+      </div>
+      <div class="uc-grid">
+        <div class="uc-body">
+          <p><strong>What it does.</strong> Runs fuzzy-match conflict checks across past matters, automates LSA-compliant ID verification, and screens for PEPs and sanctions lists.</p>
+          <p><strong>How to automate.</strong> Persona, Onfido, or Trulioo for ID verification; Clio Manage with AI fuzzy match for conflicts; automated FINTRAC screening API.</p>
+        </div>
+        <div class="uc-side">
+          <h5>Compliance Wins</h5>
           <ul>
-            <li>LawToolBox, CalendarRules, or Clio’s court-rules add-on</li>
-            <li>AI parses orders / pleadings and auto-creates calendar entries</li>
-            <li>SMS &amp; email reminders 30 / 14 / 3 / 1 day(s) ahead</li>
+            <li>Full LSA audit trail</li>
+            <li>FINTRAC screening logged</li>
+            <li>No client ID gaps</li>
           </ul>
         </div>
-        <div style="margin-top:14px;"><span class="impact high">Impact: High</span><span class="impact med">Effort: Medium</span></div>
       </div>
+    </div>
 
-      <!-- 9. Client Communication -->
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">📣</div><div><h3>9 · Proactive Client Updates</h3><div class="ax-tagline">CX · Retention</div></div></div>
-        <p class="ax-body"><strong>What it does:</strong> Sends automatic milestone updates ("Your offer was accepted", "Your PR application reached IRCC stage 2"), in plain English.</p>
-        <div class="ax-section">
-          <h5>How to Automate</h5>
+    <!-- 8 -->
+    <div class="uc">
+      <div class="uc-head">
+        <div>
+          <h3>Deadline &amp; Court-Rules Engine</h3>
+          <div class="uc-tags"><span class="tag high">Impact High</span><span class="tag med">Effort Medium</span></div>
+        </div>
+        <div class="num">USE CASE · VIII</div>
+      </div>
+      <div class="uc-grid">
+        <div class="uc-body">
+          <p><strong>What it does.</strong> Calculates limitation periods, court filing deadlines, and IRCC processing timelines automatically from the matter type and key dates.</p>
+          <p><strong>How to automate.</strong> LawToolBox, CalendarRules, or Clio's court-rules add-on. AI parses orders and pleadings, auto-creates calendar entries, and triggers reminders at 30 / 14 / 3 / 1 day(s).</p>
+        </div>
+        <div class="uc-side">
+          <h5>Why It Matters</h5>
           <ul>
-            <li>Workflow automation in Clio + Zapier / Make</li>
-            <li>AI-generated messages from matter status changes</li>
-            <li>Client portal notifications + email + SMS</li>
+            <li>Missed deadlines = malpractice</li>
+            <li>Reduces calendaring labour</li>
+            <li>Auto-cascades on order changes</li>
           </ul>
         </div>
-        <div style="margin-top:14px;"><span class="impact">Impact: Medium</span><span class="impact">Effort: Low</span></div>
       </div>
+    </div>
 
-      <!-- 10. Real Estate -->
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">🏠</div><div><h3>10 · Real-Estate Closing Workflow</h3><div class="ax-tagline">High Volume</div></div></div>
-        <p class="ax-body"><strong>What it does:</strong> End-to-end automation: order title search → review condo docs → draft statement of adjustments → generate closing package → e-sign → register at Land Titles.</p>
-        <div class="ax-section">
-          <h5>How to Automate</h5>
+    <!-- 9 -->
+    <div class="uc">
+      <div class="uc-head">
+        <div>
+          <h3>Proactive Client Updates</h3>
+          <div class="uc-tags"><span class="tag">Impact Medium</span><span class="tag">Effort Low</span></div>
+        </div>
+        <div class="num">USE CASE · IX</div>
+      </div>
+      <div class="uc-grid">
+        <div class="uc-body">
+          <p><strong>What it does.</strong> Sends automatic milestone updates ("Your offer was accepted"; "Your PR application reached IRCC stage 2") in plain English.</p>
+          <p><strong>How to automate.</strong> Workflow automation in Clio + Zapier / Make; AI-generated messages from matter status changes; delivered via client portal, email, and SMS.</p>
+        </div>
+        <div class="uc-side">
+          <h5>Client Win</h5>
           <ul>
-            <li>Conveyancing software (Unity, ProSuite, or ConveyMore)</li>
-            <li>AI condo-document summariser</li>
-            <li>E-sign + remote commissioning via Notarius / Syngrafii</li>
+            <li>Fewer "any update?" calls</li>
+            <li>Higher NPS</li>
+            <li>Lower receptionist load</li>
           </ul>
         </div>
-        <div style="margin-top:14px;"><span class="impact high">Impact: High</span><span class="impact med">Effort: High</span></div>
       </div>
+    </div>
 
-      <!-- 11. Immigration -->
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">✈</div><div><h3>11 · Immigration Form &amp; Eligibility AI</h3><div class="ax-tagline">Express Entry · PNP</div></div></div>
-        <p class="ax-body"><strong>What it does:</strong> Calculates CRS scores, identifies the best program, pre-fills IRCC forms from client documents, and flags missing items.</p>
-        <div class="ax-section">
-          <h5>How to Automate</h5>
+    <!-- 10 -->
+    <div class="uc">
+      <div class="uc-head">
+        <div>
+          <h3>Real-Estate Closing Workflow</h3>
+          <div class="uc-tags"><span class="tag high">Impact High</span><span class="tag med">Effort High</span></div>
+        </div>
+        <div class="num">USE CASE · X</div>
+      </div>
+      <div class="uc-grid">
+        <div class="uc-body">
+          <p><strong>What it does.</strong> End-to-end automation: order title search → review condo documents → draft statement of adjustments → generate closing package → e-sign → register at Land Titles.</p>
+          <p><strong>How to automate.</strong> Conveyancing software (Unity, ProSuite, or ConveyMore); AI condo-document summariser; remote commissioning via Notarius or Syngrafii.</p>
+        </div>
+        <div class="uc-side">
+          <h5>Volume Play</h5>
           <ul>
-            <li>Tracker Corp, Tracktion, or INSZoom (Mitratech) immigration platforms</li>
-            <li>OCR + AI to extract data from passports, transcripts, work letters</li>
-            <li>Internal QA checklist before submission</li>
+            <li>Halves time-per-file</li>
+            <li>Standardises every closing</li>
+            <li>Frees lawyer for ILAs &amp; advice</li>
           </ul>
         </div>
-        <div style="margin-top:14px;"><span class="impact high">Impact: High</span><span class="impact med">Effort: Medium</span></div>
       </div>
+    </div>
 
-      <!-- 12. Wills & Estates -->
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">📜</div><div><h3>12 · Wills, POAs &amp; Estate Probate</h3><div class="ax-tagline">Document Production</div></div></div>
-        <p class="ax-body"><strong>What it does:</strong> Generates wills, enduring POAs, and personal directives from an online questionnaire; produces probate applications from death certificate &amp; asset inventory.</p>
-        <div class="ax-section">
-          <h5>How to Automate</h5>
+    <!-- 11 -->
+    <div class="uc">
+      <div class="uc-head">
+        <div>
+          <h3>Immigration Form &amp; Eligibility AI</h3>
+          <div class="uc-tags"><span class="tag high">Impact High</span><span class="tag med">Effort Medium</span></div>
+        </div>
+        <div class="num">USE CASE · XI</div>
+      </div>
+      <div class="uc-grid">
+        <div class="uc-body">
+          <p><strong>What it does.</strong> Calculates Comprehensive Ranking System scores, identifies the best program, pre-fills IRCC forms from client documents, and flags missing items.</p>
+          <p><strong>How to automate.</strong> Tracker Corp, Tracktion, or INSZoom immigration platforms; OCR plus AI to extract data from passports, transcripts, and work letters; internal QA checklist before submission.</p>
+        </div>
+        <div class="uc-side">
+          <h5>Output</h5>
           <ul>
-            <li>Gavel / LawYaw forms mapped to AA Legal precedents</li>
-            <li>AI to summarise the will in plain English for the client</li>
-            <li>Probate calculator + court form auto-fill</li>
+            <li>Program eligibility memo</li>
+            <li>Pre-filled IRCC forms</li>
+            <li>Missing-document checklist</li>
           </ul>
         </div>
-        <div style="margin-top:14px;"><span class="impact high">Impact: High</span><span class="impact">Effort: Medium</span></div>
       </div>
+    </div>
 
-      <!-- 13. Litigation Prep -->
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">⚔</div><div><h3>13 · Family &amp; Criminal Litigation Prep</h3><div class="ax-tagline">Discovery · Disclosure</div></div></div>
-        <p class="ax-body"><strong>What it does:</strong> Indexes large disclosure sets, summarises witness statements &amp; police reports, builds chronologies, prepares cross-examination outlines.</p>
-        <div class="ax-section">
-          <h5>How to Automate</h5>
+    <!-- 12 -->
+    <div class="uc">
+      <div class="uc-head">
+        <div>
+          <h3>Wills, POAs &amp; Probate</h3>
+          <div class="uc-tags"><span class="tag high">Impact High</span><span class="tag med">Effort Medium</span></div>
+        </div>
+        <div class="num">USE CASE · XII</div>
+      </div>
+      <div class="uc-grid">
+        <div class="uc-body">
+          <p><strong>What it does.</strong> Generates wills, enduring powers of attorney, and personal directives from an online questionnaire; produces probate applications from a death certificate and asset inventory.</p>
+          <p><strong>How to automate.</strong> Gavel or LawYaw mapped to AA Legal precedents; AI to summarise the will in plain English for the client; probate calculator and court-form auto-fill.</p>
+        </div>
+        <div class="uc-side">
+          <h5>Output</h5>
           <ul>
-            <li>Everlaw, Relativity, or Reveal for e-discovery</li>
-            <li>Harvey or Vincent for case summaries</li>
-            <li>Internal AI bot trained on the matter folder (with strict access control)</li>
+            <li>Will, POA, personal directive</li>
+            <li>Plain-language client summary</li>
+            <li>Probate application package</li>
           </ul>
         </div>
-        <div style="margin-top:14px;"><span class="impact">Impact: Medium-High</span><span class="impact med">Effort: High</span></div>
       </div>
+    </div>
 
-      <!-- 14. Marketing -->
-      <div class="ax-card">
-        <div class="ax-head"><div class="ax-icon">📣</div><div><h3>14 · Marketing &amp; Content Engine</h3><div class="ax-tagline">Growth</div></div></div>
-        <p class="ax-body"><strong>What it does:</strong> Generates blog posts, social posts, monthly newsletter, and SEO-optimised practice-area pages from outlines provided by the lawyer.</p>
-        <div class="ax-section">
-          <h5>How to Automate</h5>
+    <!-- 13 -->
+    <div class="uc">
+      <div class="uc-head">
+        <div>
+          <h3>Family &amp; Criminal Litigation Prep</h3>
+          <div class="uc-tags"><span class="tag">Impact Medium-High</span><span class="tag med">Effort High</span></div>
+        </div>
+        <div class="num">USE CASE · XIII</div>
+      </div>
+      <div class="uc-grid">
+        <div class="uc-body">
+          <p><strong>What it does.</strong> Indexes large disclosure sets, summarises witness statements and police reports, builds chronologies, prepares cross-examination outlines.</p>
+          <p><strong>How to automate.</strong> Everlaw, Relativity, or Reveal for e-discovery; Harvey or Vincent for case summaries; an internal AI bot trained on the matter folder (with strict access control).</p>
+        </div>
+        <div class="uc-side">
+          <h5>Output</h5>
           <ul>
-            <li>ChatGPT Team / Claude for drafts; lawyer edits</li>
-            <li>Canva Magic Studio for visuals</li>
-            <li>Mailchimp + AI subject lines &amp; scheduling</li>
+            <li>Indexed disclosure set</li>
+            <li>Witness summaries</li>
+            <li>Chronology document</li>
+            <li>Cross-exam outline</li>
           </ul>
         </div>
-        <div style="margin-top:14px;"><span class="impact">Impact: Medium</span><span class="impact">Effort: Low</span></div>
       </div>
+    </div>
 
+    <!-- 14 -->
+    <div class="uc">
+      <div class="uc-head">
+        <div>
+          <h3>Marketing &amp; Content Engine</h3>
+          <div class="uc-tags"><span class="tag">Impact Medium</span><span class="tag">Effort Low</span></div>
+        </div>
+        <div class="num">USE CASE · XIV</div>
+      </div>
+      <div class="uc-grid">
+        <div class="uc-body">
+          <p><strong>What it does.</strong> Generates blog posts, social posts, the monthly newsletter, and SEO-optimised practice-area pages from outlines provided by the lawyer.</p>
+          <p><strong>How to automate.</strong> ChatGPT Team or Claude for drafts (lawyer edits); Canva Magic Studio for visuals; Mailchimp with AI subject-line testing.</p>
+        </div>
+        <div class="uc-side">
+          <h5>Output</h5>
+          <ul>
+            <li>2 blog posts / month</li>
+            <li>8–12 social posts</li>
+            <li>Monthly newsletter</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =============== ARCHITECTURE =============== -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="eyebrow">Section 03 · The AI Stack</div>
+  <h2 class="section-heading">A Six-Layer Architecture</h2>
+  <div class="divider"><span class="line"></span><span class="mark">❦</span><span class="line"></span></div>
+  <p class="lead">AA Legal's technology can be pictured as a six-storey building. Each floor has a job. Clients enter at the top, work flows downward through automation layers, and lawyers sit at the centre approving everything important.</p>
+
+  <div class="layer">
+    <div class="layer-label"><div class="layer-num">I.</div><div class="layer-name">Client Layer</div></div>
+    <div class="layer-body"><span class="role">How clients reach the firm</span>Website, AI intake chatbot, client portal, secure document upload, e-signing, and SMS/email notifications. <strong>Goal:</strong> make AA Legal accessible 24/7 without overloading reception.</div>
+  </div>
+  <div class="layer">
+    <div class="layer-label"><div class="layer-num">II.</div><div class="layer-name">Intake &amp; Triage</div></div>
+    <div class="layer-body"><span class="role">Turning enquiries into matters</span>AI captures structured intake → conflict check → KYC/AML screening → matter-type triage → recommended fee model → consult booking. <strong>Goal:</strong> a zero-touch lead-to-consult pipeline.</div>
+  </div>
+  <div class="layer">
+    <div class="layer-label"><div class="layer-num">III.</div><div class="layer-name">Practice Automation</div></div>
+    <div class="layer-body"><span class="role">Where the work happens</span>Document drafting, contract review, legal research, deadline calculation, immigration form prep, real-estate conveyancing, and e-discovery. <strong>Goal:</strong> cut routine production time by 50–70%.</div>
+  </div>
+  <div class="layer">
+    <div class="layer-label"><div class="layer-num">IV.</div><div class="layer-name">Lawyer Review</div></div>
+    <div class="layer-body"><span class="role">Human-in-the-loop</span>Every AI output is reviewed and approved by Yemi or a delegated staff lawyer. AI never sends, files, or signs anything without explicit lawyer sign-off. <strong>Goal:</strong> maintain professional responsibility.</div>
+  </div>
+  <div class="layer">
+    <div class="layer-label"><div class="layer-num">V.</div><div class="layer-name">Compliance &amp; Trust</div></div>
+    <div class="layer-body"><span class="role">Guardrails</span>Trust ledger, billing &amp; collections, FINTRAC reports, LSA audit trail, encrypted file storage, retention and destruction policy. <strong>Goal:</strong> pass any audit, any day.</div>
+  </div>
+  <div class="layer">
+    <div class="layer-label"><div class="layer-num">VI.</div><div class="layer-name">Insights &amp; Growth</div></div>
+    <div class="layer-body"><span class="role">Closing the loop</span>Dashboards on revenue, matter profitability, KPIs, client satisfaction, marketing performance. AI-generated content and review-request automation feed growth. <strong>Goal:</strong> continuous improvement.</div>
+  </div>
+</div>
+
+<!-- =============== REAL ESTATE FLOW =============== -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="eyebrow">Section 04 · A Day in the Life</div>
+  <h2 class="section-heading">How AI Changes a Residential Purchase File</h2>
+  <div class="divider"><span class="line"></span><span class="mark">❦</span><span class="line"></span></div>
+  <p class="lead">Follow a single residential purchase from enquiry to closing — with AI quietly doing the heavy lifting in the background.</p>
+
+  <div class="flow-diagram">
+    <div class="flow-title">Residential Purchase File — AI-Augmented Workflow</div>
+
+    <div class="flow-row">
+      <div class="flow-box"><span class="step-num">1</span><span class="step-title">Lead Captured</span><span class="step-desc">Realtor referral or website form</span></div>
+      <div class="flow-box ai"><span class="step-num">2</span><span class="step-title">AI Intake Bot</span><span class="step-desc">Property, dates, lender · 4 min</span></div>
+      <div class="flow-box ai"><span class="step-num">3</span><span class="step-title">AI Conflict &amp; KYC</span><span class="step-desc">Fuzzy match · ID · PEP screen</span></div>
+      <div class="flow-box"><span class="step-num">4</span><span class="step-title">Retainer Signed</span><span class="step-desc">Trust deposit · file opened</span></div>
+      <div class="flow-box ai"><span class="step-num">5</span><span class="step-title">AI Doc Review</span><span class="step-desc">Purchase contract · risks flagged</span></div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box ai"><span class="step-num">6</span><span class="step-title">AI Closing Package</span><span class="step-desc">SoA, ledger, undertakings, ILAs</span></div>
+      <div class="flow-box"><span class="step-num">7</span><span class="step-title">Lawyer Review</span><span class="step-desc">Yemi approves &amp; signs</span></div>
+      <div class="flow-box ai"><span class="step-num">8</span><span class="step-title">Remote E-Signing</span><span class="step-desc">Client signs · remote commission</span></div>
+      <div class="flow-box"><span class="step-num">9</span><span class="step-title">Closing &amp; Registration</span><span class="step-desc">Funds out · title registered</span></div>
+      <div class="flow-box ai"><span class="step-num">10</span><span class="step-title">AI Reporting Letter</span><span class="step-desc">Plain-English summary · NPS</span></div>
+    </div>
+
+    <div class="flow-legend">
+      <span class="swatch"></span> Steps shaded teal are AI-augmented. Lawyer sign-off remains mandatory at steps 4, 7, and 9.
     </div>
   </div>
-</section>
 
-<!-- VIRTUAL DIAGRAM: ARCHITECTURE -->
-<section class="strip-b">
-  <div class="container">
-    <p class="section-title">Section 03 — Virtual Walk-Through</p>
-    <h2 class="section-heading">How the AI Stack Fits Together — A Visual Guide</h2>
-    <p class="section-lead">Imagine AA Legal’s technology like a six-storey building. Each floor has a job. Clients enter at the top, work flows down through automation layers, and lawyers sit at the centre approving everything important.</p>
+  <div class="callout">
+    <h4>The Outcome</h4>
+    <p>A file that traditionally consumed 6–8 hours of staff time over four weeks is delivered in 2–3 hours of staff time over the same period — with fewer errors, faster client communication, and a higher margin on a flat fee.</p>
+  </div>
+</div>
 
-    <div class="layers">
-      <div class="layer">
-        <div class="layer-title">① Client Layer<small>How clients reach the firm</small></div>
-        <div class="layer-body">Website, AI intake chatbot, client portal, secure document upload, e-signing, SMS/email notifications. <strong>Goal:</strong> Make AA Legal accessible 24/7 without overloading reception.</div>
-      </div>
-      <div class="layer">
-        <div class="layer-title">② Intake &amp; Triage<small>Turning enquiries into matters</small></div>
-        <div class="layer-body">AI captures structured intake → conflict check → KYC/AML screening → matter type triage → recommended fee model → consult booking. <strong>Goal:</strong> Zero-touch lead-to-consult pipeline.</div>
-      </div>
-      <div class="layer">
-        <div class="layer-title">③ Practice Automation<small>Where the work happens</small></div>
-        <div class="layer-body">Document drafting, contract review, legal research, deadline calculation, immigration form prep, real-estate conveyancing, e-discovery. <strong>Goal:</strong> Cut routine production time by 50–70%.</div>
-      </div>
-      <div class="layer">
-        <div class="layer-title">④ Lawyer Review &amp; Decision<small>Human-in-the-loop</small></div>
-        <div class="layer-body">Every AI output is reviewed and approved by Yemi or a delegated staff lawyer. AI never sends, files, or signs anything without explicit lawyer sign-off. <strong>Goal:</strong> Maintain professional responsibility.</div>
-      </div>
-      <div class="layer">
-        <div class="layer-title">⑤ Compliance &amp; Trust Accounting<small>Guardrails</small></div>
-        <div class="layer-body">Trust ledger, billing &amp; collections, FINTRAC reports, LSA audit trail, encrypted file storage, retention &amp; destruction policy. <strong>Goal:</strong> Pass any audit, any day.</div>
-      </div>
-      <div class="layer">
-        <div class="layer-title">⑥ Insights &amp; Growth<small>Closing the loop</small></div>
-        <div class="layer-body">Dashboards on revenue, matter profitability, KPIs, client satisfaction, marketing performance. AI-generated content engine and review-request automation feed growth. <strong>Goal:</strong> Continuous improvement.</div>
-      </div>
+<!-- =============== WILL FLOW =============== -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="eyebrow">Section 05 · Under the Hood</div>
+  <h2 class="section-heading">How AI Drafts a Will, Step by Step</h2>
+  <div class="divider"><span class="line"></span><span class="mark">❦</span><span class="line"></span></div>
+  <p class="lead">AI need not be a black box. Here is exactly what happens when AA Legal uses AI to draft a will, in plain language.</p>
+
+  <div class="flow-diagram">
+    <div class="flow-title">From client questionnaire to finished will</div>
+    <div class="flow-row" style="grid-template-columns: repeat(7, 1fr); gap: 1.5mm;">
+      <div class="flow-box"><span class="step-num">1</span><span class="step-title">Questionnaire</span><span class="step-desc">25 questions in portal</span></div>
+      <div class="flow-box ai"><span class="step-num">2</span><span class="step-title">Data Mapping</span><span class="step-desc">Answers → variables</span></div>
+      <div class="flow-box ai"><span class="step-num">3</span><span class="step-title">Template Assembly</span><span class="step-desc">Firm precedent built</span></div>
+      <div class="flow-box ai"><span class="step-num">4</span><span class="step-title">AI Refinement</span><span class="step-desc">Plain English · Alberta law</span></div>
+      <div class="flow-box ai"><span class="step-num">5</span><span class="step-title">Plain Summary</span><span class="step-desc">One-page explainer</span></div>
+      <div class="flow-box"><span class="step-num">6</span><span class="step-title">Lawyer Review</span><span class="step-desc">Yemi confirms wishes</span></div>
+      <div class="flow-box"><span class="step-num">7</span><span class="step-title">Signing</span><span class="step-desc">Will signed · witnessed</span></div>
+    </div>
+    <div class="flow-legend"><span class="swatch"></span> AI-augmented steps shown in teal.</div>
+  </div>
+
+  <div class="callout">
+    <h4>What the AI Never Decides</h4>
+    <p>The AI does not choose beneficiaries, draft trust structures for tax planning, advise on capacity, or sign anything. It is a production assistant — the lawyer remains the brain of the operation.</p>
+  </div>
+</div>
+
+<!-- =============== ROADMAP =============== -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="eyebrow">Section 06 · Implementation</div>
+  <h2 class="section-heading">A 90-Day Rollout Plan</h2>
+  <div class="divider"><span class="line"></span><span class="mark">❦</span><span class="line"></span></div>
+  <p class="lead">There is no need to do everything at once. The following phased plan delivers quick wins in the first month and compounds into a fully AI-augmented practice within a year.</p>
+
+  <div class="roadmap">
+
+    <div class="phase">
+      <div class="ph-label">PHASE 0</div>
+      <div class="ph-time">Week 1 — Foundations</div>
+      <h4>Get the House in Order</h4>
+      <ul>
+        <li>Adopt a practice management system (Clio recommended)</li>
+        <li>Move email to Microsoft 365 with Canadian tenancy</li>
+        <li>Enable MFA across all staff accounts</li>
+        <li>Sign an LSA-compliant AI use policy</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="ph-label">PHASE 1</div>
+      <div class="ph-time">Weeks 2–4 — Quick Wins</div>
+      <h4>Low Risk, High Return</h4>
+      <ul>
+        <li>Deploy the AI intake chatbot on aalegal.ca</li>
+        <li>Turn on AI email summaries and drafts (Copilot)</li>
+        <li>Switch to passive time capture (Clio Duo)</li>
+        <li>Use ChatGPT Team or Claude for marketing content</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="ph-label">PHASE 2</div>
+      <div class="ph-time">Weeks 5–8 — Production</div>
+      <h4>Automate the Drafting</h4>
+      <ul>
+        <li>Stand up Gavel or LawYaw for wills &amp; POAs</li>
+        <li>Adopt Spellbook for contract review</li>
+        <li>Integrate Lexis+ AI or Westlaw Edge for research</li>
+        <li>Train staff and build the precedent library</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="ph-label">PHASE 3</div>
+      <div class="ph-time">Weeks 9–12 — Practice-Specific</div>
+      <h4>Tailored Workflows</h4>
+      <ul>
+        <li>Real-estate conveyancing automation</li>
+        <li>Immigration form &amp; eligibility tools</li>
+        <li>Deadline / court-rules engine</li>
+        <li>Client-portal milestone notifications</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="ph-label">PHASE 4</div>
+      <div class="ph-time">Months 4–6 — Optimisation</div>
+      <h4>Measure &amp; Improve</h4>
+      <ul>
+        <li>KPI dashboards for matters and profitability</li>
+        <li>Internal AI knowledge base (firm-trained)</li>
+        <li>E-discovery for litigation files</li>
+        <li>Quarterly AI ethics and security review</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="ph-label">PHASE 5</div>
+      <div class="ph-time">Months 7–12 — Differentiation</div>
+      <h4>Become the AI-Forward Firm</h4>
+      <ul>
+        <li>Custom AI assistant trained on firm precedents</li>
+        <li>Client-facing AI services (document explainers)</li>
+        <li>Thought leadership: blog, webinars on AI &amp; law</li>
+        <li>Articling student supervised on AI workflows</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- =============== TOOLS =============== -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="eyebrow">Section 07 · Tool Recommendations</div>
+  <h2 class="section-heading">Vetted Tools by Function</h2>
+  <div class="divider"><span class="line"></span><span class="mark">❦</span><span class="line"></span></div>
+  <p class="lead">A starter shortlist, all of which have Canadian data-residency options or are widely used in Canadian firms. Verify vendor terms before signing.</p>
+
+  <table class="elegant">
+    <thead><tr><th style="width:25%;">Function</th><th style="width:40%;">Recommended Tools</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Practice Management</td><td>Clio Manage, CosmoLex, PCLaw</td><td>Trust accounting, matters, billing</td></tr>
+      <tr><td>Intake Chatbot</td><td>Smith.ai, LawDroid, custom GPT</td><td>Legal-aware, Clio integration</td></tr>
+      <tr><td>Drafting</td><td>Gavel, LawYaw, HotDocs, Copilot</td><td>Conditional templates + polish</td></tr>
+      <tr><td>Contract Review</td><td>Spellbook, Kira, Harvey</td><td>Clause libraries &amp; risk flags</td></tr>
+      <tr><td>Legal Research</td><td>Lexis+ AI Canada, Westlaw Edge, vLex Vincent, CanLII</td><td>Citations to Canadian law</td></tr>
+      <tr><td>Time Capture</td><td>Clio Duo, Smokeball AutoTime, TimeSolv</td><td>Passive capture &amp; narratives</td></tr>
+      <tr><td>KYC / AML</td><td>Persona, Onfido, Trulioo</td><td>FINTRAC / LSA-compliant</td></tr>
+      <tr><td>Court Rules</td><td>LawToolBox, CalendarRules</td><td>Auto-calendared deadlines</td></tr>
+      <tr><td>E-Sign / Notary</td><td>DocuSign, Adobe Sign, Notarius, Syngrafii</td><td>Canadian legal compliance</td></tr>
+      <tr><td>Conveyancing</td><td>Unity, ProSuite, ConveyMore</td><td>Alberta Land Titles integration</td></tr>
+      <tr><td>Immigration</td><td>Tracker Corp, Tracktion, INSZoom</td><td>IRCC forms &amp; eligibility</td></tr>
+      <tr><td>E-Discovery</td><td>Everlaw, Relativity, Reveal</td><td>Disclosure indexing &amp; review</td></tr>
+      <tr><td>General LLM</td><td>ChatGPT Team, Claude for Work, Microsoft Copilot</td><td>Drafting · summaries · analysis</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- =============== ETHICS =============== -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="eyebrow">Section 08 · Ethics &amp; Guardrails</div>
+  <h2 class="section-heading">Non-Negotiables for AI in a Canadian Law Firm</h2>
+  <div class="divider"><span class="line"></span><span class="mark">❦</span><span class="line"></span></div>
+  <p class="lead">The Law Society of Alberta has issued guidance on generative AI. AA Legal's use of AI must respect every one of the following.</p>
+
+  <div class="guardrail-grid">
+    <div class="guardrail"><h4>Competence</h4><p>Lawyers must understand the AI tools they use, their limitations, and verify all outputs — especially citations.</p></div>
+    <div class="guardrail"><h4>Confidentiality</h4><p>Only use AI tools that contractually prohibit training on client data and offer Canadian or SOC-2-compliant hosting.</p></div>
+    <div class="guardrail"><h4>Privilege</h4><p>Never paste privileged content into consumer LLMs. Use enterprise tiers with DPAs in place.</p></div>
+    <div class="guardrail"><h4>Supervision</h4><p>Every AI output is reviewed by a qualified lawyer. AI does not sign, file, or advise.</p></div>
+    <div class="guardrail"><h4>Candour</h4><p>Disclose AI use to clients where material, and to the court where required.</p></div>
+    <div class="guardrail"><h4>Fees</h4><p>Bill fairly: efficiency gains from AI should reduce fees on hourly matters.</p></div>
+    <div class="guardrail"><h4>Bias &amp; Fairness</h4><p>Be alert to AI-introduced bias, particularly in family, criminal, and immigration matters.</p></div>
+    <div class="guardrail"><h4>Records &amp; Audit</h4><p>Keep an audit log of significant AI uses on each file. Update retainer language to disclose AI tools.</p></div>
+  </div>
+</div>
+
+<!-- =============== BUDGET =============== -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="eyebrow">Section 09 · Investment</div>
+  <h2 class="section-heading">Indicative Budget &amp; ROI</h2>
+  <div class="divider"><span class="line"></span><span class="mark">❦</span><span class="line"></span></div>
+  <p class="lead">Costs vary by vendor and seat count. These are realistic 2026 estimates for a small Canadian firm with one lawyer and two support staff.</p>
+
+  <table class="elegant">
+    <thead><tr><th style="width:48%;">Category</th><th style="width:24%;">Monthly (CAD)</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Practice management (Clio Suite)</td><td>$300 – $500</td><td>Per seat; includes Clio Duo AI</td></tr>
+      <tr><td>AI drafting / contract review</td><td>$200 – $600</td><td>Spellbook or Gavel</td></tr>
+      <tr><td>Legal research AI</td><td>$200 – $400</td><td>Lexis+ AI / Westlaw Edge</td></tr>
+      <tr><td>Intake chatbot</td><td>$150 – $400</td><td>Smith.ai or similar</td></tr>
+      <tr><td>KYC / ID verification</td><td>$2 – $5 per check</td><td>Variable, only when used</td></tr>
+      <tr><td>Microsoft 365 + Copilot</td><td>$50 – $70 per seat</td><td>Canadian tenancy</td></tr>
+      <tr><td>E-sign / notarisation</td><td>$50 – $150</td><td>DocuSign / Notarius</td></tr>
+      <tr><td>Total (typical)</td><td>≈ $1,200 – $2,500 / month</td><td>Plus one-off setup ≈ $3–5K</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <h4>Expected Payback</h4>
+    <p>If AI saves a single lawyer just one hour per day, at a billed rate of $350 per hour over 220 working days, that is approximately $77,000 of recovered capacity per year — a 25–50× return on a typical AI budget.</p>
+  </div>
+</div>
+
+<!-- =============== METRICS =============== -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="eyebrow">Section 10 · Measuring Success</div>
+  <h2 class="section-heading">KPIs to Track Once AI Is Live</h2>
+  <div class="divider"><span class="line"></span><span class="mark">❦</span><span class="line"></span></div>
+
+  <div class="kpi-band">
+    <div class="kpi-grid">
+      <div class="kpi-item"><h5>Time-to-First-Draft</h5><div class="target">TARGET · −60%</div><p>Across wills, real-estate, simple immigration</p></div>
+      <div class="kpi-item"><h5>Client NPS</h5><div class="target">TARGET · ≥ 70</div><p>Surveyed at file close</p></div>
+      <div class="kpi-item"><h5>Matter Profitability</h5><div class="target">TARGET · +25%</div><p>Gross margin on flat-fee matters</p></div>
+      <div class="kpi-item"><h5>Error / Re-Work Rate</h5><div class="target">TARGET · ≤ 2%</div><p>Files requiring substantive correction</p></div>
+      <div class="kpi-item"><h5>Intake-to-Consult</h5><div class="target">TARGET · &lt; 24h</div><p>Chatbot answers ≥ 70% of FAQs</p></div>
+      <div class="kpi-item"><h5>Compliance Findings</h5><div class="target">TARGET · ZERO</div><p>LSA audit; 100% conflict / KYC coverage</p></div>
     </div>
   </div>
-</section>
 
-<!-- VIRTUAL DIAGRAM: A DAY IN THE LIFE -->
-<section class="strip-a">
-  <div class="container">
-    <p class="section-title">Section 04 — A Day in the Life</p>
-    <h2 class="section-heading">How AI Changes a Typical Real-Estate File</h2>
-    <p class="section-lead">Follow a single residential purchase from enquiry to closing — with AI quietly doing the heavy lifting in the background.</p>
+  <div class="pullquote" style="background:var(--cream); border-left:4px solid var(--gold); padding:5mm 8mm; margin:6mm 0; font-family:Georgia, serif; font-style:italic; color:var(--burgundy-deep); font-size:11.5pt; line-height:1.5; border-radius:0 3px 3px 0;">"AI is not a replacement for the wisdom, judgement, and compassion that define AA Legal — it is a force-multiplier for them. Start small, measure honestly, keep the lawyer in charge."</div>
+</div>
 
-    <div class="diagram">
-      <h4>Residential Purchase File — AI-Augmented Workflow</h4>
-      <div class="flow">
-        <div class="flow-box"><span class="step-num">1</span><span class="title">Lead Captured</span>Realtor refers buyer · website form</div>
-        <div class="flow-box ai"><span class="step-num">2</span><span class="title">AI Intake Bot</span>Collects names, property, dates, lender · 4 min</div>
-        <div class="flow-box ai"><span class="step-num">3</span><span class="title">AI Conflict + KYC</span>Fuzzy match · ID verification · PEP screen</div>
-        <div class="flow-box"><span class="step-num">4</span><span class="title">Retainer e-Signed</span>Trust deposit by Interac · file opened</div>
-        <div class="flow-box ai"><span class="step-num">5</span><span class="title">AI Doc Review</span>Purchase contract scanned · risks flagged</div>
-        <div class="flow-box ai"><span class="step-num">6</span><span class="title">AI Drafts Closing Package</span>SoA, trust ledger, undertakings, ILAs</div>
-        <div class="flow-box"><span class="step-num">7</span><span class="title">Lawyer Review</span>Yemi approves &amp; signs</div>
-        <div class="flow-box ai"><span class="step-num">8</span><span class="title">Remote E-Signing</span>Buyer signs from home · commissioned remotely</div>
-        <div class="flow-box"><span class="step-num">9</span><span class="title">Closing &amp; Registration</span>Funds disbursed · title registered</div>
-        <div class="flow-box ai"><span class="step-num">10</span><span class="title">AI Reporting Letter</span>Plain-English summary + review request</div>
-      </div>
-      <p style="margin-top:20px; color:var(--gold-soft); font-size:14px; text-align:center; font-style:italic;">Steps highlighted in teal are AI-augmented. Lawyer sign-off remains mandatory at steps 4, 7, and 9.</p>
-    </div>
+<!-- =============== END / CONTACT =============== -->
+<div class="page-break"></div>
+<div class="section end-page">
+  <svg viewBox="0 0 400 360" width="120" height="108" style="margin-bottom:6mm;">
+    <defs>
+      <linearGradient id="goldGrad2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#f0d271"/>
+        <stop offset="35%" stop-color="#d4a83a"/>
+        <stop offset="70%" stop-color="#b8862a"/>
+        <stop offset="100%" stop-color="#8a6018"/>
+      </linearGradient>
+      <linearGradient id="goldShine2" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#9a7320" stop-opacity="0.5"/>
+        <stop offset="50%" stop-color="#f5e09a" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#9a7320" stop-opacity="0.5"/>
+      </linearGradient>
+    </defs>
+    <g fill="url(#goldGrad2)">
+      <polygon points="40,80 100,18 160,80"/>
+      <rect x="32" y="78" width="136" height="14"/>
+      <rect x="44" y="92" width="112" height="8"/>
+      <polygon points="60,100 140,100 132,260 68,260"/>
+      <rect x="55" y="180" width="90" height="10"/>
+      <rect x="50" y="260" width="100" height="12"/>
+      <rect x="40" y="272" width="120" height="16"/>
+      <rect x="32" y="288" width="136" height="10"/>
+    </g>
+    <g opacity="0.35" fill="#7a5a18">
+      <rect x="74" y="105" width="2" height="150"/>
+      <rect x="86" y="103" width="2" height="153"/>
+      <rect x="98" y="102" width="2" height="155"/>
+      <rect x="110" y="103" width="2" height="153"/>
+      <rect x="122" y="105" width="2" height="150"/>
+    </g>
+    <g fill="url(#goldGrad2)">
+      <polygon points="240,80 300,18 360,80"/>
+      <rect x="232" y="78" width="136" height="14"/>
+      <rect x="244" y="92" width="112" height="8"/>
+      <polygon points="260,100 340,100 332,260 268,260"/>
+      <rect x="255" y="180" width="90" height="10"/>
+      <rect x="250" y="260" width="100" height="12"/>
+      <rect x="240" y="272" width="120" height="16"/>
+      <rect x="232" y="288" width="136" height="10"/>
+    </g>
+    <g opacity="0.35" fill="#7a5a18">
+      <rect x="274" y="105" width="2" height="150"/>
+      <rect x="286" y="103" width="2" height="153"/>
+      <rect x="298" y="102" width="2" height="155"/>
+      <rect x="310" y="103" width="2" height="153"/>
+      <rect x="322" y="105" width="2" height="150"/>
+    </g>
+    <g fill="url(#goldGrad2)">
+      <rect x="180" y="120" width="22" height="140"/>
+      <rect x="180" y="245" width="50" height="20"/>
+    </g>
+    <rect x="160" y="78" width="80" height="6" fill="url(#goldShine2)"/>
+  </svg>
+  <h2 style="font-size:24pt; color:var(--burgundy-deep); letter-spacing:0.15em;">AA LEGAL</h2>
+  <p style="font-family:Georgia, serif; font-style:italic; color:var(--gold); margin-top:2mm;">…Committed to excellence!!!</p>
 
-    <div class="callout">
-      <h4>The Outcome</h4>
-      <p>A file that traditionally consumed <strong>6–8 hours of staff time</strong> over 4 weeks is delivered in <strong>2–3 hours of staff time</strong> over the same period — with fewer errors, faster client communication, and a higher margin on a flat fee.</p>
-    </div>
-  </div>
-</section>
-
-<!-- VIRTUAL DIAGRAM: HOW AN AI DRAFTS A WILL -->
-<section class="strip-b">
-  <div class="container">
-    <p class="section-title">Section 05 — Under the Hood</p>
-    <h2 class="section-heading">How an AI Drafts a Will — Step by Step</h2>
-    <p class="section-lead">Many people fear AI as a "black box". Here is exactly what happens when AA Legal uses AI to draft a will, in plain language.</p>
-
-    <div class="diagram">
-      <h4>From client questionnaire → finished will</h4>
-      <div class="flow">
-        <div class="flow-box"><span class="step-num">1</span><span class="title">Questionnaire</span>Client answers 25 questions in client portal</div>
-        <div class="flow-box ai"><span class="step-num">2</span><span class="title">Data Mapping</span>Answers populate variables (name, executor, beneficiaries...)</div>
-        <div class="flow-box ai"><span class="step-num">3</span><span class="title">Template Assembly</span>AA Legal precedent assembled with correct clauses</div>
-        <div class="flow-box ai"><span class="step-num">4</span><span class="title">AI Refinement</span>Plain-English language polished · per-Alberta law check</div>
-        <div class="flow-box ai"><span class="step-num">5</span><span class="title">Plain-Language Summary</span>One-page explanation for the client</div>
-        <div class="flow-box"><span class="step-num">6</span><span class="title">Lawyer Review</span>Yemi confirms wishes are correctly reflected</div>
-        <div class="flow-box"><span class="step-num">7</span><span class="title">Signing Appointment</span>Will signed with two witnesses · notarised</div>
-      </div>
-    </div>
-
-    <div class="callout">
-      <h4>What the AI Never Decides</h4>
-      <p>The AI does <strong>not</strong> choose beneficiaries, draft trust structures for tax planning, advise on capacity, or sign anything. It is a <strong>production assistant</strong> — the lawyer remains the brain of the operation.</p>
-    </div>
-  </div>
-</section>
-
-<!-- IMPLEMENTATION ROADMAP -->
-<section class="strip-a">
-  <div class="container">
-    <p class="section-title">Section 06 — Implementation</p>
-    <h2 class="section-heading">A 90-Day Rollout Plan for AA Legal</h2>
-    <p class="section-lead">You do not need to do everything at once. Here is a phased plan that delivers quick wins in the first month and compounds into a fully AI-augmented practice within a year.</p>
-
-    <div class="roadmap">
-
-      <div class="phase">
-        <span class="phase-label">PHASE 0</span>
-        <div class="timeframe">Week 1 — Foundations</div>
-        <h4>Get the House in Order</h4>
-        <ul>
-          <li>Adopt a practice management system if not in place (Clio recommended)</li>
-          <li>Move email to Microsoft 365 with Canadian tenancy</li>
-          <li>Enable MFA across all staff accounts</li>
-          <li>Sign LSA-compliant AI use policy</li>
-        </ul>
-      </div>
-
-      <div class="phase">
-        <span class="phase-label">PHASE 1</span>
-        <div class="timeframe">Weeks 2–4 — Quick Wins</div>
-        <h4>Low Risk, High Return</h4>
-        <ul>
-          <li>Deploy AI intake chatbot on aalegal.ca</li>
-          <li>Turn on AI email summaries &amp; draft suggestions (Copilot)</li>
-          <li>Switch to passive time capture (Clio Duo)</li>
-          <li>Use ChatGPT Team / Claude for marketing content</li>
-        </ul>
-      </div>
-
-      <div class="phase">
-        <span class="phase-label">PHASE 2</span>
-        <div class="timeframe">Weeks 5–8 — Document Production</div>
-        <h4>Automate the Drafting</h4>
-        <ul>
-          <li>Stand up Gavel/LawYaw for wills &amp; POAs</li>
-          <li>Adopt Spellbook for contract review</li>
-          <li>Integrate Lexis+ AI or Westlaw Edge for research</li>
-          <li>Train staff &amp; build precedent library</li>
-        </ul>
-      </div>
-
-      <div class="phase">
-        <span class="phase-label">PHASE 3</span>
-        <div class="timeframe">Weeks 9–12 — Practice-Specific</div>
-        <h4>Tailored Workflows</h4>
-        <ul>
-          <li>Real-estate conveyancing automation</li>
-          <li>Immigration form &amp; eligibility tools</li>
-          <li>Deadline / court-rules engine</li>
-          <li>Client-portal milestone notifications</li>
-        </ul>
-      </div>
-
-      <div class="phase">
-        <span class="phase-label">PHASE 4</span>
-        <div class="timeframe">Months 4–6 — Optimisation</div>
-        <h4>Measure &amp; Improve</h4>
-        <ul>
-          <li>KPI dashboards for matters &amp; profitability</li>
-          <li>Internal AI knowledge base (firm-trained)</li>
-          <li>E-discovery for litigation files</li>
-          <li>Quarterly AI ethics &amp; security review</li>
-        </ul>
-      </div>
-
-      <div class="phase">
-        <span class="phase-label">PHASE 5</span>
-        <div class="timeframe">Months 7–12 — Differentiation</div>
-        <h4>Become the AI-Forward Firm</h4>
-        <ul>
-          <li>Custom AI assistant trained on firm precedents</li>
-          <li>Client-facing AI services (e.g., document explainers)</li>
-          <li>Thought leadership: blog, webinars on AI &amp; law</li>
-          <li>Articling student supervised on AI workflows</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- TOOL COMPARISON -->
-<section class="strip-b">
-  <div class="container">
-    <p class="section-title">Section 07 — Tool Recommendations</p>
-    <h2 class="section-heading">Vetted Tools by Function</h2>
-    <p class="section-lead">A starter shortlist, all of which have Canadian data-residency options or are widely used in Canadian firms. Verify vendor terms before signing.</p>
-
-    <table class="elegant">
-      <thead><tr><th>Function</th><th>Recommended Tools</th><th>Why</th></tr></thead>
-      <tbody>
-        <tr><td>Practice Management</td><td>Clio Manage, CosmoLex, PCLaw</td><td>Trust accounting, matters, billing, court-rules</td></tr>
-        <tr><td>Intake Chatbot</td><td>Smith.ai, LawDroid, Intercom + custom GPT</td><td>Legal-aware, integrates with Clio</td></tr>
-        <tr><td>Drafting</td><td>Gavel, LawYaw, HotDocs, Microsoft Copilot</td><td>Conditional templates + AI polishing</td></tr>
-        <tr><td>Contract Review</td><td>Spellbook, Kira, Harvey</td><td>Clause libraries &amp; risk flagging</td></tr>
-        <tr><td>Legal Research</td><td>Lexis+ AI Canada, Westlaw Edge, vLex Vincent, CanLII</td><td>Citations to Canadian law you can trust</td></tr>
-        <tr><td>Time Capture</td><td>Clio Duo, Smokeball AutoTime, TimeSolv</td><td>Passive capture &amp; AI narratives</td></tr>
-        <tr><td>KYC / AML</td><td>Persona, Onfido, Trulioo</td><td>FINTRAC / LSA-compliant ID verification</td></tr>
-        <tr><td>Court Rules</td><td>LawToolBox, CalendarRules</td><td>Auto-calendared deadlines</td></tr>
-        <tr><td>E-Sign / Notary</td><td>DocuSign, Adobe Sign, Notarius, Syngrafii</td><td>Canadian legal compliance</td></tr>
-        <tr><td>Conveyancing</td><td>Unity, ProSuite, ConveyMore</td><td>Alberta Land Titles integration</td></tr>
-        <tr><td>Immigration</td><td>Tracker Corp, Tracktion, INSZoom</td><td>IRCC forms &amp; eligibility</td></tr>
-        <tr><td>E-Discovery</td><td>Everlaw, Relativity, Reveal</td><td>Disclosure indexing &amp; review</td></tr>
-        <tr><td>General LLM</td><td>ChatGPT Team, Claude for Work, Microsoft Copilot</td><td>Drafting, summaries, analysis (no training on your data)</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- ETHICS & GUARDRAILS -->
-<section class="strip-a">
-  <div class="container">
-    <p class="section-title">Section 08 — Ethics &amp; Guardrails</p>
-    <h2 class="section-heading">Non-Negotiables When Using AI in a Canadian Law Firm</h2>
-    <p class="section-lead">The Law Society of Alberta has issued guidance on generative AI. AA Legal’s use of AI must respect every one of the following.</p>
-
-    <div class="guardrails">
-      <div class="guardrail"><h4>Competence</h4><p>Lawyers must understand the AI tools they use, their limitations, and verify all outputs — especially citations.</p></div>
-      <div class="guardrail"><h4>Confidentiality</h4><p>Only use AI tools that contractually prohibit training on client data and offer Canadian or SOC-2-compliant data hosting.</p></div>
-      <div class="guardrail"><h4>Privilege</h4><p>Never paste privileged content into consumer LLMs. Use enterprise tiers with DPAs in place.</p></div>
-      <div class="guardrail"><h4>Supervision</h4><p>Every AI output is reviewed by a qualified lawyer. AI does not sign, file, or advise.</p></div>
-      <div class="guardrail"><h4>Candour</h4><p>Disclose AI use to clients where material, and in court where required.</p></div>
-      <div class="guardrail"><h4>Fees</h4><p>Bill fairly: efficiency gains from AI should reduce client fees where charged by the hour.</p></div>
-      <div class="guardrail"><h4>Bias &amp; Fairness</h4><p>Be alert to AI-introduced bias, particularly in family, criminal, and immigration matters.</p></div>
-      <div class="guardrail"><h4>Records &amp; Audit</h4><p>Keep an audit log of significant AI uses on each file. Update retainer language to disclose AI tools.</p></div>
-    </div>
-
-    <div class="callout">
-      <h4>AA Legal’s AI Use Policy — One Sentence</h4>
-      <p><strong>"AI helps us work faster and clearer, but every legal judgement, every document delivered to a client, and every word filed with a court is owned, reviewed, and signed by a human lawyer at AA Legal."</strong></p>
-    </div>
-  </div>
-</section>
-
-<!-- BUDGET -->
-<section class="strip-b">
-  <div class="container">
-    <p class="section-title">Section 09 — Investment</p>
-    <h2 class="section-heading">Indicative Budget &amp; ROI</h2>
-    <p class="section-lead">Costs vary by vendor and seat count. These are realistic 2026 estimates for a small Canadian firm with 1 lawyer and 2 support staff.</p>
-
-    <table class="elegant">
-      <thead><tr><th>Category</th><th>Monthly (CAD)</th><th>Notes</th></tr></thead>
-      <tbody>
-        <tr><td>Practice management (Clio Suite)</td><td>$300–$500</td><td>Per seat, includes Clio Duo AI add-on</td></tr>
-        <tr><td>AI drafting / contract review</td><td>$200–$600</td><td>Spellbook or Gavel</td></tr>
-        <tr><td>Legal research AI</td><td>$200–$400</td><td>Lexis+ AI Canada / Westlaw Edge</td></tr>
-        <tr><td>Intake chatbot</td><td>$150–$400</td><td>Smith.ai or similar</td></tr>
-        <tr><td>KYC / ID verification</td><td>$2–$5 per check</td><td>Variable, only when used</td></tr>
-        <tr><td>Microsoft 365 + Copilot</td><td>$50–$70 per seat</td><td>Canadian tenancy</td></tr>
-        <tr><td>E-sign / notarisation</td><td>$50–$150</td><td>DocuSign / Notarius</td></tr>
-        <tr><td><strong>Total (typical)</strong></td><td><strong>~$1,200–$2,500 / month</strong></td><td>Plus one-off setup ~$3–5K</td></tr>
-      </tbody>
-    </table>
-
-    <div class="callout" style="margin-top:30px;">
-      <h4>Expected Payback</h4>
-      <p>If AI saves a single lawyer just <strong>1 hour per day</strong>, at a billed rate of $350/hour over 220 working days, that is <strong>~$77,000 of recovered capacity per year</strong> — a 25–50× return on a typical AI budget.</p>
-    </div>
-  </div>
-</section>
-
-<!-- METRICS -->
-<section class="strip-a">
-  <div class="container">
-    <p class="section-title">Section 10 — Measuring Success</p>
-    <h2 class="section-heading">KPIs to Track Once AI Is Live</h2>
-    <div class="automation-grid">
-      <div class="ax-card"><div class="ax-head"><div class="ax-icon">⏱</div><div><h3>Time-To-First-Draft</h3><div class="ax-tagline">Speed</div></div></div><p class="ax-body">Target: 60% reduction across wills, real-estate, simple immigration matters.</p></div>
-      <div class="ax-card"><div class="ax-head"><div class="ax-icon">★</div><div><h3>Client NPS</h3><div class="ax-tagline">Experience</div></div></div><p class="ax-body">Target: ≥ 70 after 6 months. Survey at file close.</p></div>
-      <div class="ax-card"><div class="ax-head"><div class="ax-icon">$</div><div><h3>Matter Profitability</h3><div class="ax-tagline">Margin</div></div></div><p class="ax-body">Target: +25% gross margin on flat-fee matters.</p></div>
-      <div class="ax-card"><div class="ax-head"><div class="ax-icon">⚠</div><div><h3>Error / Re-Work Rate</h3><div class="ax-tagline">Quality</div></div></div><p class="ax-body">Target: ≤ 2% files requiring substantive correction post-delivery.</p></div>
-      <div class="ax-card"><div class="ax-head"><div class="ax-icon">📨</div><div><h3>Intake-to-Consult</h3><div class="ax-tagline">Funnel</div></div></div><p class="ax-body">Target: 24-hour average; chatbot answers ≥ 70% of FAQs.</p></div>
-      <div class="ax-card"><div class="ax-head"><div class="ax-icon">⚖</div><div><h3>Compliance Findings</h3><div class="ax-tagline">Risk</div></div></div><p class="ax-body">Target: zero LSA audit findings; 100% conflict / KYC completion.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- CONCLUSION -->
-<section class="strip-b">
-  <div class="container" style="text-align:center;">
-    <p class="section-title">Closing</p>
-    <h2 class="section-heading" style="text-align:center;">The Path Forward for AA Legal</h2>
-    <p class="section-lead" style="margin: 0 auto 30px;">AI is not a replacement for the wisdom, judgement, and compassion that define AA Legal — it is a force-multiplier for them. Start small, measure honestly, keep the lawyer in charge, and the firm will deliver faster, more affordable, and more delightful legal services than ever before.</p>
-    <div class="callout" style="text-align:left; max-width:850px; margin: 30px auto 0;">
-      <h4>Next Step</h4>
-      <p>Choose <strong>two</strong> automations from Section 02 that map to AA Legal’s busiest practice areas (suggested starters: <em>AI Intake Chatbot</em> and <em>Passive Time Capture</em>) and pilot them over a four-week sprint. Review results, refine, then layer in the next two.</p>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="crest" style="width:90px; height:90px; margin-bottom:18px;">
-    <span class="crest-text" style="font-size:30px;">AAL</span>
-  </div>
-  <h2 style="color:var(--gold); font-size:28px;">AA Legal</h2>
-  <p style="color:var(--gold-soft); font-style:italic; margin-top:6px;">Professionalism, Integrity and Compassion</p>
+  <div class="divider" style="max-width:120mm; margin: 8mm auto;"><span class="line"></span><span class="mark">❦</span><span class="line"></span></div>
 
   <div class="contact-grid">
-    <div class="contact-item"><div class="ic">☎</div><div class="lbl">Phone</div><div class="val">+1 (825) 558-1337</div></div>
-    <div class="contact-item"><div class="ic">📠</div><div class="lbl">Fax</div><div class="val">403-457-4707</div></div>
-    <div class="contact-item"><div class="ic">🌐</div><div class="lbl">Web</div><div class="val">www.aalegal.ca</div></div>
-    <div class="contact-item"><div class="ic">✉</div><div class="lbl">Email</div><div class="val">yemi.a@aalegal.ca</div></div>
-    <div class="contact-item" style="grid-column: span 2;"><div class="ic">📍</div><div class="lbl">Office</div><div class="val">Suite 115, 1925 - 18th Avenue NE, Calgary AB T2E 7T8</div></div>
+    <div class="contact-item"><div class="lbl">Telephone</div><div class="val">+1 (825) 558-1337</div></div>
+    <div class="contact-item"><div class="lbl">Facsimile</div><div class="val">403-457-4707</div></div>
+    <div class="contact-item"><div class="lbl">Web</div><div class="val">www.aalegal.ca</div></div>
+    <div class="contact-item"><div class="lbl">Email</div><div class="val">yemi.a@aalegal.ca</div></div>
+    <div class="contact-item" style="grid-column: span 2;"><div class="lbl">Office</div><div class="val">Suite 115, 1925 – 18<sup>th</sup> Avenue NE, Calgary AB&nbsp; T2E 7T8</div></div>
   </div>
 
-  <p class="copyright">© 2026 AA Legal. This document is a strategic planning aid and does not constitute legal, technology, or financial advice. Verify all vendor terms, compliance obligations, and Law Society of Alberta guidance before adoption.</p>
-</footer>
+  <p style="margin-top:12mm; color:var(--muted); font-size:9pt; font-family:Georgia, serif; font-style:italic; max-width:140mm; margin-left:auto; margin-right:auto;">© 2026 AA Legal. This document is a strategic planning aid and does not constitute legal, technology, or financial advice. Verify all vendor terms, compliance obligations, and Law Society of Alberta guidance before adoption.</p>
+</div>
 
 </body>
 </html>
