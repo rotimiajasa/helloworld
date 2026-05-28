@@ -73,7 +73,6 @@
 
   // pricing
   const pg = $('#pricingGrid'); pg.classList.add('stagger');
-  const tick = svg('check', 17).replace('viewBox="0 0 24 24"', 'viewBox="0 0 24 24"');
   D.plans.forEach(p => {
     const c = el('div', 'plan' + (p.highlight ? ' highlight' : ''));
     c.innerHTML =
