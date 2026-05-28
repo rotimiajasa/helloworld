@@ -60,8 +60,8 @@ jobs:
           protocol: ftps
           port: 21
           local-dir: ./troandigital/
-          # Path relative to the main cPanel account's FTP root (/home/troaddib/)
-          server-dir: /troandigital.net/public_html/
+          # FTP account is rooted at public_html, so / lands files directly there
+          server-dir: /
           dangerous-clean-slate: false
           exclude: |
             **/.git*
