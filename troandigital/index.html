@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Troan Digital — Cybersecurity Managed Services | Defend. Detect. Respond.</title>
+<meta name="description" content="Troan Digital is a cybersecurity managed service provider delivering 24/7 SOC monitoring, managed detection & response, penetration testing and compliance for businesses across Africa and beyond.">
+<meta property="og:title" content="Troan Digital — Cybersecurity Managed Services">
+<meta property="og:description" content="Enterprise-grade security operations, 24/7. Defend. Detect. Respond.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.troandigital.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Animated background canvas -->
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+<!-- ─────────── HEADER ─────────── -->
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a href="#home" class="logo" aria-label="Troan Digital home">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+      </span>
+      <span class="logo-text">Troan<span class="dot">.</span>Digital</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#how" class="nav-link">How it works</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#insights" class="nav-link">Insights</a>
+      <a href="#contact" class="nav-cta">Book a Consultation</a>
+    </nav>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- ─────────── HERO ─────────── -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-copy reveal">
+      <span class="hero-badge"><span class="live-dot"></span> SOC Live · Monitoring 24/7/365</span>
+      <h1>Your business, <span class="grad">defended</span> around the clock.</h1>
+      <p class="hero-sub">
+        Troan Digital is a cybersecurity managed service provider. We detect, contain
+        and respond to threats before they ever reach your bottom line — so your team
+        can build, and we'll keep the adversaries out.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary btn-lg">Get a Free Security Assessment</a>
+        <a href="#services" class="btn btn-ghost btn-lg">Explore Services →</a>
+      </div>
+      <div class="hero-trust">
+        <span>Trusted by 200+ organisations</span>
+        <div class="trust-logos" id="trustLogos"></div>
+      </div>
+    </div>
+
+    <!-- Animated SOC dashboard mockup -->
+    <div class="hero-visual reveal">
+      <div class="soc-card glass">
+        <div class="soc-top">
+          <span class="soc-title">SECURITY OPERATIONS CENTRE</span>
+          <span class="soc-status"><span class="live-dot"></span> OPERATIONAL</span>
+        </div>
+        <div class="soc-metrics">
+          <div class="soc-metric">
+            <div class="soc-metric-val" data-count="50000" data-suffix="+">0</div>
+            <div class="soc-metric-lbl">Threats Blocked</div>
+          </div>
+          <div class="soc-metric">
+            <div class="soc-metric-val" data-count="99.97" data-suffix="%" data-decimals="2">0</div>
+            <div class="soc-metric-lbl">Uptime</div>
+          </div>
+          <div class="soc-metric">
+            <div class="soc-metric-val" data-count="15" data-prefix="&lt;" data-suffix="m">0</div>
+            <div class="soc-metric-lbl">Response</div>
+          </div>
+        </div>
+        <div class="soc-feed-label">LIVE THREAT FEED</div>
+        <ul class="soc-feed" id="socFeed"></ul>
+        <div class="soc-bars" id="socBars"></div>
+      </div>
+      <div class="hero-glow"></div>
+    </div>
+  </div>
+  <a href="#stats" class="scroll-hint" aria-label="Scroll down"><span></span></a>
+</section>
+
+<!-- ─────────── STATS ─────────── -->
+<section class="stats" id="stats">
+  <div class="container stats-grid" id="statsGrid"></div>
+</section>
+
+<!-- ─────────── SERVICES ─────────── -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">What we do</span>
+      <h2>Managed security, <span class="grad">end to end</span></h2>
+      <p class="section-lead">From continuous monitoring to offensive testing and compliance,
+        we cover every layer of your security programme — staffed by certified experts.</p>
+    </div>
+    <div class="cards-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+<!-- ─────────── HOW IT WORKS ─────────── -->
+<section class="section how" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Protection in <span class="grad">four steps</span></h2>
+      <p class="section-lead">A clear, proven onboarding path — security coverage live within the first week.</p>
+    </div>
+    <div class="steps" id="stepsGrid"></div>
+  </div>
+</section>
+
+<!-- ─────────── PRICING ─────────── -->
+<section class="section pricing" id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Plans</span>
+      <h2>Simple, <span class="grad">scalable</span> pricing</h2>
+      <p class="section-lead">Start where you are. Scale as you grow. Every plan includes our 24/7 SOC.</p>
+    </div>
+    <div class="pricing-grid" id="pricingGrid"></div>
+    <p class="pricing-note reveal">All plans include onboarding, monthly reporting and a dedicated point of contact. Prices in NGN, billed monthly. <a href="#contact">Need something custom?</a></p>
+  </div>
+</section>
+
+<!-- ─────────── ABOUT ─────────── -->
+<section class="section about" id="about">
+  <div class="container about-grid">
+    <div class="about-copy reveal">
+      <span class="eyebrow">Who we are</span>
+      <h2>Security people, <span class="grad">on your side</span></h2>
+      <p>Founded in 2018, Troan Digital was built by security practitioners who spent years
+        defending Africa's largest financial institutions. We saw too many businesses left
+        exposed — priced out of enterprise security or underserved by box-ticking vendors.</p>
+      <p>So we built a managed service that treats your environment like our own: a real
+        24/7 SOC, certified analysts, transparent reporting, and response measured in minutes,
+        not days.</p>
+      <div class="about-certs" id="aboutCerts"></div>
+    </div>
+    <div class="team-grid reveal" id="teamGrid"></div>
+  </div>
+</section>
+
+<!-- ─────────── TESTIMONIALS ─────────── -->
+<section class="section testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Proof</span>
+      <h2>Trusted where it <span class="grad">counts</span></h2>
+    </div>
+    <div class="cards-grid" id="testimonialsGrid"></div>
+  </div>
+</section>
+
+<!-- ─────────── INSIGHTS ─────────── -->
+<section class="section insights" id="insights">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Insights</span>
+      <h2>From our <span class="grad">threat desk</span></h2>
+      <p class="section-lead">Research, intelligence and practical guidance from the Troan Digital analyst team.</p>
+    </div>
+    <div class="cards-grid" id="insightsGrid"></div>
+  </div>
+</section>
+
+<!-- ─────────── FAQ ─────────── -->
+<section class="section faq" id="faq">
+  <div class="container faq-wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions, <span class="grad">answered</span></h2>
+    </div>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ─────────── CONTACT / CTA ─────────── -->
+<section class="section contact" id="contact">
+  <div class="container contact-grid">
+    <div class="contact-copy reveal">
+      <span class="eyebrow">Get started</span>
+      <h2>Let's secure your <span class="grad">business</span></h2>
+      <p>Book a free, no-obligation security assessment. We'll map your current exposure
+        and show you exactly where Troan Digital can help.</p>
+      <ul class="contact-list" id="contactList"></ul>
+    </div>
+    <form class="contact-form glass reveal" id="contactForm" novalidate>
+      <div class="field-row">
+        <div class="field">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" required placeholder="Jane Doe">
+        </div>
+        <div class="field">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" placeholder="Acme Ltd.">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="email">Work email</label>
+          <input id="email" name="email" type="email" required placeholder="jane@acme.com">
+        </div>
+        <div class="field">
+          <label for="interest">Interested in</label>
+          <select id="interest" name="interest">
+            <option>24/7 SOC Monitoring</option>
+            <option>Managed Detection & Response</option>
+            <option>Penetration Testing</option>
+            <option>Compliance & Risk</option>
+            <option>Cloud Security</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="message">How can we help?</label>
+        <textarea id="message" name="message" rows="4" placeholder="Tell us about your environment and goals…"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg btn-block">Request My Free Assessment</button>
+      <p class="form-note">We respond within one business day. Your details stay private.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ─────────── FOOTER ─────────── -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="#home" class="logo">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </span>
+        <span class="logo-text">Troan<span class="dot">.</span>Digital</span>
+      </a>
+      <p>Cybersecurity managed services. Defend. Detect. Respond. Protecting businesses across Africa and beyond, 24/7.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">SOC Monitoring</a></li>
+        <li><a href="#services">Detection & Response</a></li>
+        <li><a href="#services">Penetration Testing</a></li>
+        <li><a href="#services">Compliance & Risk</a></li>
+        <li><a href="#services">Cloud Security</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About us</a></li>
+        <li><a href="#insights">Insights</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get in touch</h4>
+      <ul>
+        <li><a href="mailto:security@troandigital.net">security@troandigital.net</a></li>
+        <li><a href="tel:+2348008762600">+234 (0) 800 TROAN</a></li>
+        <li>Victoria Island, Lagos</li>
+        <li><a href="https://www.troandigital.net">www.troandigital.net</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>© <span id="year"></span> Troan Digital. All rights reserved.</p>
+    <p class="footer-status"><span class="live-dot"></span> All systems operational</p>
+  </div>
+</footer>
+
+<!-- Toast container -->
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
