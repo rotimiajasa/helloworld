@@ -2,7 +2,9 @@ name: Deploy to cPanel
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
+      - claude/peaceful-fermi-U7JQy
   workflow_dispatch:
 
 concurrency:
@@ -10,8 +12,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # ── Original site (runs on master only) ──────────────────────────
   ftp-deploy:
     name: Sync site to cPanel via FTPS
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,4 +38,30 @@ jobs:
             **/.github/**
             **/README.md
             **/node_modules/**
+            **/.DS_Store
+
+  # ── Troan Digital cybersecurity site → public_html/ ──────────────
+  deploy-troandigital:
+    name: Deploy Troan Digital site to public_html
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy troandigital/ → public_html/
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.TROAN_FTP_SERVER }}
+          username: ${{ secrets.TROAN_FTP_USERNAME }}
+          password: ${{ secrets.TROAN_FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          # Upload only the troandigital/ subfolder to the domain root
+          local-dir: ./troandigital/
+          server-dir: /public_html/
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/README.md
             **/.DS_Store
