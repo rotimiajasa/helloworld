@@ -40,7 +40,7 @@ jobs:
             **/node_modules/**
             **/.DS_Store
 
-  # ── Troan Digital cybersecurity site → public_html/ ──────────────
+  # ── Troan Digital cybersecurity site → troandigital.net/public_html/ ──
   deploy-troandigital:
     name: Deploy Troan Digital site to public_html
     runs-on: ubuntu-latest
@@ -48,17 +48,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy troandigital/ → public_html/
+      - name: Deploy troandigital/ → troandigital.net/public_html/
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.TROAN_FTP_SERVER }}
+          # Use the main cPanel username (troaddib), NOT the sub-FTP account.
+          # The main account can reach all paths under /home/troaddib/.
+          # Secret value should be:  troaddib@troandigital.net  (or just: troaddib)
           username: ${{ secrets.TROAN_FTP_USERNAME }}
           password: ${{ secrets.TROAN_FTP_PASSWORD }}
           protocol: ftps
           port: 21
-          # Upload only the troandigital/ subfolder to the domain root
           local-dir: ./troandigital/
-          server-dir: /public_html/
+          # Path relative to the main cPanel account's FTP root (/home/troaddib/)
+          server-dir: /troandigital.net/public_html/
           dangerous-clean-slate: false
           exclude: |
             **/.git*
