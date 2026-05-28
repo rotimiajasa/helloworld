@@ -205,7 +205,14 @@
         and show you exactly where Troan Digital can help.</p>
       <ul class="contact-list" id="contactList"></ul>
     </div>
-    <form class="contact-form glass reveal" id="contactForm" novalidate>
+    <form class="contact-form glass reveal" id="contactForm" novalidate
+          action="https://formsubmit.co/contact@troandigital.net" method="POST">
+      <!-- FormSubmit configuration -->
+      <input type="hidden" name="_subject" value="New enquiry from troandigital.net">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <!-- honeypot: bots fill this, humans don't -->
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0">
       <div class="field-row">
         <div class="field">
           <label for="name">Full name</label>
@@ -282,7 +289,7 @@
       <h4>Get in touch</h4>
       <ul>
         <li><a href="mailto:security@troandigital.net">security@troandigital.net</a></li>
-        <li><a href="tel:+2348008762600">+234 (0) 800 TROAN</a></li>
+        <li><a href="tel:+2347039125104">+234 703 912 5104</a></li>
         <li>Victoria Island, Lagos</li>
         <li><a href="https://www.troandigital.net">www.troandigital.net</a></li>
       </ul>

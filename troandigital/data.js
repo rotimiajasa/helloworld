@@ -166,7 +166,7 @@ window.TROAN = {
 
   contact: [
     { icon: 'mail',  label: 'Email',    value: 'security@troandigital.net' },
-    { icon: 'phone', label: 'Phone',    value: '+234 (0) 800 TROAN' },
+    { icon: 'phone', label: 'Phone',    value: '+234 703 912 5104' },
     { icon: 'pin',   label: 'Office',   value: 'Victoria Island, Lagos, Nigeria' },
     { icon: 'clock', label: 'SOC Desk', value: 'Open 24/7/365' },
   ],

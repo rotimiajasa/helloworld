@@ -266,7 +266,12 @@
      CONTACT FORM
      ========================================================= */
   const form = $('#contactForm');
-  form.addEventListener('submit', (e) => {
+  // FormSubmit AJAX endpoint — emails contact@troandigital.net (no backend needed)
+  const FORM_ENDPOINT = 'https://formsubmit.co/ajax/contact@troandigital.net';
+  const submitBtn = $('button[type="submit"]', form);
+  const submitLabel = submitBtn.textContent;
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     let ok = true;
     ['name', 'email'].forEach(id => {
@@ -277,8 +282,40 @@
       if (bad) ok = false;
     });
     if (!ok) { toast('Please add your name and a valid work email.', false); return; }
-    form.reset();
-    toast('Thanks! Our team will reach out within one business day.');
+
+    // honeypot — silently drop bot submissions
+    if (form.querySelector('[name="_honey"]').value) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name:     $('#name').value.trim(),
+          company:  $('#company').value.trim(),
+          email:    $('#email').value.trim(),
+          interest: $('#interest').value,
+          message:  $('#message').value.trim(),
+          _subject: 'New enquiry from troandigital.net',
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && (data.success === 'true' || data.success === true)) {
+        form.reset();
+        toast('Thanks! Your message is on its way to our team.');
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch (err) {
+      toast('Sorry, something went wrong. Please email contact@troandigital.net directly.', false);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = submitLabel;
+    }
   });
   $$('.field input').forEach(i => i.addEventListener('input', () => i.closest('.field').classList.remove('invalid')));
 
