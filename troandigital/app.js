@@ -337,41 +337,13 @@
   let toastTimer;
   function toast(msg, success = true) {
     const t = $('#toast');
-    t.style.borderColor = success ? 'var(--green)' : 'var(--rose)';
+    t.style.borderColor = success ? '#15803d' : '#be123c';
     t.innerHTML =
-      `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="${success ? 'var(--green)' : 'var(--rose)'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${success ? '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m22 4-10 10.01-3-3"/>' : '<circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/>'}</svg>
+      `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="${success ? '#15803d' : '#be123c'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${success ? '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m22 4-10 10.01-3-3"/>' : '<circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/>'}</svg>
        <p>${msg}</p>`;
     t.hidden = false;
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => { t.hidden = true; }, 4200);
-  }
-
-  /* =========================================================
-     SPOTLIGHT GLOW — track mouse over interactive cards
-     ========================================================= */
-  if (!reduceMotion) {
-    document.addEventListener('pointermove', (e) => {
-      const card = e.target.closest('.spotlight');
-      if (!card) return;
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-    }, { passive: true });
-  }
-
-  /* =========================================================
-     SOC CARD — subtle 3D tilt on pointer
-     ========================================================= */
-  const socCard = $('.soc-card');
-  if (socCard && !reduceMotion && window.matchMedia('(pointer:fine)').matches) {
-    const visual = socCard.parentElement;
-    visual.addEventListener('pointermove', (e) => {
-      const r = visual.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width - 0.5;
-      const py = (e.clientY - r.top) / r.height - 0.5;
-      socCard.style.transform = `rotateY(${px * 7}deg) rotateX(${-py * 7}deg) translateZ(0)`;
-    });
-    visual.addEventListener('pointerleave', () => { socCard.style.transform = ''; });
   }
 
   /* =========================================================
@@ -391,10 +363,10 @@
     window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
 
   /* =========================================================
-     INTERACTIVE NEURAL VORTEX — WebGL background
-     Ported from the React/21st.dev component to vanilla JS.
+     REMOVED: WebGL neural vortex (replaced with clean light bg)
      ========================================================= */
   (function initNeuroVortex() {
+    return; // disabled — Editorial Light theme uses CSS background
     const canvasEl = $('#bg-canvas');
     if (!canvasEl) return;
 

@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://www.troandigital.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -20,8 +20,6 @@
 <!-- Scroll progress -->
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-<!-- WebGL neural vortex background -->
-<canvas id="bg-canvas" aria-hidden="true"></canvas>
 
 <!-- ─────────── HEADER ─────────── -->
 <header class="header" id="header">
@@ -54,7 +52,7 @@
   <div class="container hero-grid">
     <div class="hero-copy reveal">
       <span class="hero-badge"><span class="live-dot"></span> SOC Live · Monitoring 24/7/365</span>
-      <h1>Your business, <span class="grad">defended</span> around the clock.</h1>
+      <h1>Your business, <span class="accent">defended</span> around the clock.</h1>
       <p class="hero-sub">
         Troan Digital is a cybersecurity managed service provider. We detect, contain
         and respond to threats before they ever reach your bottom line — so your team
@@ -72,7 +70,7 @@
 
     <!-- Animated SOC dashboard mockup -->
     <div class="hero-visual reveal">
-      <div class="soc-card glass">
+      <div class="soc-card">
         <div class="soc-top">
           <span class="soc-title">SECURITY OPERATIONS CENTRE</span>
           <span class="soc-status"><span class="live-dot"></span> OPERATIONAL</span>
@@ -230,7 +228,7 @@
         and show you exactly where Troan Digital can help.</p>
       <ul class="contact-list" id="contactList"></ul>
     </div>
-    <form class="contact-form glass reveal" id="contactForm" novalidate
+    <form class="contact-form reveal" id="contactForm" novalidate
           action="https://formsubmit.co/contact@troandigital.net" method="POST">
       <!-- FormSubmit configuration -->
       <input type="hidden" name="_subject" value="New enquiry from troandigital.net">
