@@ -1,0 +1,4 @@
+pentest_orchestrator/**/__pycache__
+pentest_orchestrator/**/*.pyc
+pentest-demo/node_modules/
+pentest-demo/out/
