@@ -179,12 +179,13 @@ p{color:var(--muted)}
 .header-inner{display:flex;align-items:center;justify-content:space-between}
 .logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.22rem;color:#fff}
 .logo-mark{
-  width:38px;height:38px;flex-shrink:0;object-fit:contain;
-  filter:drop-shadow(0 4px 12px rgba(34,211,238,.35));
+  height:42px;width:auto;max-width:210px;flex-shrink:0;object-fit:contain;
+  filter:drop-shadow(0 4px 14px rgba(34,211,238,.3));
   transition:transform .4s var(--ease-spring);
 }
-.footer .logo-mark{width:32px;height:32px}
-.logo:hover .logo-mark{transform:rotate(-8deg) scale(1.06)}
+.header.scrolled .logo-mark{height:38px}
+.footer .logo-mark{height:40px;max-width:230px}
+.logo:hover .logo-mark{transform:scale(1.05)}
 .logo-text .dot{color:var(--cyan)}
 .nav{display:flex;align-items:center;gap:4px}
 .nav-link{
