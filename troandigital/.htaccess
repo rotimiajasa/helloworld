@@ -34,7 +34,11 @@ Options -Indexes
 </IfModule>
 
 # ---- Block access to sensitive / dotfiles ----
-<FilesMatch "(^\.|\.(md|yml|yaml|json|gitignore)$)">
+<FilesMatch "(^\.|\.(md|yml|yaml|json|gitignore|sh|bak|bk|log|ini|env|lock)$)">
+  Require all denied
+</FilesMatch>
+# ---- Block execution of server-side scripts in the docroot (static site only) ----
+<FilesMatch "\.(php|php5|php7|phtml|pl|py|cgi|asp|aspx)$">
   Require all denied
 </FilesMatch>
 # Re-allow the site's own data.js (it is a normal script, not config)

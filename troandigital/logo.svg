@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 128" role="img" aria-label="Troan Digital">
+  <defs>
+    <linearGradient id="troanShield" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0" stop-color="#1ba7e0"/>
+      <stop offset="0.55" stop-color="#39b6ec"/>
+      <stop offset="1" stop-color="#8fd8f7"/>
+    </linearGradient>
+  </defs>
+  <!-- shield -->
+  <path d="M60 4 L114 26 V66 C114 101 60 124 60 124 C60 124 6 101 6 66 V26 Z"
+        fill="url(#troanShield)"/>
+  <!-- dynamic T (paper-plane arrow) -->
+  <path d="M28 50 L92 34 L92 45 L70 51 L70 94 L56 94 L56 55 L28 55 Z"
+        fill="#ffffff"/>
+</svg>
