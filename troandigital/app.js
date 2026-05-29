@@ -36,9 +36,10 @@
      RENDER CONTENT
      ========================================================= */
 
-  // trust chips in hero
-  const trustNames = ['FinBridge', 'Heritage MFB', 'Accra Logistics', 'NovaPay', 'Sahel Telco'];
-  $('#trustLogos').append(...trustNames.map(n => el('span', 'chip', n)));
+  // trust marquee in hero (duplicated for seamless infinite loop)
+  const trustNames = ['FinBridge', 'Heritage MFB', 'Accra Logistics', 'NovaPay', 'Sahel Telco', 'Zenith Cloud', 'Lagos Mutual'];
+  const trustChips = [...trustNames, ...trustNames].map(n => el('span', 'chip', n));
+  $('#trustLogos').append(...trustChips);
 
   // stats
   $('#statsGrid').classList.add('stagger');
@@ -53,7 +54,7 @@
   // services
   const sg = $('#servicesGrid'); sg.classList.add('stagger');
   D.services.forEach(s => {
-    const c = el('article', 'card');
+    const c = el('article', 'card spotlight');
     c.innerHTML =
       `${s.badge ? `<span class="card-badge">${s.badge}</span>` : ''}
        <div class="card-icon ic-${s.color}">${svg(s.icon)}</div>
@@ -61,6 +62,17 @@
        <p>${s.desc}</p>
        <div class="card-tags">${s.tags.map(t => `<span>${t}</span>`).join('')}</div>`;
     sg.append(c);
+  });
+
+  // why us
+  const wg = $('#whyGrid'); wg.classList.add('stagger');
+  (D.whyUs || []).forEach(w => {
+    const c = el('div', 'why-card spotlight');
+    c.innerHTML =
+      `<div class="why-icon">${svg(w.icon, 24)}</div>
+       <h3>${w.title}</h3>
+       <p>${w.desc}</p>`;
+    wg.append(c);
   });
 
   // steps
@@ -74,7 +86,7 @@
   // pricing
   const pg = $('#pricingGrid'); pg.classList.add('stagger');
   D.plans.forEach(p => {
-    const c = el('div', 'plan' + (p.highlight ? ' highlight' : ''));
+    const c = el('div', 'plan spotlight' + (p.highlight ? ' highlight' : ''));
     c.innerHTML =
       `${p.badge ? `<span class="plan-badge">${p.badge}</span>` : ''}
        <div class="plan-name">${p.name}</div>
@@ -93,7 +105,7 @@
   // team
   const tg = $('#teamGrid'); tg.classList.add('stagger');
   D.team.forEach(m => {
-    const c = el('div', 'team-card');
+    const c = el('div', 'team-card spotlight');
     c.innerHTML =
       `<div class="team-avatar">${initials(m.name)}</div>
        <h3>${m.name}</h3>
@@ -105,9 +117,10 @@
   // testimonials
   const tcg = $('#testimonialsGrid'); tcg.classList.add('stagger');
   D.testimonials.forEach(t => {
-    const c = el('article', 't-card');
+    const c = el('article', 't-card spotlight');
     c.innerHTML =
-      `<div class="t-stars">★★★★★</div>
+      `<span class="t-quote-mark" aria-hidden="true">&ldquo;</span>
+       <div class="t-stars">★★★★★</div>
        <p class="t-quote">${t.quote}</p>
        <div class="t-author">
          <div class="t-avatar">${initials(t.name)}</div>
@@ -130,7 +143,7 @@
          </div>
          <h3>${p.title}</h3>
          <p>${p.excerpt}</p>
-         <div class="post-more">Read article →</div>
+         <div class="post-more">Read article <span aria-hidden="true">→</span></div>
        </div>`;
     c.addEventListener('click', () => toast('Full article coming soon to the Troan Digital blog.'));
     ig.append(c);
@@ -332,6 +345,50 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => { t.hidden = true; }, 4200);
   }
+
+  /* =========================================================
+     SPOTLIGHT GLOW — track mouse over interactive cards
+     ========================================================= */
+  if (!reduceMotion) {
+    document.addEventListener('pointermove', (e) => {
+      const card = e.target.closest('.spotlight');
+      if (!card) return;
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    }, { passive: true });
+  }
+
+  /* =========================================================
+     SOC CARD — subtle 3D tilt on pointer
+     ========================================================= */
+  const socCard = $('.soc-card');
+  if (socCard && !reduceMotion && window.matchMedia('(pointer:fine)').matches) {
+    const visual = socCard.parentElement;
+    visual.addEventListener('pointermove', (e) => {
+      const r = visual.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      socCard.style.transform = `rotateY(${px * 7}deg) rotateX(${-py * 7}deg) translateZ(0)`;
+    });
+    visual.addEventListener('pointerleave', () => { socCard.style.transform = ''; });
+  }
+
+  /* =========================================================
+     SCROLL PROGRESS BAR + BACK TO TOP
+     ========================================================= */
+  const progress = $('#scrollProgress');
+  const toTop = $('#toTop');
+  const onScrollUI = () => {
+    const h = document.documentElement;
+    const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight || 1);
+    if (progress) progress.style.width = (scrolled * 100) + '%';
+    if (toTop) toTop.classList.toggle('show', h.scrollTop > 600);
+  };
+  onScrollUI();
+  window.addEventListener('scroll', onScrollUI, { passive: true });
+  if (toTop) toTop.addEventListener('click', () =>
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
 
   /* =========================================================
      ANIMATED BACKGROUND — particle / node network

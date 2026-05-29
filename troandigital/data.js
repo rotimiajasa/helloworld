@@ -124,6 +124,13 @@ window.TROAN = {
 
   certs: ['ISO 27001 Certified', 'PCI-DSS QSA Partner', 'Microsoft Security Partner', 'AWS Security Competency', 'NDPC Accredited'],
 
+  whyUs: [
+    { icon: 'clock',  title: 'Minutes, not days', desc: 'A real 24/7 SOC with a < 15-minute response SLA — adversaries are contained before they spread.' },
+    { icon: 'radar',  title: 'Human + machine', desc: 'Automated detection backed by certified analysts who hunt, validate and act on every signal.' },
+    { icon: 'doc',    title: 'Radical transparency', desc: 'Clear monthly reporting, live dashboards and a named point of contact — never a black box.' },
+    { icon: 'check',  title: 'Compliance built-in', desc: 'ISO 27001, PCI-DSS, NDPR and CBN frameworks handled end-to-end, with audit evidence ready.' },
+  ],
+
   testimonials: [
     {
       quote: 'Troan Digital detected and contained a ransomware attempt within 12 minutes of initial compromise. We never lost a single minute of downtime. Their SOC is genuinely world-class.',
