@@ -390,57 +390,6 @@
   if (toTop) toTop.addEventListener('click', () =>
     window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
 
-  /* =========================================================
-     ANIMATED BACKGROUND — particle / node network
-     ========================================================= */
-  const canvas = $('#bg-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, particles, raf;
-  const COUNT = () => Math.min(70, Math.floor(window.innerWidth / 22));
-
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  function initParticles() {
-    particles = Array.from({ length: COUNT() }, () => ({
-      x: Math.random() * W, y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
-      r: Math.random() * 1.6 + 0.6,
-    }));
-  }
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0 || p.x > W) p.vx *= -1;
-      if (p.y < 0 || p.y > H) p.vy *= -1;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(34,211,238,0.55)';
-      ctx.fill();
-      for (let j = i + 1; j < particles.length; j++) {
-        const q = particles[j];
-        const dx = p.x - q.x, dy = p.y - q.y;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 130) {
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
-          ctx.strokeStyle = `rgba(120,160,220,${0.12 * (1 - dist / 130)})`;
-          ctx.lineWidth = 0.6;
-          ctx.stroke();
-        }
-      }
-    }
-    raf = requestAnimationFrame(draw);
-  }
-  if (!reduceMotion) {
-    resize(); initParticles(); draw();
-    let rt;
-    window.addEventListener('resize', () => {
-      clearTimeout(rt);
-      rt = setTimeout(() => { resize(); initParticles(); }, 200);
-    });
-  }
+  /* Background is now a pure-CSS animated perspective grid + glow
+     (see #bg-canvas and .grid-overlay in styles.css) — no canvas needed. */
 })();
