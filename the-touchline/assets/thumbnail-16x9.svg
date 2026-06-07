@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect x="0" y="0" width="1280" height="720" fill="#0B1F17"/>
+  <!-- right green block: drop a player/subject cutout on top of this -->
+  <polygon points="760,0 1280,0 1280,720 600,720" fill="#15A862"/>
+  <polygon points="744,0 760,0 604,720 588,720" fill="#E8FF3A"/>
+  <!-- mini logo -->
+  <text x="60" y="90" font-family="'Arial Black', Arial, sans-serif" font-weight="900" font-size="40" letter-spacing="2" fill="#F4F6F4">THE TOUCHLINE</text>
+  <rect x="60" y="106" width="360" height="6" fill="#E8FF3A"/>
+  <!-- headline (edit) -->
+  <text x="58" y="360" font-family="'Arial Black', Arial, sans-serif" font-weight="900" font-size="120" fill="#F4F6F4">GROUP OF</text>
+  <text x="58" y="490" font-family="'Arial Black', Arial, sans-serif" font-weight="900" font-size="120" fill="#E8FF3A">DEATH?</text>
+  <!-- tag -->
+  <text x="60" y="650" font-family="Arial, sans-serif" font-weight="800" font-size="34" letter-spacing="4" fill="#9FB3A8">WORLD CUP 2026</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 320" width="1080" height="320">
+  <!-- transparent background; overlay this strip on video -->
+  <rect x="60" y="150" width="760" height="120" rx="14" fill="#0B1F17" fill-opacity="0.92"/>
+  <rect x="60" y="150" width="16" height="120" fill="#E8FF3A"/>
+  <text x="100" y="212" font-family="'Arial Black', Arial, sans-serif" font-weight="900" font-size="50" fill="#F4F6F4">PLAYER NAME</text>
+  <text x="102" y="252" font-family="Arial, sans-serif" font-weight="800" font-size="28" letter-spacing="3" fill="#15A862">TEAM · POSITION</text>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <rect x="0" y="0" width="1080" height="1080" fill="#0B1F17"/>
+  <!-- lime top bar -->
+  <rect x="0" y="0" width="1080" height="18" fill="#E8FF3A"/>
+  <!-- mini logo -->
+  <text x="70" y="120" font-family="'Arial Black', Arial, sans-serif" font-weight="900" font-size="40" letter-spacing="3" fill="#F4F6F4">THE TOUCHLINE</text>
+  <!-- big stat number (edit) -->
+  <text x="540" y="640" text-anchor="middle" font-family="'Arial Black', Arial, sans-serif" font-weight="900" font-size="380" fill="#E8FF3A">104</text>
+  <!-- label (edit) -->
+  <text x="540" y="760" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="48" letter-spacing="6" fill="#F4F6F4">MATCHES · WORLD CUP 2026</text>
+  <!-- footer line + handle -->
+  <rect x="70" y="960" width="940" height="6" fill="#15A862"/>
+  <text x="70" y="1020" font-family="Arial, sans-serif" font-weight="800" font-size="34" letter-spacing="2" fill="#9FB3A8">@thetouchline</text>
+</svg>
