@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: 'Fredoka'; src: url('assets/fonts/Fredoka-Bold.ttf'); font-weight: 700; }
+@font-face { font-family: 'Baloo'; src: url('assets/fonts/BalooBhai2.ttf'); font-weight: 400 800; }
+@font-face { font-family: 'Nunito'; src: url('assets/fonts/Nunito.ttf'); font-weight: 300 900; }
+
+:root{
+  --yellow:#FFD93D; --coral:#FF6B6B; --teal:#4ECDC4; --sky:#4D96FF;
+  --grape:#9B5DE5; --mint:#6BCB77; --pink:#FF8FCF; --orange:#FF9F45;
+  --ink:#2B2D42; --paper:#FFFDF6; --soft:#6c6f93;
+}
+
+@page{
+  size: A4;
+  margin: 14mm 12mm 16mm 12mm;
+  background: var(--paper);
+  @bottom-center{
+    content: "Little Hearts Studio  •  Faceless Parenting Channel Blueprint  •  Page " counter(page) " of " counter(pages);
+    font-family:'Nunito'; font-size:8.5pt; color:#b6b3c7;
+  }
+}
+@page cover{ margin:0; background:none; @bottom-center{content:none;} }
+
+*{ box-sizing:border-box; }
+body{ font-family:'Nunito',sans-serif; color:var(--ink); font-size:10.5pt; line-height:1.5; margin:0; }
+h1,h2,h3,h4{ font-family:'Baloo','Fredoka',sans-serif; margin:0; line-height:1.12; }
+.emoji{ font-family:'Noto Color Emoji'; }
+p{ margin:0 0 7px 0; }
+b,strong{ color:#1c1e36; }
+small{ color:var(--soft); }
+
+/* ---------- COVER ---------- */
+.cover{ page:cover; height:297mm; width:210mm; position:relative; overflow:hidden;
+  background:linear-gradient(165deg,#FFE9A8 0%,#FFD2E0 40%,#CFE6FF 72%,#CDF3D6 100%); }
+.blob{ position:absolute; border-radius:50%; }
+.cloud{ position:absolute; background:#ffffff; border-radius:60px; }
+.sun{ position:absolute; top:24mm; right:24mm; width:40mm; height:40mm; border-radius:50%;
+  background:#FFCE3A; border:9px solid #FFE596; }
+.cover-badge{ position:absolute; top:22mm; left:18mm; background:var(--coral); color:#fff;
+  font-family:'Baloo'; font-weight:800; padding:6px 16px; border-radius:30px; font-size:11pt;
+  box-shadow:0 6px 0 #e0504f; letter-spacing:.5px; z-index:5; }
+.cover-wrap{ position:absolute; top:96mm; left:0; right:0; padding:0 20mm; text-align:center; z-index:5; }
+.cover h1{ font-family:'Baloo'; font-weight:800; font-size:46pt; color:#3a2c6e;
+  text-shadow:3px 3px 0 #fff, 6px 6px 0 rgba(155,93,229,.25); line-height:1; }
+.cover h1 .pop{ color:var(--coral); }
+.cover .sub{ font-family:'Fredoka'; font-size:15pt; color:#4b4d6b; margin-top:10mm; }
+.cover .tag{ display:inline-block; margin-top:9mm; background:#fff; border:3px dashed var(--teal);
+  border-radius:18px; padding:10px 20px; font-family:'Baloo'; font-weight:700; color:#2b8f88; font-size:11.5pt; }
+.cover .pills{ position:absolute; bottom:46mm; left:0; right:0; text-align:center; z-index:5; }
+.cover .pill{ display:inline-block; margin:4px; padding:7px 15px; border-radius:30px;
+  font-family:'Baloo'; font-weight:700; color:#fff; font-size:10pt; box-shadow:0 4px 0 rgba(0,0,0,.12); }
+.cover .footer{ position:absolute; bottom:16mm; left:0; right:0; text-align:center;
+  font-family:'Nunito'; color:#7c7a94; font-size:9.5pt; }
+.crayons{ position:absolute; bottom:0; left:0; right:0; height:11mm; display:flex; z-index:5; }
+.crayons div{ flex:1; }
+
+/* ---------- SECTIONS ---------- */
+.section-tab{ display:inline-block; color:#fff; font-family:'Baloo'; font-weight:800; font-size:9.5pt;
+  padding:4px 14px; border-radius:20px; margin-bottom:6px; letter-spacing:.4px; }
+h2.title{ font-family:'Baloo'; font-weight:800; font-size:22pt; color:#34306b; margin-bottom:4px; }
+.rule{ height:6px; width:70mm; border-radius:6px; margin:2px 0 12px 0;
+  background:linear-gradient(90deg,var(--coral),var(--orange),var(--yellow),var(--mint),var(--sky),var(--grape)); }
+.lead{ font-size:11pt; color:#4a4c6b; margin-bottom:12px; }
+
+/* cards */
+.card{ border-radius:16px; padding:13px 15px; margin:0 0 11px 0; border:2px solid rgba(0,0,0,.05);
+  box-shadow:0 4px 0 rgba(0,0,0,.06); }
+.card h3{ font-size:13.5pt; margin-bottom:5px; }
+.card.y{ background:#FFF6D0; border-color:#FFE27A; }
+.card.c{ background:#FFE7E7; border-color:#FFB3B3; }
+.card.t{ background:#DFF6F4; border-color:#A6E6E0; }
+.card.s{ background:#E3EEFF; border-color:#AFCBFF; }
+.card.g{ background:#F0E7FF; border-color:#D2B9FF; }
+.card.m{ background:#E3F6E7; border-color:#B0E6BC; }
+.card.o{ background:#FFEEDD; border-color:#FFD0A6; }
+.card.p{ background:#FFE7F3; border-color:#FFBCE0; }
+
+.row{ display:flex; gap:11px; }
+.col{ flex:1; }
+
+ul.tick{ list-style:none; padding:0; margin:6px 0; }
+ul.tick li{ padding:3px 0 3px 24px; position:relative; }
+ul.tick li:before{ content:"★"; position:absolute; left:0; top:2px; color:var(--orange); font-size:12pt; }
+
+/* numbered step */
+.step{ display:flex; gap:12px; margin-bottom:10px; align-items:flex-start; break-inside:avoid; }
+.step .num{ flex:0 0 auto; width:36px; height:36px; border-radius:50%; color:#fff;
+  font-family:'Baloo'; font-weight:800; font-size:16pt; text-align:center; line-height:36px;
+  box-shadow:0 4px 0 rgba(0,0,0,.15); }
+.step .body{ flex:1; background:#fff; border-radius:14px; padding:9px 13px; border:2px solid #eee;
+  box-shadow:0 3px 0 rgba(0,0,0,.05); }
+.step .body h4{ font-size:12.5pt; margin-bottom:3px; }
+
+/* pillars grid */
+.pillar{ width:48%; display:inline-block; vertical-align:top; border-radius:18px; padding:13px 14px;
+  margin:0 .8% 11px .8%; color:#23253f; box-shadow:0 5px 0 rgba(0,0,0,.08); }
+.pillar .pemoji{ font-size:21pt; }
+.pillar h3{ font-size:14pt; margin:3px 0 5px; }
+.pillar .why{ font-size:9pt; background:rgba(255,255,255,.6); border-radius:10px; padding:6px 8px; margin-top:6px; }
+
+/* pipeline */
+.pipe{ display:flex; align-items:stretch; gap:0; margin:10px 0 14px; }
+.pipe .node{ flex:1; text-align:center; padding:10px 4px; border-radius:13px; color:#fff;
+  font-family:'Baloo'; font-weight:700; font-size:8.6pt; box-shadow:0 4px 0 rgba(0,0,0,.12); margin:0 3px; }
+.pipe .node .pe{ display:block; font-size:16pt; margin-bottom:2px; }
+
+/* table */
+table{ border-collapse:separate; border-spacing:0; width:100%; font-size:9pt; margin:6px 0 12px;
+  border-radius:13px; overflow:hidden; box-shadow:0 4px 0 rgba(0,0,0,.06); }
+th{ background:#34306b; color:#fff; font-family:'Baloo'; font-weight:700; padding:8px 9px; text-align:left; font-size:9pt; }
+td{ padding:7px 9px; border-bottom:1px solid #efeef6; background:#fff; vertical-align:top; }
+tr:nth-child(even) td{ background:#FBF8FF; }
+.tag-mini{ display:inline-block; padding:2px 8px; border-radius:12px; color:#fff; font-family:'Baloo';
+  font-weight:700; font-size:8pt; }
+
+/* KPI */
+.kpi{ width:31%; display:inline-block; vertical-align:top; text-align:center; border-radius:16px;
+  padding:12px 8px; margin:0 1% 11px; color:#fff; box-shadow:0 5px 0 rgba(0,0,0,.12); }
+.kpi .big{ font-family:'Baloo'; font-weight:800; font-size:21pt; display:block; line-height:1; }
+.kpi .lbl{ font-size:8.6pt; display:block; margin-top:5px; opacity:.95; }
+
+/* roadmap */
+.phase{ display:flex; gap:12px; margin-bottom:10px; break-inside:avoid; }
+.phase .marker{ flex:0 0 70px; text-align:center; border-radius:13px; color:#fff; padding:8px 4px;
+  font-family:'Baloo'; font-weight:800; box-shadow:0 4px 0 rgba(0,0,0,.12); }
+.phase .marker .d{ font-size:8pt; display:block; font-family:'Nunito'; font-weight:700; }
+.phase .desc{ flex:1; background:#fff; border-radius:13px; padding:9px 13px; border:2px solid #eee; box-shadow:0 3px 0 rgba(0,0,0,.05); }
+
+/* callout */
+.callout{ border-radius:14px; padding:11px 14px; margin:10px 0; background:#FFF9E3; border-left:8px solid var(--orange); }
+.callout.tip{ background:#E5F7EA; border-color:var(--mint); }
+.callout.warn{ background:#FFEDED; border-color:var(--coral); }
+
+.script{ background:#1f2140; color:#f3f1ff; border-radius:14px; padding:13px 15px; font-size:9.3pt; }
+.script h4{ color:#FFD93D; }
+.script .who{ color:#7ad7ff; font-family:'Baloo'; font-weight:700; }
+.script .sd{ color:#ff9fc7; }
+
+.flag{ display:inline-block; padding:2px 10px; border-radius:20px; font-family:'Baloo'; font-weight:700;
+  font-size:8.5pt; color:#fff; }
+
+hr.dot{ border:none; border-top:3px dotted #d9d6ea; margin:12px 0; }
+.center{ text-align:center; }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <div class="blob" style="top:150mm; left:-20mm; width:70mm; height:70mm; background:#FF8FCF; opacity:.45;"></div>
+  <div class="blob" style="top:170mm; right:-22mm; width:80mm; height:80mm; background:#6BCB77; opacity:.4;"></div>
+  <div class="blob" style="top:120mm; left:30mm; width:26mm; height:26mm; background:#4D96FF; opacity:.35;"></div>
+  <div class="blob" style="top:108mm; right:36mm; width:18mm; height:18mm; background:#9B5DE5; opacity:.4;"></div>
+  <div class="sun"></div>
+  <div class="cloud" style="top:30mm; left:120mm; width:42mm; height:13mm; opacity:.9;"></div>
+  <div class="cloud" style="top:78mm; left:22mm; width:34mm; height:11mm; opacity:.85;"></div>
+  <div class="cover-badge">AI-POWERED BLUEPRINT</div>
+
+  <div class="cover-wrap">
+    <h1>Little Hearts<br><span class="pop">Studio</span> <span class="emoji">🌱</span></h1>
+    <div class="sub">A Faceless YouTube Channel that helps families<br>raise <b>confident, kind &amp; curious</b> kids</div>
+    <div class="tag"><span class="emoji">🎬</span> The Complete Step-by-Step AI System</div>
+  </div>
+
+  <div class="pills">
+    <span class="pill" style="background:var(--coral)"><span class="emoji">❤️</span> Love &amp; Confidence</span>
+    <span class="pill" style="background:var(--sky)"><span class="emoji">🧭</span> Discipline &amp; Guidance</span>
+    <span class="pill" style="background:var(--mint)"><span class="emoji">📚</span> Learning &amp; Curiosity</span>
+    <span class="pill" style="background:var(--grape)"><span class="emoji">🤝</span> Social Skills</span>
+  </div>
+
+  <div class="footer">Optimised for Average View Duration &nbsp;•&nbsp; Comments &nbsp;•&nbsp; Shares &nbsp;|&nbsp; Prepared June 2026</div>
+  <div class="crayons">
+    <div style="background:var(--coral)"></div><div style="background:var(--orange)"></div>
+    <div style="background:var(--yellow)"></div><div style="background:var(--mint)"></div>
+    <div style="background:var(--teal)"></div><div style="background:var(--sky)"></div>
+    <div style="background:var(--grape)"></div><div style="background:var(--pink)"></div>
+  </div>
+</div>
+
+<!-- ============ PAGE 1 — THE BIG IDEA + NICHE STUDY ============ -->
+<div class="section-tab" style="background:var(--coral)">PART 1 · THE BIG IDEA</div>
+<h2 class="title"><span class="emoji">🌟</span> What We're Building &amp; Why It Wins</h2>
+<div class="rule"></div>
+<p class="lead">A faceless channel where warm narration, gentle animation, and real psychology turn everyday parenting struggles into "I needed this today" moments — engineered so viewers <b>watch longer, comment more, and share with other parents.</b></p>
+
+<div class="row">
+  <div class="col card c">
+    <h3><span class="emoji">🎯</span> The Mission</h3>
+    <p style="font-size:9.6pt">Give overwhelmed parents <b>bite-sized, science-backed</b> ways to show love, guide behaviour, grow young minds, and build social skills — without ever showing a face.</p>
+  </div>
+  <div class="col card t">
+    <h3><span class="emoji">🧑‍🤝‍🧑</span> Who It's For</h3>
+    <p style="font-size:9.6pt">Parents of ages 2–12, new parents, and grandparents — people who save and <b>share</b> advice they wish they'd had. High emotion = high engagement.</p>
+  </div>
+</div>
+
+<h3 style="color:#34306b; margin:6px 0"><span class="emoji">🔎</span> What the Top Faceless Performers Taught Us</h3>
+<div class="card g">
+  <ul class="tick" style="margin:2px 0">
+    <li><b>Emotion is the engine.</b> The biggest faceless parenting hit — <i>"8 Toxic Things Parents Say to Their Children"</i> (Psych2Go) — passed <b>18M views</b> by naming a painful, relatable truth.</li>
+    <li><b>Animation + calm voice scales.</b> Psych2Go grew to <b>12.8M subs / 1.9B views</b> using simple cute animation and a soothing narrator — no face required.</li>
+    <li><b>Education niches hold attention best</b> — faceless how-to / psychology content reaches <b>42%+ average view duration</b> vs. the ~24% site average.</li>
+    <li><b>The first 30 seconds decide everything</b> — 55% of viewers leave in minute one; a pattern interrupt in the first 5s lifts retention ~23%.</li>
+    <li><b>Shorts are the discovery rocket</b> — they earn proportionally more likes, comments &amp; shares per view, feeding subscribers to long-form.</li>
+  </ul>
+</div>
+
+<div class="callout tip"><span class="emoji">💡</span> <b>Our edge:</b> Most parenting channels either lecture or sell. We combine a <b>3-second emotional hook</b>, a <b>tiny story</b>, and <b>one tool a parent can use tonight</b> — the format proven to maximise watch time and saves.</div>
+
+<!-- ============ PAGE 2 — BRAND FOUNDATION ============ -->
+<div class="section-tab" style="background:var(--sky)">PART 2 · CHANNEL FOUNDATION</div>
+<h2 class="title"><span class="emoji">🎨</span> Brand, Voice &amp; Look</h2>
+<div class="rule"></div>
+<p class="lead">A faceless channel still needs a <b>personality</b>. Ours is the warm, wise friend who never judges.</p>
+
+<div class="row">
+  <div class="col card y">
+    <h3><span class="emoji">🗣️</span> The Voice (Persona)</h3>
+    <ul class="tick" style="font-size:9.4pt">
+      <li>Warm, calm, hopeful — never preachy</li>
+      <li>Speaks <i>with</i> parents, not <i>at</i> them</li>
+      <li>Always ends with kindness + a tiny action</li>
+    </ul>
+  </div>
+  <div class="col card m">
+    <h3><span class="emoji">🎵</span> Sound &amp; Narration</h3>
+    <ul class="tick" style="font-size:9.4pt">
+      <li>AI voice: warm, mid-pace, gentle smile</li>
+      <li>Soft lo-fi / piano under-bed at ~15% vol</li>
+      <li>Consistent narrator = recognisable brand</li>
+    </ul>
+  </div>
+</div>
+
+<h3 style="color:#34306b"><span class="emoji">🌈</span> Visual Identity Kit</h3>
+<div class="card s">
+  <div class="row">
+    <div class="col">
+      <p style="margin:0 0 6px"><b>Colour palette</b> (friendly, hopeful, screen-safe):</p>
+      <div>
+        <span class="flag" style="background:var(--coral)">Coral</span>
+        <span class="flag" style="background:var(--orange)">Sunset</span>
+        <span class="flag" style="background:var(--yellow); color:#5a4a00">Sunny</span>
+        <span class="flag" style="background:var(--mint)">Mint</span>
+        <span class="flag" style="background:var(--sky)">Sky</span>
+        <span class="flag" style="background:var(--grape)">Grape</span>
+      </div>
+      <p style="margin:8px 0 0; font-size:9.3pt">Rounded shapes, hand-drawn doodles, soft paper textures, big readable type.</p>
+    </div>
+    <div class="col">
+      <p style="margin:0 0 6px"><b>Naming directions</b> (pick one, check handle availability):</p>
+      <ul class="tick" style="font-size:9.3pt; margin:0">
+        <li>Little Hearts Studio</li>
+        <li>Grow Kind</li>
+        <li>The Gentle Parent Lab</li>
+        <li>Tiny Humans, Big Hearts</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<h3 style="color:#34306b"><span class="emoji">🖼️</span> Thumbnail &amp; Title Formula</h3>
+<div class="row">
+  <div class="col card o">
+    <h4><span class="emoji">📌</span> Thumbnail rules</h4>
+    <ul class="tick" style="font-size:9.2pt">
+      <li>1 emotion + 3–4 BIG words</li>
+      <li>One warm illustration (parent + child silhouette)</li>
+      <li>High contrast, same font every time</li>
+    </ul>
+  </div>
+  <div class="col card p">
+    <h4><span class="emoji">✍️</span> Title patterns that get clicks</h4>
+    <ul class="tick" style="font-size:9.2pt">
+      <li>"The 1 Phrase That Builds Confident Kids"</li>
+      <li>"Stop Saying This to Your Child (Say This)"</li>
+      <li>"Why Calm Parents Raise Calm Kids"</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ PAGE 3 — CONTENT PILLARS ============ -->
+<div class="section-tab" style="background:var(--mint)">PART 3 · CONTENT PILLARS</div>
+<h2 class="title"><span class="emoji">🏛️</span> The 4 Pillars (Your Content Map)</h2>
+<div class="rule"></div>
+<p class="lead">Every video belongs to one pillar. Rotate them weekly so the channel feels rich and the algorithm learns who to recommend you to.</p>
+
+<div>
+  <div class="pillar" style="background:linear-gradient(160deg,#FFD3D3,#FFB3B3)">
+    <span class="pemoji emoji">❤️</span>
+    <h3>1 · Love &amp; Confidence</h3>
+    <p style="font-size:9.2pt; margin:0">Affection, encouragement, emotional stability, self-belief.</p>
+    <div class="why"><b>Hooks:</b> "The 5 words kids never forget." · "How to make a shy child feel brave."</div>
+  </div>
+  <div class="pillar" style="background:linear-gradient(160deg,#BFE0FF,#9CC7FF)">
+    <span class="pemoji emoji">🧭</span>
+    <h3>2 · Discipline &amp; Guidance</h3>
+    <p style="font-size:9.2pt; margin:0">Good behaviour, fair rules, correcting mistakes, self-control.</p>
+    <div class="why"><b>Hooks:</b> "Time-outs don't work — do this instead." · "Calm ways to stop a tantrum."</div>
+  </div>
+  <div class="pillar" style="background:linear-gradient(160deg,#CFF3D6,#A9E6B6)">
+    <span class="pemoji emoji">📚</span>
+    <h3>3 · Learning &amp; Curiosity</h3>
+    <p style="font-size:9.2pt; margin:0">Loving to learn, asking questions, access to great education.</p>
+    <div class="why"><b>Hooks:</b> "Turn 'I'm bored' into genius." · "3 questions that grow a curious brain."</div>
+  </div>
+  <div class="pillar" style="background:linear-gradient(160deg,#E7D2FF,#D2B3FF)">
+    <span class="pemoji emoji">🤝</span>
+    <h3>4 · Social Skills</h3>
+    <p style="font-size:9.2pt; margin:0">Respect, kind communication, friendships, healthy relationships.</p>
+    <div class="why"><b>Hooks:</b> "Teach sharing without the fight." · "Help your child make a friend."</div>
+  </div>
+</div>
+
+<div class="callout"><span class="emoji">🔁</span> <b>Weekly rotation:</b> Mon = Pillar 1, Wed = Pillar 2, Fri = Pillar 3, Sun = Pillar 4. Sprinkle 3–5 <b>Shorts</b> across the week, each pulled from a long-form video's best 30 seconds.</div>
+
+<table>
+  <tr><th>Format</th><th>Length</th><th>Job</th><th>Best for</th></tr>
+  <tr><td><b>Long-form</b></td><td>6–9 min</td><td>Watch time + authority + ad revenue</td><td>Average View Duration</td></tr>
+  <tr><td><b>Shorts</b></td><td>25–45 s</td><td>Discovery + new subscribers</td><td>Shares &amp; reach</td></tr>
+  <tr><td><b>Story episodes</b></td><td>3–5 min</td><td>Emotional bonding, bedtime-friendly</td><td>Comments &amp; loyalty</td></tr>
+</table>
+
+<!-- ============ PAGE 4-5 — THE AI SYSTEM ============ -->
+<div class="section-tab" style="background:var(--grape)">PART 4 · THE AI ENGINE</div>
+<h2 class="title"><span class="emoji">🤖</span> Your Faceless AI Production System</h2>
+<div class="rule"></div>
+<p class="lead">One repeatable assembly line. Once set up, you can produce a week of content in a single sitting.</p>
+
+<div class="pipe">
+  <div class="node" style="background:var(--coral)"><span class="pe emoji">💡</span>Ideas &amp; Research</div>
+  <div class="node" style="background:var(--orange)"><span class="pe emoji">✍️</span>Script &amp; Hook</div>
+  <div class="node" style="background:var(--mint)"><span class="pe emoji">🎙️</span>AI Voice</div>
+  <div class="node" style="background:var(--sky)"><span class="pe emoji">🎞️</span>Visuals &amp; Edit</div>
+  <div class="node" style="background:var(--grape)"><span class="pe emoji">🚀</span>Publish &amp; Engage</div>
+</div>
+
+<div class="step">
+  <div class="num" style="background:var(--coral)">1</div>
+  <div class="body">
+    <h4><span class="emoji">💡</span> Idea &amp; Research Engine</h4>
+    <p style="margin:0; font-size:9.6pt">Ask an AI chat assistant (Claude / ChatGPT) to mine real parent pain points: <i>"List 30 emotional struggles parents of 4–8 year olds face around confidence."</i> Validate demand with YouTube search + Google Trends. Keep a running <b>idea bank</b> of 50 titles, tagged by pillar.</p>
+  </div>
+</div>
+<div class="step">
+  <div class="num" style="background:var(--orange)">2</div>
+  <div class="body">
+    <h4><span class="emoji">✍️</span> Script &amp; Hook Generator</h4>
+    <p style="margin:0; font-size:9.6pt">Feed the AI your brand voice + the retention rules (next page) and have it draft a script with <b>3 hook options</b>, a micro-story, one actionable tool, and a comment-bait question. Always <b>human-edit</b> for warmth, accuracy &amp; safety. Tools: Claude/ChatGPT, or faceless script generators.</p>
+  </div>
+</div>
+<div class="step">
+  <div class="num" style="background:var(--mint)">3</div>
+  <div class="body">
+    <h4><span class="emoji">🎙️</span> AI Voiceover Studio</h4>
+    <p style="margin:0; font-size:9.6pt">Generate the narration with a warm, natural AI voice (ElevenLabs and similar). Lock <b>one voice</b> forever = brand recognition. Add gentle pauses; keep pace at ~150 words/min. Layer soft royalty-free music underneath.</p>
+  </div>
+</div>
+<div class="step">
+  <div class="num" style="background:var(--sky)">4</div>
+  <div class="body">
+    <h4><span class="emoji">🎞️</span> Visuals &amp; Auto-Edit</h4>
+    <p style="margin:0; font-size:9.6pt">Build cute, consistent animation: AI image/animation tools (HeyGen, Clippie, Zebracat, or Canva + stock B-roll). Add <b>on-screen captions</b> (boosts Shorts watch time ~18%), simple motion every 3–5s as pattern interrupts, and your branded intro/outro template.</p>
+  </div>
+</div>
+<div class="step">
+  <div class="num" style="background:var(--grape)">5</div>
+  <div class="body">
+    <h4><span class="emoji">🚀</span> Publish, Repurpose &amp; Engage</h4>
+    <p style="margin:0; font-size:9.6pt">AI writes the SEO title, description, tags &amp; pinned comment. Auto-slice 3–5 Shorts from each long-form (tools like Faceless.so / Submagic auto-schedule across platforms). Then <b>reply to 50+ comments in the first 2 hours</b> — it can lift that video's reach 15–20%.</p>
+  </div>
+</div>
+
+<div class="callout warn"><span class="emoji">🛡️</span> <b>Trust &amp; safety guardrail:</b> Parenting is sensitive. <b>A human reviews every script</b> for accuracy, inclusivity, and to avoid medical/clinical claims. Add "general guidance, not professional advice" in descriptions. AI drafts — you approve.</div>
+
+<!-- ============ PAGE — RETENTION / AVD ============ -->
+<div class="section-tab" style="background:var(--coral)">PART 5 · WATCH-TIME PLAYBOOK</div>
+<h2 class="title"><span class="emoji">⏱️</span> Maximising Average View Duration</h2>
+<div class="rule"></div>
+<p class="lead">AVD is the #1 signal that gets a faceless video recommended. We design every second to earn the next second.</p>
+
+<div class="row">
+  <div class="col card y">
+    <h4><span class="emoji">🪝</span> The First 5 Seconds</h4>
+    <ul class="tick" style="font-size:9.2pt">
+      <li>Open on the <b>pain or promise</b>, not a greeting</li>
+      <li>Pattern interrupt: bold text + sound (+23% retention)</li>
+      <li>Show the payoff they'll get by staying</li>
+    </ul>
+  </div>
+  <div class="col card t">
+    <h4><span class="emoji">🎢</span> The Middle</h4>
+    <ul class="tick" style="font-size:9.2pt">
+      <li>One clear idea every <b>60–90 seconds</b></li>
+      <li>Micro-cliffhanger before each new point</li>
+      <li>Visual change every 3–5s so eyes don't drift</li>
+    </ul>
+  </div>
+</div>
+
+<table>
+  <tr><th>Video length</th><th>Healthy retention target</th><th>What "good" looks like</th></tr>
+  <tr><td>Shorts (&lt;1 min)</td><td><span class="tag-mini" style="background:var(--mint)">70%+</span></td><td>Looping, single idea, captions on</td></tr>
+  <tr><td>Under 5 min</td><td><span class="tag-mini" style="background:var(--sky)">50–70%</span></td><td>Tight story, no filler intro</td></tr>
+  <tr><td>10+ min</td><td><span class="tag-mini" style="background:var(--grape)">40–60%</span></td><td>Chaptered, re-hooked every 90s</td></tr>
+</table>
+
+<div class="callout tip"><span class="emoji">📈</span> <b>Read your retention graph every week.</b> Find the biggest drop-off, watch what happens 5s before it, and fix that exact moment in your next script. Small fixes compound fast.</div>
+
+<h3 style="color:#34306b"><span class="emoji">🧰</span> 8 Retention Boosters to Bake Into Every Script</h3>
+<div class="card g">
+  <div class="row">
+    <div class="col"><ul class="tick" style="font-size:9.3pt; margin:0">
+      <li>Cut the intro — start mid-action</li>
+      <li>"Stay till the end for…" open loop</li>
+      <li>Number your points ("3rd one is the big one")</li>
+      <li>Speak in short, warm sentences</li>
+    </ul></div>
+    <div class="col"><ul class="tick" style="font-size:9.3pt; margin:0">
+      <li>Mini story before each tip (relatable scene)</li>
+      <li>Captions + key words highlighted</li>
+      <li>Music shift to signal a new section</li>
+      <li>End with a question, not "bye"</li>
+    </ul></div>
+  </div>
+</div>
+
+<!-- ============ PAGE — COMMENTS & SHARES ============ -->
+<div class="section-tab" style="background:var(--teal)">PART 6 · COMMENTS &amp; SHARES</div>
+<h2 class="title"><span class="emoji">💬</span> Sparking Conversation &amp; Sharing</h2>
+<div class="rule"></div>
+<p class="lead">Comments and shares tell YouTube your content matters. Parenting is emotional and identity-driven — perfect fuel if we ask the right way.</p>
+
+<div class="row">
+  <div class="col card c">
+    <h3><span class="emoji">💬</span> Get More Comments</h3>
+    <ul class="tick" style="font-size:9.4pt">
+      <li>Ask <b>one specific question</b>: "What's the kindest thing your child ever said?"</li>
+      <li>Take a gentle side: "Rewards or natural consequences — which is your style?"</li>
+      <li>Pin a starter comment to model the vibe</li>
+      <li>Reply to <b>50+ comments in 2 hours</b> (+15–20% reach)</li>
+      <li>Use a fun CTA: "Drop a <span class="emoji">❤️</span> if you needed this today"</li>
+    </ul>
+  </div>
+  <div class="col card s">
+    <h3><span class="emoji">🔁</span> Get More Shares</h3>
+    <ul class="tick" style="font-size:9.4pt">
+      <li>Make it <b>"tag a parent who needs this"</b>-worthy</li>
+      <li>Deliver one save-able takeaway (screenshot-ready)</li>
+      <li>Validate a feeling: "You're not a bad parent for…"</li>
+      <li>End Shorts on an uplifting, quotable line</li>
+      <li>Add a soft share CTA in the last 10 seconds</li>
+    </ul>
+  </div>
+</div>
+
+<h3 style="color:#34306b"><span class="emoji">🗓️</span> Comment-Bait Question Bank (rotate by pillar)</h3>
+<table>
+  <tr><th>Pillar</th><th>Question to end the video with</th></tr>
+  <tr><td><span class="tag-mini" style="background:var(--coral)">Love</span></td><td>"What's a phrase your child lights up at? Share it so other parents can borrow it. <span class="emoji">❤️</span>"</td></tr>
+  <tr><td><span class="tag-mini" style="background:var(--sky)">Discipline</span></td><td>"Time-out or talk-it-out — what works in your house? No judgment here."</td></tr>
+  <tr><td><span class="tag-mini" style="background:var(--mint)">Learning</span></td><td>"What's the funniest question your kid has ever asked you? <span class="emoji">😄</span>"</td></tr>
+  <tr><td><span class="tag-mini" style="background:var(--grape)">Social</span></td><td>"How do you help your child make new friends? Drop your best tip below."</td></tr>
+</table>
+
+<div class="callout"><span class="emoji">🤝</span> <b>Community flywheel:</b> Use AI to draft warm, personal replies fast — but always sound human. A loved comment section becomes a community that returns for every upload.</div>
+
+<!-- ============ PAGE — CALENDAR + TOOLS ============ -->
+<div class="section-tab" style="background:var(--orange)">PART 7 · CADENCE &amp; TOOL STACK</div>
+<h2 class="title"><span class="emoji">📅</span> Weekly Rhythm &amp; Your AI Toolkit</h2>
+<div class="rule"></div>
+
+<h3 style="color:#34306b"><span class="emoji">🗓️</span> A Sustainable Week (batch on one day)</h3>
+<table>
+  <tr><th>Day</th><th>Long-form</th><th>Shorts</th><th>Focus</th></tr>
+  <tr><td><b>Mon</b></td><td>Pillar 1 · Love</td><td>1 clip</td><td>Confidence</td></tr>
+  <tr><td><b>Wed</b></td><td>Pillar 2 · Discipline</td><td>1 clip</td><td>Calm behaviour</td></tr>
+  <tr><td><b>Fri</b></td><td>Pillar 3 · Learning</td><td>1 clip</td><td>Curiosity</td></tr>
+  <tr><td><b>Sun</b></td><td>Pillar 4 · Social</td><td>1–2 clips</td><td>Friendship</td></tr>
+</table>
+<div class="callout tip"><span class="emoji">⚙️</span> <b>Batch day:</b> Script all 4 + outline Shorts in one AI session → generate voices → edit → schedule. ~Half a day a week once the system is dialled in.</div>
+
+<h3 style="color:#34306b"><span class="emoji">🧰</span> The AI Tool Stack (mix &amp; match)</h3>
+<table>
+  <tr><th>Stage</th><th>What it does</th><th>Example tools</th></tr>
+  <tr><td><span class="tag-mini" style="background:var(--coral)">Ideas</span></td><td>Pain-point mining, titles, research</td><td>Claude, ChatGPT, Google Trends, YouTube search</td></tr>
+  <tr><td><span class="tag-mini" style="background:var(--orange)">Script</span></td><td>Hooks, structure, comment-bait</td><td>Claude / ChatGPT, faceless script generators</td></tr>
+  <tr><td><span class="tag-mini" style="background:var(--mint)">Voice</span></td><td>Warm natural narration</td><td>ElevenLabs &amp; similar AI voice tools</td></tr>
+  <tr><td><span class="tag-mini" style="background:var(--sky)">Visuals</span></td><td>Animation, B-roll, captions, edit</td><td>Canva, HeyGen, Clippie, Zebracat, Submagic</td></tr>
+  <tr><td><span class="tag-mini" style="background:var(--grape)">Repurpose</span></td><td>Auto-slice &amp; schedule Shorts</td><td>Faceless.so, Submagic, AutoShorts</td></tr>
+  <tr><td><span class="tag-mini" style="background:#FF8FCF; color:#fff">Music/Art</span></td><td>Royalty-free sound + thumbnails</td><td>YouTube Audio Library, Canva, AI image tools</td></tr>
+</table>
+<div class="callout warn"><span class="emoji">⚖️</span> <b>Always:</b> use licensed/royalty-free assets, disclose AI use per YouTube policy, and keep a human in the loop on every parenting claim.</div>
+
+<!-- ============ PAGE — KPIs + ROADMAP ============ -->
+<div class="section-tab" style="background:var(--grape)">PART 8 · TARGETS &amp; ROADMAP</div>
+<h2 class="title"><span class="emoji">📊</span> Know Your Numbers &amp; 90-Day Plan</h2>
+<div class="rule"></div>
+
+<h3 style="color:#34306b"><span class="emoji">🎯</span> The 3 Metrics That Matter Most</h3>
+<div class="center">
+  <div class="kpi" style="background:linear-gradient(160deg,var(--coral),#e85a5a)">
+    <span class="big">50%+</span><span class="lbl">Avg View Duration<br>(watch-time signal)</span>
+  </div>
+  <div class="kpi" style="background:linear-gradient(160deg,var(--sky),#3a7de0)">
+    <span class="big">5%+</span><span class="lbl">Comment + Like rate<br>(engagement signal)</span>
+  </div>
+  <div class="kpi" style="background:linear-gradient(160deg,var(--grape),#7e44c9)">
+    <span class="big">↑</span><span class="lbl">Shares per video<br>(reach signal)</span>
+  </div>
+</div>
+
+<h3 style="color:#34306b"><span class="emoji">🛤️</span> Your First 90 Days</h3>
+<div class="phase">
+  <div class="marker" style="background:var(--coral)">Phase 1<span class="d">Days 1–14</span></div>
+  <div class="desc"><b>Build the studio.</b> Lock name, logo, colours, AI voice &amp; templates. Set up the 5-step pipeline. Write your first idea bank of 50 titles. Produce 3 "vault" videos before launch.</div>
+</div>
+<div class="phase">
+  <div class="marker" style="background:var(--orange)">Phase 2<span class="d">Days 15–45</span></div>
+  <div class="desc"><b>Launch &amp; learn.</b> Publish 4 long-form + ~12 Shorts. Reply to every comment. Track retention graphs weekly and fix the biggest drop-off each time. Find your top 2 pillars.</div>
+</div>
+<div class="phase">
+  <div class="marker" style="background:var(--mint)">Phase 3<span class="d">Days 46–75</span></div>
+  <div class="desc"><b>Double down.</b> Make more of what's working. Tighten hooks. Start a recurring series ("Calm Parent Challenge"). Build the comment community &amp; pinned-question habit.</div>
+</div>
+<div class="phase">
+  <div class="marker" style="background:var(--grape)">Phase 4<span class="d">Days 76–90</span></div>
+  <div class="desc"><b>Systemise &amp; scale.</b> Automate Shorts repurposing &amp; scheduling. Batch 2 weeks ahead. Review analytics, refine the tool stack, and plan monetisation (memberships, digital printables, sponsorships).</div>
+</div>
+
+<div class="callout"><span class="emoji">🌟</span> <b>North star:</b> every single video should make a parent feel <i>"that helped, and I'm not alone."</i> Do that consistently and the watch time, comments, and shares follow.</div>
+
+<!-- ============ PAGE — SAMPLE BLUEPRINT ============ -->
+<div class="section-tab" style="background:var(--teal)">PART 9 · DONE-FOR-YOU TEMPLATE</div>
+<h2 class="title"><span class="emoji">🎬</span> Sample Video Blueprint</h2>
+<div class="rule"></div>
+<p class="lead"><b>Title:</b> "The 1 Sentence That Builds a Confident Child" &nbsp;·&nbsp; <b>Pillar:</b> Love &amp; Confidence &nbsp;·&nbsp; <b>Length:</b> ~6 min</p>
+
+<div class="script">
+  <h4>🪝 HOOK (0:00–0:08)</h4>
+  <p><span class="who">VOICE:</span> "There's one sentence that quietly tells your child <i>'you are enough'</i> — and most of us forget to say it." <span class="sd">[Bold text pops + soft chime · warm illustration fades in]</span></p>
+  <h4>🎯 PROMISE (0:08–0:25)</h4>
+  <p><span class="who">VOICE:</span> "In the next few minutes you'll learn the exact words, why they work, and how to say them tonight. Stay till the end for the one mistake that undoes it all." <span class="sd">[open loop]</span></p>
+  <h4>📖 STORY + TEACH (0:25–4:30)</h4>
+  <p><span class="who">VOICE:</span> Tiny relatable scene → the sentence → the simple psychology → 2 easy ways to use it. <span class="sd">[New idea every 60–90s · visual change every 3–5s · numbered points]</span></p>
+  <h4>⚠️ THE TWIST (4:30–5:20)</h4>
+  <p><span class="who">VOICE:</span> "Here's the mistake: saying it only when they succeed. Confidence grows when we say it after they <i>fail</i> too." <span class="sd">[pattern interrupt + music shift]</span></p>
+  <h4>💬 CTA + QUESTION (5:20–6:00)</h4>
+  <p><span class="who">VOICE:</span> "Tell me below — what's a phrase your child lights up at? Share it so another tired parent can borrow it. And if this helped, send it to someone who needs it today. <span class="emoji">❤️</span>"</p>
+</div>
+
+<div class="callout tip" style="margin-top:12px"><span class="emoji">✂️</span> <b>Shorts from this video:</b> (1) the hook line, (2) "the 1 sentence" reveal, (3) the twist/mistake. Add captions, end on the quotable line, and ask the same question.</div>
+
+<hr class="dot">
+<div class="center" style="margin-top:6px">
+  <h3 style="color:#34306b; font-size:16pt"><span class="emoji">🌈</span> Now go raise the internet's kindest community of parents. <span class="emoji">🌱</span></h3>
+  <p style="color:var(--soft); font-size:9.3pt; max-width:150mm; margin:6px auto 0">Built with a faceless AI system • Optimised for Average View Duration, Comments &amp; Shares • Keep a human heart in every video.</p>
+</div>
+
+</body>
+</html>
